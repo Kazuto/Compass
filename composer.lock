@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "27cc8840d9ddc63587f8e0d8755ac7a3",
+    "content-hash": "ac35fefff237c510df47e5e5106c40ff",
     "packages": [
         {
             "name": "brick/math",
@@ -6450,6 +6450,40 @@
                 "source": "https://github.com/hamcrest/hamcrest-php/tree/v2.0.1"
             },
             "time": "2020-07-09T08:09:16+00:00"
+        },
+        {
+            "name": "kazuto/pint-preset",
+            "version": "1.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Kazuto/pint-preset.git",
+                "reference": "85fd33b5b042f95ecfb9ce4825a67c1082e2cf6e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Kazuto/pint-preset/zipball/85fd33b5b042f95ecfb9ce4825a67c1082e2cf6e",
+                "reference": "85fd33b5b042f95ecfb9ce4825a67c1082e2cf6e",
+                "shasum": ""
+            },
+            "type": "library",
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPL-3.0"
+            ],
+            "authors": [
+                {
+                    "name": "Kai Mayer",
+                    "email": "mail@kazuto.de",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Opiniated Laravel Pint Preset",
+            "homepage": "https://github.com/kazuto/pint-preset",
+            "support": {
+                "issues": "https://github.com/Kazuto/pint-preset/issues",
+                "source": "https://github.com/Kazuto/pint-preset/tree/1.0.1"
+            },
+            "time": "2023-09-28T10:09:16+00:00"
         },
         {
             "name": "laravel/pint",
