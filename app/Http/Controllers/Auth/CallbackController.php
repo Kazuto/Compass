@@ -29,6 +29,6 @@ class CallbackController extends Controller
 
         Auth::login($user);
 
-        return redirect()->route('compass.home');
+        return redirect()->route('home');
     }
 }
