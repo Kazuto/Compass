@@ -2,22 +2,26 @@
 
 declare(strict_types=1);
 
-namespace App\View\Components;
+namespace App\View\Components\Auth;
 
-use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
 
-class AuthLink extends Component
+use function route;
+use function view;
+
+class Link extends Component
 {
     public function __construct(
-        public string $provider
+        public string $provider,
+        public string $icon = '',
+        public bool $disabled = false,
     ) {
     }
 
-    public function render(): View|Closure|string
+    public function render(): View
     {
-        return view('components.auth-link');
+        return view('components.auth.link');
     }
 
     public function redirectRoute(): string
