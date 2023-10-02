@@ -9,14 +9,12 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class SignOutController extends Controller
+class LogOutController extends Controller
 {
     public function __invoke(Request $request): RedirectResponse
     {
-        if (filled(Auth::user())) {
-            Auth::logout();
-        }
+        Auth::logout();
 
-        return redirect()->route('compass.home');
+        return redirect()->route('home');
     }
 }
