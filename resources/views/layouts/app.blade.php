@@ -6,19 +6,22 @@
 
     <title>{{ Config::get('app.name') }}</title>
 
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.bunny.net">
-    <link href="https://fonts.bunny.net/css?family=figtree:400,600&display=swap" rel="stylesheet"/>
-
     <!-- Styles -->
+    <style>
+        :root {
+            --color-primary: #FFFFFF;
+            --color-accent: #ff7700;
+            --color-background: #142534;
+        }
+    </style>
     @vite('resources/css/app.css')
 </head>
 <body class="antialiased selection:bg-indigo-500 selection:text-white">
 <div class="container mx-auto">
     @include('partials.header')
 
-    <div class="relative sm:flex sm:justify-center sm:items-center min-h-screen">
-       @yield('content')
+    <div class="relative sm:flex sm:justify-center sm:items-center min-h-screen px-8">
+        @yield('content')
     </div>
 </div>
 </body>

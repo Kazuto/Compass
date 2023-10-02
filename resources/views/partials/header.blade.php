@@ -1,4 +1,4 @@
-<header class="py-4 px-8">
+<header class="py-4 px-8 absolute top-0 left-0 right-0 z-10">
     <nav class="flex">
         <span class="flex-grow"></span>
         @auth

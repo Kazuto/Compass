@@ -27,13 +27,11 @@
     font-display: swap;
 }
 
-:root {
-    --color-primary: #FFFFFF;
-    --color-accent: #ff7700;
-    --color-background: #142534;
-}
+
 
 body {
+    @apply antialiased font-medium;
+
     background-color: var(--color-background);
     color: var(--color-primary);
     font-family: 'Quicksand', sans-serif;
