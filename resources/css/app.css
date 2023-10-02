@@ -27,8 +27,6 @@
     font-display: swap;
 }
 
-
-
 body {
     @apply antialiased font-medium;
 

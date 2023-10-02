@@ -1,9 +1,12 @@
 <div>
-    <h3 class="text-[var(--color-accent)] font-bold uppercase tracking-wide">{{ $name }}</h3>
+    <h3 class="text-[var(--color-accent)] font-bold uppercase tracking-wide">
+        {{ $bookmarkGroup->name }}
+    </h3>
     <ol>
-        <x-bookmark.item name="System" url="#" icon="󰈏" />
-        <x-bookmark.item name="Master" url="#" icon="󰡉" />
-        <x-bookmark.item name="Merchant" url="#" icon="󰓜" />
-        <x-bookmark.item name="Shirtmerlin - Demo Shop" url="#" icon="󰙨" />
+        @forelse($bookmarkGroup->bookmarks as $bookmark)
+            <x-bookmark.item :bookmark="$bookmark" />
+        @empty
+            <li>No bookmarks yet</li>
+        @endforelse
     </ol>
 </div>
