@@ -6,9 +6,18 @@
             <h3 class="block text-2xl mb-4 font-black">
                 Group: <span class="text-[var(--color-accent)]">{{ $bookmarkGroup->name }}</span>
             </h3>
+
             <div>
-                <a href="#" class="text-sm py-1.5 px-2 rounded-lg bg-[var(--color-accent)]">Add Bookmark</a>
-                <a href="#" class="text-sm py-1.5 px-2 rounded-lg bg-[var(--color-accent)]">Edit Group</a>
+                <x-button-link href="#" class="mr-2">Edit Group</x-button-link>
+                <form
+                    action="{{ route('settings.bookmarks.groups.delete', ['bookmarkGroup' => $bookmarkGroup]) }}"
+                    method="POST"
+                    class="inline"
+                >
+                    @method('DELETE')
+                    @csrf
+                    <button type="submit" class="py-2 px-3 rounded-lg bg-red-600 last:ml-2">Delete Group</button>
+                </form>
             </div>
         </div>
 

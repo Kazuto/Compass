@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Routes;
 
 use App\Http\Controllers\Settings\Bookmarks\CreateBookmarkGroupController;
+use App\Http\Controllers\Settings\Bookmarks\DeleteBookmarkGroupController;
 use App\Http\Controllers\Settings\Bookmarks\ListBookmarkGroupController;
 use App\Http\Controllers\Settings\Bookmarks\ShowBookmarkGroupController;
 use App\Http\Controllers\Settings\Bookmarks\StoreBookmarkGroupController;
@@ -28,6 +29,7 @@ class SettingsRoutes implements RouteGroup
                         Route::get('/group/create', CreateBookmarkGroupController::class)->name('groups.create');
                         Route::post('/group/store', StoreBookmarkGroupController::class)->name('groups.store');
                         Route::get('/group/{bookmarkGroup:uuid}', ShowBookmarkGroupController::class)->name('groups.show');
+                        Route::delete('/group/{bookmarkGroup:uuid}', DeleteBookmarkGroupController::class)->name('groups.delete');
                     });
             });
     }
