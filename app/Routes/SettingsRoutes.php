@@ -25,6 +25,7 @@ class SettingsRoutes implements RouteGroup
                     ->prefix('bookmarks/')
                     ->group(function () {
                         Route::get('/', ListBookmarkGroupController::class)->name('list');
+                        Route::get('/group/{bookmarkGroup:uuid}', ShowBookmarkGroupController::class)->name('groups.show');
                     });
             });
     }
