@@ -20,6 +20,12 @@ class SettingsRoutes implements RouteGroup
             ->middleware('auth')
             ->group(function () {
                 Route::get('/', IndexController::class)->name('index');
+
+                Route::as('bookmarks.')
+                    ->prefix('bookmarks/')
+                    ->group(function () {
+                        Route::get('/', ListBookmarkGroupController::class)->name('list');
+                    });
             });
     }
 }
