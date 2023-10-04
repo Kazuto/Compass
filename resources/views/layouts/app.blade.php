@@ -9,9 +9,9 @@
     <!-- Styles -->
     <style>
         :root {
-            --color-primary: #FFFFFF;
-            --color-accent: #ff7700;
-            --color-background: #142534;
+            --color-text: {{ config('theme.colors.text') }};
+            --color-accent: {{ config('theme.colors.accent') }};
+            --color-background: {{ config('theme.colors.background') }};
         }
     </style>
     @vite('resources/css/app.css')

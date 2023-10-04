@@ -31,7 +31,7 @@ body {
     @apply antialiased font-medium;
 
     background-color: var(--color-background);
-    color: var(--color-primary);
+    color: var(--color-text);
     font-family: 'Quicksand', sans-serif;
 }
 
