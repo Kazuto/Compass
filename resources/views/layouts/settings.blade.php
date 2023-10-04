@@ -22,9 +22,11 @@
 
     <div class="relative min-h-screen p-8">
         <div class="w-full flex-shrink-0">
+
             <div class="mb-8">
                 <h2 class="text-3xl font-bold mb-2">Settings</h2>
-                <a href="{{route('home')}}" class="transition-all hover:text-[var(--color-accent)]">Back to Dashboard</a>
+                <a href="{{route('home')}}" class="transition-all hover:text-[var(--color-accent)]">Back to
+                    Dashboard</a>
             </div>
         </div>
         <div class="grid grid-cols-[250px_1fr] gap-8 ">
@@ -33,7 +35,11 @@
                 <x-settings-link route="settings.bookmarks.list">Bookmarks</x-settings-link>
             </nav>
 
-            @yield('content')
+            <div>
+                @include('partials.alert')
+
+                @yield('content')
+            </div>
         </div>
     </div>
 </div>
