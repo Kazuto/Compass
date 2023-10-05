@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Database\Seeders\Settings;
+namespace Database\Seeders;
 
 use App\Models\WhitelistAccess;
 use Illuminate\Database\Seeder;

@@ -2,9 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Database\Factories\Settings;
+namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
+
+use function fake;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\WhitelistAccess>

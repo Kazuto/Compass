@@ -25,6 +25,7 @@ use function config;
  * @property-read \App\Models\User|null $user
  *
  * @method static Builder|WhitelistAccess available()
+ * @method static \Database\Factories\WhitelistAccessFactory factory($count = null, $state = [])
  * @method static Builder|WhitelistAccess forEmail(string $email)
  * @method static Builder|WhitelistAccess newModelQuery()
  * @method static Builder|WhitelistAccess newQuery()
