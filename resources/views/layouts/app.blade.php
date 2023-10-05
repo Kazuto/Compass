@@ -9,9 +9,9 @@
     <!-- Styles -->
     <style>
         :root {
-            --color-text: {{ config('theme.colors.text') }};
-            --color-accent: {{ config('theme.colors.accent') }};
-            --color-background: {{ config('theme.colors.background') }};
+            --color-text: {{ config('compass.theme.colors.text') }};
+            --color-accent: {{ config('compass.theme.colors.accent') }};
+            --color-background: {{ config('compass.theme.colors.background') }};
         }
     </style>
     @vite('resources/css/app.css')
@@ -21,6 +21,8 @@
     @include('partials.header')
 
     <div class="relative sm:flex sm:justify-center sm:items-center min-h-screen px-8">
+        @include('partials.alert')
+
         @yield('content')
     </div>
 </div>

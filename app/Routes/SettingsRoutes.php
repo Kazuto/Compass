@@ -13,6 +13,9 @@ use App\Http\Controllers\Settings\Bookmarks\StoreBookmarkGroupController;
 use App\Http\Controllers\Settings\Bookmarks\UpdateBookmarkController;
 use App\Http\Controllers\Settings\Bookmarks\UpdateBookmarkGroupController;
 use App\Http\Controllers\Settings\IndexController;
+use App\Http\Controllers\Settings\WhitelistAccess\DeleteWhitelistAccessController;
+use App\Http\Controllers\Settings\WhitelistAccess\ListWhitelistAccessController;
+use App\Http\Controllers\Settings\WhitelistAccess\StoreWhitelistAccessController;
 use Illuminate\Support\Facades\Route;
 
 class SettingsRoutes implements RouteGroup
@@ -36,6 +39,14 @@ class SettingsRoutes implements RouteGroup
                         Route::get('/group/{bookmarkGroup:uuid}', ShowBookmarkGroupController::class)->name('groups.show');
                         Route::patch('/group/{bookmarkGroup:uuid}', UpdateBookmarkGroupController::class)->name('groups.update');
                         Route::delete('/group/{bookmarkGroup:uuid}', DeleteBookmarkGroupController::class)->name('groups.delete');
+                    });
+
+                Route::as('whitelist.')
+                    ->prefix('whitelist')
+                    ->group(function () {
+                        Route::get('/', ListWhitelistAccessController::class)->name('list');
+                        Route::post('/', StoreWhitelistAccessController::class)->name('store');
+                        Route::delete('/{whitelistAccess}', DeleteWhitelistAccessController::class)->name('delete');
                     });
             });
     }

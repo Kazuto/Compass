@@ -9,9 +9,9 @@
     <!-- Styles -->
     <style>
         :root {
-            --color-text: {{ config('theme.colors.text') }};
-            --color-accent: {{ config('theme.colors.accent') }};
-            --color-background: {{ config('theme.colors.background') }};
+            --color-text: {{ config('compass.theme.colors.text') }};
+            --color-accent: {{ config('compass.theme.colors.accent') }};
+            --color-background: {{ config('compass.theme.colors.background') }};
         }
     </style>
     @vite('resources/css/app.css')
@@ -33,6 +33,7 @@
             <nav class="flex flex-col gap-2">
                 <x-settings-link route="settings.index">General</x-settings-link>
                 <x-settings-link route="settings.bookmarks.list">Bookmarks</x-settings-link>
+                <x-settings-link route="settings.whitelist.list">Whitelist</x-settings-link>
             </nav>
 
             <div>
