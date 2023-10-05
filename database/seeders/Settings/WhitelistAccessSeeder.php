@@ -11,6 +11,6 @@ class WhitelistAccessSeeder extends Seeder
 {
     public function run(): void
     {
-        WhitelistAccess::factory(50)->create();
+        WhitelistAccess::factory(5)->create();
     }
 }

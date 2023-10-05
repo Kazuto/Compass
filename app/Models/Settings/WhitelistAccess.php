@@ -5,11 +5,11 @@ declare(strict_types=1);
 namespace App\Models\Settings;
 
 use App\Models\User;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Illuminate\Database\Query\Builder;
 
 /**
  * App\Models\Settings\AccessWhitelist
@@ -23,22 +23,23 @@ use Illuminate\Database\Query\Builder;
  * @property \Illuminate\Support\Carbon|null $deleted_at
  * @property-read User|null $user
  *
- * @method static \Illuminate\Database\Eloquent\Builder|WhitelistAccess available()
+ * @method static Builder|WhitelistAccess available()
  * @method static \Database\Factories\Settings\WhitelistAccessFactory factory($count = null, $state = [])
- * @method static \Illuminate\Database\Eloquent\Builder|WhitelistAccess newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|WhitelistAccess newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|WhitelistAccess onlyTrashed()
- * @method static \Illuminate\Database\Eloquent\Builder|WhitelistAccess query()
- * @method static \Illuminate\Database\Eloquent\Builder|WhitelistAccess unavailable()
- * @method static \Illuminate\Database\Eloquent\Builder|WhitelistAccess whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|WhitelistAccess whereDeletedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|WhitelistAccess whereEmail($value)
- * @method static \Illuminate\Database\Eloquent\Builder|WhitelistAccess whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|WhitelistAccess whereIsAvailable($value)
- * @method static \Illuminate\Database\Eloquent\Builder|WhitelistAccess whereUpdatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|WhitelistAccess whereUserId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|WhitelistAccess withTrashed()
- * @method static \Illuminate\Database\Eloquent\Builder|WhitelistAccess withoutTrashed()
+ * @method static Builder|WhitelistAccess forEmail(string $email)
+ * @method static Builder|WhitelistAccess newModelQuery()
+ * @method static Builder|WhitelistAccess newQuery()
+ * @method static Builder|WhitelistAccess onlyTrashed()
+ * @method static Builder|WhitelistAccess query()
+ * @method static Builder|WhitelistAccess unavailable()
+ * @method static Builder|WhitelistAccess whereCreatedAt($value)
+ * @method static Builder|WhitelistAccess whereDeletedAt($value)
+ * @method static Builder|WhitelistAccess whereEmail($value)
+ * @method static Builder|WhitelistAccess whereId($value)
+ * @method static Builder|WhitelistAccess whereIsAvailable($value)
+ * @method static Builder|WhitelistAccess whereUpdatedAt($value)
+ * @method static Builder|WhitelistAccess whereUserId($value)
+ * @method static Builder|WhitelistAccess withTrashed()
+ * @method static Builder|WhitelistAccess withoutTrashed()
  *
  * @mixin \Eloquent
  */
@@ -70,6 +71,11 @@ class WhitelistAccess extends Model
     //endregion Relations
 
     //region Scopes
+    public function scopeForEmail(Builder $builder, string $email): Builder
+    {
+        return $builder->where('email', '=', $email)->available();
+    }
+
     public function scopeAvailable(Builder $builder): Builder
     {
         return $builder->where('is_available', '=', true);
@@ -82,5 +88,18 @@ class WhitelistAccess extends Model
     //endregion Scopes
 
     //region Methods
+    public static function isWhitelisted(string $email): bool
+    {
+        if (config('compass.auth.whitelist_admin_email') === $email) {
+            return true;
+        }
+
+        return static::forEmail($email)->exists();
+    }
+
+    public static function isNotWhitelisted(string $email): bool
+    {
+        return ! static::isWhitelisted($email);
+    }
     //endregion Methods
 }
