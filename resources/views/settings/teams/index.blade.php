@@ -4,6 +4,10 @@
     <div class="w-full">
         <div class="flex items-center justify-between pb-4 mb-4 border-b border-white/20">
             <h3 class="block text-2xl mb-4 font-black">Teams</h3>
+
+            <div>
+                @include('settings.teams.partials.create-team-modal')
+            </div>
         </div>
 
         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">

@@ -14,6 +14,7 @@ use App\Http\Controllers\Settings\Bookmarks\UpdateBookmarkController;
 use App\Http\Controllers\Settings\Bookmarks\UpdateBookmarkGroupController;
 use App\Http\Controllers\Settings\Teams\ListTeamController;
 use App\Http\Controllers\Settings\Teams\ShowTeamController;
+use App\Http\Controllers\Settings\Teams\StoreTeamController;
 use App\Http\Controllers\Settings\WhitelistAccess\DeleteWhitelistAccessController;
 use App\Http\Controllers\Settings\WhitelistAccess\ListWhitelistAccessController;
 use App\Http\Controllers\Settings\WhitelistAccess\StoreWhitelistAccessController;
@@ -44,6 +45,7 @@ class SettingsRoutes implements RouteGroup
                     ->prefix('teams')
                     ->group(function () {
                         Route::get('/', ListTeamController::class)->name('list');
+                        Route::post('/', StoreTeamController::class)->name('store');
                         Route::get('/{team:uuid}', ShowTeamController::class)->name('show');
                     });
 
