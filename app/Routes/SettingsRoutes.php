@@ -9,6 +9,7 @@ use App\Http\Controllers\Settings\Bookmarks\ListBookmarkGroupController;
 use App\Http\Controllers\Settings\Bookmarks\ShowBookmarkGroupController;
 use App\Http\Controllers\Settings\Bookmarks\StoreBookmarkController;
 use App\Http\Controllers\Settings\Bookmarks\StoreBookmarkGroupController;
+use App\Http\Controllers\Settings\Bookmarks\UpdateBookmarkController;
 use App\Http\Controllers\Settings\Bookmarks\UpdateBookmarkGroupController;
 use App\Http\Controllers\Settings\IndexController;
 use Illuminate\Support\Facades\Route;
@@ -28,6 +29,7 @@ class SettingsRoutes implements RouteGroup
                     ->group(function () {
                         Route::get('/', ListBookmarkGroupController::class)->name('list');
                         Route::post('/', StoreBookmarkController::class)->name('store');
+                        Route::patch('/{bookmark:uuid}', UpdateBookmarkController::class)->name('update');
                         Route::post('/group', StoreBookmarkGroupController::class)->name('groups.store');
                         Route::get('/group/{bookmarkGroup:uuid}', ShowBookmarkGroupController::class)->name('groups.show');
                         Route::patch('/group/{bookmarkGroup:uuid}', UpdateBookmarkGroupController::class)->name('groups.update');

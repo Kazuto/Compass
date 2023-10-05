@@ -24,6 +24,6 @@ class UpdateBookmarkGroupController extends Controller
             Session::flash('error', 'Something went wrong!');
         }
 
-        return redirect(route('settings.bookmarks.groups.update', ['bookmarkGroup' => $bookmarkGroup]));
+        return redirect(route('settings.bookmarks.groups.show', ['bookmarkGroup' => $bookmarkGroup]));
     }
 }

@@ -20,6 +20,7 @@ class StoreBookmarkRequest extends FormRequest
             'name' => 'required|string',
             'url' => 'required|url',
             'icon' => 'string',
+            'order' => 'integer',
             'bookmark_group_id' => 'required|integer',
         ];
     }

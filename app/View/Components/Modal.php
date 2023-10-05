@@ -14,7 +14,7 @@ class Modal extends Component
         public string $title,
         public ?string $id = null,
     ) {
-        $this->id = Str::slug($this->title);
+        $this->id = $this->id ?? Str::slug($this->title);
     }
 
     public function render(): View

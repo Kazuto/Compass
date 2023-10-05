@@ -18,6 +18,7 @@ class SelectInput extends Component
         public string $optionValue = 'id',
         public string $optionLabel = 'name',
         public ?string $label = null,
+        public ?int $selection = null,
     ) {
         $this->label = $this->label ?? Str::title($this->name);
     }

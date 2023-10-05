@@ -15,6 +15,7 @@ class ShowBookmarkGroupController extends Controller
     {
         return view('settings.bookmarks.groups.show', [
             'bookmarkGroup' => $bookmarkGroup->load('bookmarks'),
+            'bookmarkGroups' => BookmarkGroup::all(),
         ]);
     }
 }

@@ -32,10 +32,7 @@
                     <td class="text-left py-3 px-2"><span class="icon">{{ $bookmark->icon }}</span></td>
                     <td class="text-left py-3 px-2">{{ $bookmark->order }}</td>
                     <td class="text-right py-3 px-2">
-                        <a href="#"
-                           class="inline-flex w-8 h-8 items-center justify-center rounded-lg transition-all hover:bg-white/50 mr-2">
-                            <span class="icon">󰏫</span>
-                        </a>
+                        @include('settings.bookmarks.partials.update-bookmark-modal', ['bookmark' => $bookmark, 'bookmarkGroups' => $bookmarkGroups])
 
                         <a href="#"
                            class="inline-flex w-8 h-8 items-center justify-center rounded-lg transition-all hover:bg-red-500 mr-2">

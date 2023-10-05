@@ -12,8 +12,7 @@ class Button extends Component
 {
     public function __construct(
         public string $type = 'submit'
-    )
-    {
+    ) {
     }
 
     public function render(): View|Closure|string
