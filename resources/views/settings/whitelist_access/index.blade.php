@@ -28,6 +28,7 @@
                         @endif
                     </td>
                     <td class="text-right py-3 px-2">
+                        @include('settings.whitelist_access.partials.delete-whitelist-access-modal', ['whitelistAccess' => $access])
                     </td>
                 </tr>
             @endforeach

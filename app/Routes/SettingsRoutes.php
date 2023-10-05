@@ -13,6 +13,7 @@ use App\Http\Controllers\Settings\Bookmarks\StoreBookmarkGroupController;
 use App\Http\Controllers\Settings\Bookmarks\UpdateBookmarkController;
 use App\Http\Controllers\Settings\Bookmarks\UpdateBookmarkGroupController;
 use App\Http\Controllers\Settings\IndexController;
+use App\Http\Controllers\Settings\WhitelistAccess\DeleteWhitelistAccessController;
 use App\Http\Controllers\Settings\WhitelistAccess\ListWhitelistAccessController;
 use Illuminate\Support\Facades\Route;
 
@@ -43,6 +44,7 @@ class SettingsRoutes implements RouteGroup
                     ->prefix('whitelist')
                     ->group(function () {
                         Route::get('/', ListWhitelistAccessController::class)->name('list');
+                        Route::delete('/{whitelistAccess}', DeleteWhitelistAccessController::class)->name('delete');
                     });
             });
     }
