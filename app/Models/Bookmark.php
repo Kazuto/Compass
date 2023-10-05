@@ -63,6 +63,7 @@ class Bookmark extends Model
         'name',
         'url',
         'icon',
+        'order',
         'bookmark_group_id',
     ];
 
@@ -70,6 +71,8 @@ class Bookmark extends Model
     {
         self::creating(function (Bookmark $model) {
             $model->uuid = Str::uuid();
+
+            $model->order = Bookmark::where('bookmark_group_id', '=', $model->bookmark_group_id)->max('order') + 1;
         });
 
         static::addGlobalScope(new OrderColumn);

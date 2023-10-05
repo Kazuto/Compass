@@ -40,6 +40,10 @@ body {
     font-family: 'JetBrainsMono NF', monospace;
 }
 
+.icon-font {
+    font-family: 'JetBrainsMono NF', monospace;
+}
+
 ::backdrop {
     @apply bg-black/50;
 }

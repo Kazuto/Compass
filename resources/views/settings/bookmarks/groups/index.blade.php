@@ -6,7 +6,7 @@
             <h3 class="block text-2xl mb-4 font-black">Bookmarks</h3>
 
             <div>
-                <x-button-link href="#" class="mr-2">Add Bookmark</x-button-link>
+                @include('settings.bookmarks.partials.create-bookmark-modal')
                 @include('settings.bookmarks.partials.create-bookmark-group-modal')
             </div>
         </div>
