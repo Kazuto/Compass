@@ -12,7 +12,6 @@ use App\Http\Controllers\Settings\Bookmarks\StoreBookmarkController;
 use App\Http\Controllers\Settings\Bookmarks\StoreBookmarkGroupController;
 use App\Http\Controllers\Settings\Bookmarks\UpdateBookmarkController;
 use App\Http\Controllers\Settings\Bookmarks\UpdateBookmarkGroupController;
-use App\Http\Controllers\Settings\IndexController;
 use App\Http\Controllers\Settings\WhitelistAccess\DeleteWhitelistAccessController;
 use App\Http\Controllers\Settings\WhitelistAccess\ListWhitelistAccessController;
 use App\Http\Controllers\Settings\WhitelistAccess\StoreWhitelistAccessController;
@@ -26,8 +25,6 @@ class SettingsRoutes implements RouteGroup
             ->prefix('settings/')
             ->middleware('auth')
             ->group(function () {
-                Route::get('/', IndexController::class)->name('index');
-
                 Route::as('bookmarks.')
                     ->prefix('bookmarks/')
                     ->group(function () {
