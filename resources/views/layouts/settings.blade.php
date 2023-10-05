@@ -33,6 +33,7 @@
             <nav class="flex flex-col gap-2">
                 <x-settings-link route="settings.index">General</x-settings-link>
                 <x-settings-link route="settings.bookmarks.list">Bookmarks</x-settings-link>
+                <x-settings-link route="settings.whitelist.list">Access</x-settings-link>
             </nav>
 
             <div>
