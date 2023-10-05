@@ -1,4 +1,4 @@
-<x-modal title="Update Bookmark" id="update-bookmark-{{ $bookmark->uuid }}" class="!text-left">
+<x-modal title="Update Bookmark" id="update-bookmark-{{ $bookmark->uuid }}" class="text-left">
     <x-slot name="button" icon>
         <span class="icon">󰏫</span>
     </x-slot>

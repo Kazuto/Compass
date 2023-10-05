@@ -34,10 +34,7 @@
                     <td class="text-right py-3 px-2">
                         @include('settings.bookmarks.partials.update-bookmark-modal', ['bookmark' => $bookmark, 'bookmarkGroups' => $bookmarkGroups])
 
-                        <a href="#"
-                           class="inline-flex w-8 h-8 items-center justify-center rounded-lg transition-all hover:bg-red-500 mr-2">
-                            <span class="icon">󰩹</span>
-                        </a>
+                        @include('settings.bookmarks.partials.delete-bookmark-modal', ['bookmark' => $bookmark])
                     </td>
                 </tr>
             @endforeach
