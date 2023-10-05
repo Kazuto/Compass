@@ -7,20 +7,7 @@
 
             <div>
                 <x-button-link href="#" class="mr-2">Add Bookmark</x-button-link>
-
-                <x-modal
-                    id="create-bookmark-group"
-                    title="Create Bookmark Group"
-                    button-text="Add Group"
-                >
-                    <form action="{{ route('settings.bookmarks.groups.store') }}" method="POST">
-                        @csrf
-                        <x-text-input name="name" id="name" label="Name:"></x-text-input>
-
-                        <button type="submit" class="rounded-lg bg-[var(--color-accent)] text-[var(--color-text)] py-2 px-4">Save</button>
-                    </form>
-                </x-modal>
-
+                @include('settings.bookmarks.partials.create-bookmark-group-modal')
             </div>
         </div>
 
