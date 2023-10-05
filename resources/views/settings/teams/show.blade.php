@@ -6,6 +6,10 @@
             <h3 class="block text-2xl mb-4 font-black">
                 Teams: <span class="text-[var(--color-accent)]">{{ $team->name }}</span>
             </h3>
+
+            <div>
+                @include('settings.teams.partials.delete-team-modal', ['team' => $team])
+            </div>
         </div>
 
             <table class="w-full mb-6">
