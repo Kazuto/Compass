@@ -27,19 +27,25 @@
     font-display: swap;
 }
 
-
-
 body {
     @apply antialiased font-medium;
 
     background-color: var(--color-background);
-    color: var(--color-primary);
+    color: var(--color-text);
     font-family: 'Quicksand', sans-serif;
 }
 
 .icon {
     @apply inline-block;
     font-family: 'JetBrainsMono NF', monospace;
+}
+
+.icon-font {
+    font-family: 'JetBrainsMono NF', monospace;
+}
+
+::backdrop {
+    @apply bg-black/50;
 }
 
 

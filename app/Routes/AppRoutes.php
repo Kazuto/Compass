@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Routes;
 
+use App\Http\Controllers\DashboardController;
 use Illuminate\Support\Facades\Route;
 
 class AppRoutes implements RouteGroup
@@ -12,10 +13,7 @@ class AppRoutes implements RouteGroup
     {
         Route::middleware('auth')
             ->group(function () {
-                Route::get('/', function () {
-                    return view('index');
-                })->name('home');
+                Route::get('/', DashboardController::class)->name('home');
             });
-
     }
 }

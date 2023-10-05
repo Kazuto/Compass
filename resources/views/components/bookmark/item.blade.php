@@ -1,8 +1,8 @@
 <li>
-    <a class="inline-block text-sm transition-all hover:translate-x-2" href="{{ $url }}">
-        @if($icon)
-        <span class="icon mr-1">{{ $icon }}</span>
+    <a class="inline-block text-sm transition-all hover:translate-x-2" href="{{ $bookmark->url }}">
+        @if($bookmark->icon)
+        <span class="icon mr-1">{{ $bookmark->icon }}</span>
         @endif
-        {{ $name }}
+        {{ $bookmark->name }}
     </a>
 </li>
