@@ -8,7 +8,7 @@
 
         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
             @foreach ($teams as $team)
-                <a href="#"
+                <a href="{{ route('settings.teams.show', ['team' => $team]) }}"
                    class="rounded-lg p-3 shadow border border-white/5 bg-gradient-to-bl from-white/5 to-transparent">
                     <h4 class="text-lg font-bold mb-2">
                         {{ $team->name }}
