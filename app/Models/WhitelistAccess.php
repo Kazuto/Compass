@@ -2,14 +2,15 @@
 
 declare(strict_types=1);
 
-namespace App\Models\Settings;
+namespace App\Models;
 
-use App\Models\User;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
+
+use function config;
 
 /**
  * App\Models\Settings\AccessWhitelist
@@ -21,10 +22,9 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property \Illuminate\Support\Carbon|null $deleted_at
- * @property-read User|null $user
+ * @property-read \App\Models\User|null $user
  *
  * @method static Builder|WhitelistAccess available()
- * @method static \Database\Factories\Settings\WhitelistAccessFactory factory($count = null, $state = [])
  * @method static Builder|WhitelistAccess forEmail(string $email)
  * @method static Builder|WhitelistAccess newModelQuery()
  * @method static Builder|WhitelistAccess newQuery()
