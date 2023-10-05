@@ -1,0 +1,32 @@
+<?php
+
+declare(strict_types=1);
+
+namespace {{ namespace }};
+
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
+
+class {{ class }} extends Model
+{
+    //region Traits
+    use HasFactory;
+    use SoftDeletes;
+    //endregion Traits
+
+    //region Constants
+    //endregion Constants
+
+    //region ORM
+    //endregion ORM
+
+    //region Relations
+    //endregion Relations
+
+    //region Scopes
+    //endregion Scopes
+
+    //region Methods
+    //endregion Methods
+}
