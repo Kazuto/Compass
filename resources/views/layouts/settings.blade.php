@@ -33,6 +33,7 @@
             <nav class="flex flex-col gap-2">
                 <x-settings-link route="settings.bookmarks.list">Bookmarks</x-settings-link>
                 <x-settings-link route="settings.whitelist.list">Whitelist</x-settings-link>
+                <x-settings-link route="settings.teams.list">Teams</x-settings-link>
             </nav>
 
             <div>

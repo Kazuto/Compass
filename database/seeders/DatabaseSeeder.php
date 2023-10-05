@@ -15,6 +15,7 @@ class DatabaseSeeder extends Seeder
             BookmarkGroupSeeder::class,
             BookmarkSeeder::class,
             WhitelistAccessSeeder::class,
+            TeamSeeder::class,
         ]);
     }
 }
