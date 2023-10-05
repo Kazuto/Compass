@@ -1,12 +1,12 @@
-<x-modal
-    id="create-bookmark-group"
-    title="Create Bookmark Group"
-    button-text="Create Group"
->
+<x-modal title="Create Bookmark Group">
+    <x-slot name="button">
+        Create Group
+    </x-slot>
+
     <form action="{{ route('settings.bookmarks.groups.store') }}" method="POST">
         @csrf
         <x-text-input name="name" id="name" label="Name"></x-text-input>
 
-        <button type="submit" class="rounded-lg bg-[var(--color-accent)] text-[var(--color-text)] py-2 px-4">Save</button>
+        <x-button>Save</x-button>
     </form>
 </x-modal>

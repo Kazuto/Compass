@@ -1,9 +1,8 @@
-<x-modal
-    id="delete-bookmark-group"
-    title="Delete Bookmark Group"
-    button-text="Delete Group"
-    button-type="danger"
->
+<x-modal title="Delete Bookmark Group">
+    <x-slot name="button" danger>
+        Delete Group
+    </x-slot>
+
     <p class="text-lg text-[var(--color-text)] mb-8">
         Are you sure to delete this bookmark group?
     </p>
@@ -14,6 +13,6 @@
     >
         @csrf
         @method('DELETE')
-        <button type="submit" class="py-2 px-3 rounded-lg bg-red-600 text-[var(--color-text)]">Confirm</button>
+        <x-button danger>Confirm</x-button>
     </form>
 </x-modal>

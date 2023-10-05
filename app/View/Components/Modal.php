@@ -6,15 +6,15 @@ namespace App\View\Components;
 
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
+use Str;
 
 class Modal extends Component
 {
     public function __construct(
-        public string $id,
         public string $title,
-        public string $buttonText = 'Open',
-        public string $buttonType = ''
+        public ?string $id = null,
     ) {
+        $this->id = Str::slug($this->title);
     }
 
     public function render(): View

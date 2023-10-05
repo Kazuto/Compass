@@ -1,14 +1,17 @@
+@props([
+    'button'
+])
 <button
     type="button"
     id="button-{{ $id }}"
     data-toggle="modal"
     data-target="modal-{{ $id }}"
-    @class([
+    {{ $button->attributes->class([
         'py-2 px-3 rounded-lg bg-[var(--color-accent)]',
-        'bg-red-600' => $buttonType === 'danger'
-])
+        'bg-red-600' => $button->attributes->has('danger'),
+]) }}
 >
-    {{ $buttonText }}
+    {{ $button }}
 </button>
 
 <dialog id="modal-{{ $id }}" class="w-full max-w-2xl bg-[var(--color-background)] rounded-lg shadow-lg">
