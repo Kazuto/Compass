@@ -35,8 +35,34 @@ class CallbackController extends Controller
             'github_refresh_token' => $authUser->refreshToken,
         ]);
 
+        $this->updateOrCreateWhitelistAccess($user);
+
         Auth::login($user);
 
         return redirect()->route('home');
+    }
+
+    private function updateOrCreateWhitelistAccess(User $user): void
+    {
+        if (! $user->wasRecentlyCreated) {
+            return;
+        }
+
+        if ($user->email === config('compass.auth.whitelist_admin_email')) {
+            WhitelistAccess::create([
+                'email' => $user->email,
+                'user_id' => $user->id,
+                'is_active' => true,
+            ]);
+
+            return;
+        }
+
+        WhitelistAccess::query()
+            ->forEmail($user->email)
+            ->update([
+                'user_id' => $user->id,
+                'is_active' => true,
+            ]);
     }
 }
