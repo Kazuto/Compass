@@ -18,6 +18,8 @@ class UpdateBookmarkGroupController extends Controller
             DB::transaction(function () use ($request, $bookmarkGroup) {
                 $bookmarkGroup->update($request->validated());
 
+                $bookmarkGroup->teams()->sync($request->get('team_ids'));
+
                 Session::flash('success', 'The bookmark group was updated successfully.');
             });
         } catch (Throwable) {

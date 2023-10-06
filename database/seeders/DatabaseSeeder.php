@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Database\Seeders;
 
-use Database\Seeders\Settings\WhitelistAccessSeeder;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -15,6 +14,7 @@ class DatabaseSeeder extends Seeder
             BookmarkGroupSeeder::class,
             BookmarkSeeder::class,
             WhitelistAccessSeeder::class,
+            TeamSeeder::class,
         ]);
     }
 }

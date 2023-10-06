@@ -12,7 +12,12 @@ use App\Http\Controllers\Settings\Bookmarks\StoreBookmarkController;
 use App\Http\Controllers\Settings\Bookmarks\StoreBookmarkGroupController;
 use App\Http\Controllers\Settings\Bookmarks\UpdateBookmarkController;
 use App\Http\Controllers\Settings\Bookmarks\UpdateBookmarkGroupController;
-use App\Http\Controllers\Settings\IndexController;
+use App\Http\Controllers\Settings\Teams\AddUserController;
+use App\Http\Controllers\Settings\Teams\DeleteTeamController;
+use App\Http\Controllers\Settings\Teams\ListTeamController;
+use App\Http\Controllers\Settings\Teams\RemoveUserController;
+use App\Http\Controllers\Settings\Teams\ShowTeamController;
+use App\Http\Controllers\Settings\Teams\StoreTeamController;
 use App\Http\Controllers\Settings\WhitelistAccess\DeleteWhitelistAccessController;
 use App\Http\Controllers\Settings\WhitelistAccess\ListWhitelistAccessController;
 use App\Http\Controllers\Settings\WhitelistAccess\StoreWhitelistAccessController;
@@ -26,8 +31,6 @@ class SettingsRoutes implements RouteGroup
             ->prefix('settings/')
             ->middleware('auth')
             ->group(function () {
-                Route::get('/', IndexController::class)->name('index');
-
                 Route::as('bookmarks.')
                     ->prefix('bookmarks/')
                     ->group(function () {
@@ -39,6 +42,18 @@ class SettingsRoutes implements RouteGroup
                         Route::get('/group/{bookmarkGroup:uuid}', ShowBookmarkGroupController::class)->name('groups.show');
                         Route::patch('/group/{bookmarkGroup:uuid}', UpdateBookmarkGroupController::class)->name('groups.update');
                         Route::delete('/group/{bookmarkGroup:uuid}', DeleteBookmarkGroupController::class)->name('groups.delete');
+                    });
+
+                Route::as('teams.')
+                    ->prefix('teams')
+                    ->group(function () {
+                        Route::get('/', ListTeamController::class)->name('list');
+                        Route::post('/', StoreTeamController::class)->name('store');
+                        Route::get('/{team:uuid}', ShowTeamController::class)->name('show');
+                        Route::delete('/{team:uuid}', DeleteTeamController::class)->name('delete');
+
+                        Route::post('/{team:uuid}', AddUserController::class)->name('add-user');
+                        Route::delete('/{team:uuid}/{user}', RemoveUserController::class)->name('remove-user');
                     });
 
                 Route::as('whitelist.')

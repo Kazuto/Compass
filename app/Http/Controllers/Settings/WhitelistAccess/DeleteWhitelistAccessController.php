@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Settings\WhitelistAccess;
 
 use App\Http\Controllers\Controller;
-use App\Models\Settings\WhitelistAccess;
+use App\Models\WhitelistAccess;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;

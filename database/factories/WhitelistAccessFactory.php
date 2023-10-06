@@ -2,12 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Database\Factories\Settings;
+namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 
+use function fake;
+
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Settings\WhitelistAccess>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\WhitelistAccess>
  */
 class WhitelistAccessFactory extends Factory
 {
@@ -15,7 +17,7 @@ class WhitelistAccessFactory extends Factory
     {
         return [
             'email' => fake()->email(),
-            'is_available' => fake()->boolean(85),
+            'is_active' => fake()->boolean(5),
         ];
     }
 }

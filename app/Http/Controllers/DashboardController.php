@@ -13,7 +13,7 @@ class DashboardController extends Controller
     public function __invoke(Request $request): View
     {
         return view('index', [
-            'bookmarkGroups' => BookmarkGroup::all()->loadMissing('bookmarks'),
+            'bookmarkGroups' => BookmarkGroup::accessible()->with('bookmarks')->get(),
         ]);
     }
 }

@@ -2,12 +2,14 @@
 
 declare(strict_types=1);
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\Teams;
 
+use App\Models\User;
 use Auth;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
-class StoreBookmarkGroupRequest extends FormRequest
+class AddUserRequest extends FormRequest
 {
     public function authorize(): bool
     {
@@ -17,8 +19,7 @@ class StoreBookmarkGroupRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required',
-            'team_ids' => 'array',
+            'user_id' => ['required', 'integer', Rule::in(User::pluck('id')->toArray())],
         ];
     }
 }

@@ -24,16 +24,16 @@
         <div class="w-full flex-shrink-0">
 
             <div class="mb-8">
-                <h2 class="text-3xl font-bold mb-2">Settings</h2>
+                <h2 class="text-5xl font-bold mb-4">Settings</h2>
                 <a href="{{route('home')}}" class="transition-all hover:text-[var(--color-accent)]">Back to
                     Dashboard</a>
             </div>
         </div>
         <div class="grid grid-cols-[250px_1fr] gap-8 ">
             <nav class="flex flex-col gap-2">
-                <x-settings-link route="settings.index">General</x-settings-link>
                 <x-settings-link route="settings.bookmarks.list">Bookmarks</x-settings-link>
                 <x-settings-link route="settings.whitelist.list">Whitelist</x-settings-link>
+                <x-settings-link route="settings.teams.list">Teams</x-settings-link>
             </nav>
 
             <div>

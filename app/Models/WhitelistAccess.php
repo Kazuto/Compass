@@ -2,40 +2,41 @@
 
 declare(strict_types=1);
 
-namespace App\Models\Settings;
+namespace App\Models;
 
-use App\Models\User;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
+use function config;
+
 /**
  * App\Models\Settings\AccessWhitelist
  *
  * @property int $id
  * @property string $email
- * @property int $is_available
+ * @property int $is_active
  * @property int|null $user_id
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property \Illuminate\Support\Carbon|null $deleted_at
- * @property-read User|null $user
+ * @property-read \App\Models\User|null $user
  *
- * @method static Builder|WhitelistAccess available()
- * @method static \Database\Factories\Settings\WhitelistAccessFactory factory($count = null, $state = [])
+ * @method static Builder|WhitelistAccess active()
+ * @method static \Database\Factories\WhitelistAccessFactory factory($count = null, $state = [])
  * @method static Builder|WhitelistAccess forEmail(string $email)
+ * @method static Builder|WhitelistAccess inactive()
  * @method static Builder|WhitelistAccess newModelQuery()
  * @method static Builder|WhitelistAccess newQuery()
  * @method static Builder|WhitelistAccess onlyTrashed()
  * @method static Builder|WhitelistAccess query()
- * @method static Builder|WhitelistAccess unavailable()
  * @method static Builder|WhitelistAccess whereCreatedAt($value)
  * @method static Builder|WhitelistAccess whereDeletedAt($value)
  * @method static Builder|WhitelistAccess whereEmail($value)
  * @method static Builder|WhitelistAccess whereId($value)
- * @method static Builder|WhitelistAccess whereIsAvailable($value)
+ * @method static Builder|WhitelistAccess whereIsActive($value)
  * @method static Builder|WhitelistAccess whereUpdatedAt($value)
  * @method static Builder|WhitelistAccess whereUserId($value)
  * @method static Builder|WhitelistAccess withTrashed()
@@ -58,7 +59,7 @@ class WhitelistAccess extends Model
 
     protected $fillable = [
         'email',
-        'is_available',
+        'is_active',
         'user_id',
     ];
     //endregion ORM
@@ -73,17 +74,17 @@ class WhitelistAccess extends Model
     //region Scopes
     public function scopeForEmail(Builder $builder, string $email): Builder
     {
-        return $builder->where('email', '=', $email)->available();
+        return $builder->where('email', '=', $email);
     }
 
-    public function scopeAvailable(Builder $builder): Builder
+    public function scopeActive(Builder $builder): Builder
     {
-        return $builder->where('is_available', '=', true);
+        return $builder->where('is_active', '=', true);
     }
 
-    public function scopeUnavailable(Builder $builder): Builder
+    public function scopeInactive(Builder $builder): Builder
     {
-        return $builder->where('is_available', '=', 'false');
+        return $builder->where('is_active', '=', 'false');
     }
     //endregion Scopes
 

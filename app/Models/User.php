@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
-use App\Models\Settings\WhitelistAccess;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -26,9 +26,11 @@ use Laravel\Sanctum\HasApiTokens;
  * @property mixed $password
  * @property-read \Illuminate\Notifications\DatabaseNotificationCollection<int, \Illuminate\Notifications\DatabaseNotification> $notifications
  * @property-read int|null $notifications_count
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Team> $teams
+ * @property-read int|null $teams_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \Laravel\Sanctum\PersonalAccessToken> $tokens
  * @property-read int|null $tokens_count
- * @property-read WhitelistAccess|null $whitelistAccess
+ * @property-read \App\Models\WhitelistAccess|null $whitelistAccess
  *
  * @method static \Database\Factories\UserFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder|User newModelQuery()
@@ -80,6 +82,18 @@ class User extends Authenticatable
     //endregion ORM
 
     //region Relations
+    public function teams(): BelongsToMany
+    {
+        return $this->belongsToMany(
+            Team::class,
+            'team_user',
+            'team_id',
+            'user_id',
+            'id',
+            'id'
+        );
+    }
+
     public function whitelistAccess(): HasOne
     {
         return $this->hasOne(WhitelistAccess::class, 'user_id', 'id');
