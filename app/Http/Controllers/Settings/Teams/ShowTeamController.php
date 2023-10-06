@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Settings\Teams;
 
 use App\Http\Controllers\Controller;
 use App\Models\Team;
+use App\Models\User;
 use Illuminate\View\View;
 use Request;
 
@@ -18,6 +19,7 @@ class ShowTeamController extends Controller
                 'users',
                 'bookmarkGroups.bookmarks',
             ]),
+            'users' => User::whereNotIn('id', $team->users->pluck('id'))->get(),
         ]);
     }
 }

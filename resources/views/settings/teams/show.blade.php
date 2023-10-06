@@ -8,6 +8,7 @@
             </h3>
 
             <div>
+                @include('settings.teams.partials.add-user-modal', ['team' => $team, 'users' => $users])
                 @include('settings.teams.partials.delete-team-modal', ['team' => $team])
             </div>
         </div>
@@ -19,8 +20,7 @@
             <table class="w-full mb-6">
                 <thead class="bg-white/20">
                 <tr class="text-left">
-                    <th class="p-2 rounded-l">#</th>
-                    <th class="p-2">Name</th>
+                    <th class="p-2 rounded-l">Name</th>
                     <th class="p-2">E-Mail</th>
                     <th class="p-2 rounded-r"></th>
                 </tr>
@@ -28,11 +28,10 @@
                 <tbody>
                 @forelse ($team->users as $user)
                     <tr class="border-b border-white/10 last:border-transparent">
-                        <td class="text-left py-3 px-2">{{ $user->id }}</td>
                         <td class="text-left py-3 px-2">{{ $user->name }}</td>
                         <td class="text-left py-3 px-2">{{ $user->email }}</td>
                         <td class="text-right py-3 px-2">
-                            {{--                            @include('settingsdd.whitelist_access.partials.delete-whitelist-access-modal', ['whitelistAccess' => $access])--}}
+                            @include('settings.teams.partials.remove-user-modal', ['team' => $team, 'user' => $user])
                         </td>
                     </tr>
                 @empty

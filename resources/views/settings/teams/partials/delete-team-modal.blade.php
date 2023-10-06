@@ -1,9 +1,9 @@
 <x-modal title="Delete Bookmark" class="text-left">
-    <x-slot name="button" icon>
-        <span class="icon">󰩹</span>
+    <x-slot name="button">
+        Delete Team
     </x-slot>
 
-    <p class="text-lg text-[var(--color-text)] mb-8">
+    <p class="text-lg text-[var(--color-text)] mb-4">
         Are you sure to delete this team?
     </p>
     <form

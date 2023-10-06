@@ -1,13 +1,13 @@
-<x-modal title="Delete Bookmark" id="delete-bookmark-{{ $whitelistAccess->uuid }}" class="text-left">
+<x-modal title="Remove User" id="remove-user-{{ $user->id }}" class="text-left">
     <x-slot name="button" icon>
         <span class="icon">󰩹</span>
     </x-slot>
 
     <p class="text-lg text-[var(--color-text)] mb-4">
-        Are you sure to delete this whitelist entry?
+        Are you sure to remove this user from the team?
     </p>
     <form
-        action="{{ route('settings.whitelist.delete', ['whitelistAccess' => $whitelistAccess]) }}"
+        action="{{ route('settings.teams.remove-user', ['team' => $team, 'user' => $user]) }}"
         method="POST"
         class="inline"
     >
