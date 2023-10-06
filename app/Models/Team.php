@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
@@ -25,18 +26,19 @@ use Illuminate\Support\Str;
  * @property-read int|null $users_count
  *
  * @method static \Database\Factories\TeamFactory factory($count = null, $state = [])
- * @method static \Illuminate\Database\Eloquent\Builder|Team newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|Team newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|Team onlyTrashed()
- * @method static \Illuminate\Database\Eloquent\Builder|Team query()
- * @method static \Illuminate\Database\Eloquent\Builder|Team whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Team whereDeletedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Team whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Team whereName($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Team whereUpdatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Team whereUuid($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Team withTrashed()
- * @method static \Illuminate\Database\Eloquent\Builder|Team withoutTrashed()
+ * @method static Builder|Team isMember(\App\Models\User $user)
+ * @method static Builder|Team newModelQuery()
+ * @method static Builder|Team newQuery()
+ * @method static Builder|Team onlyTrashed()
+ * @method static Builder|Team query()
+ * @method static Builder|Team whereCreatedAt($value)
+ * @method static Builder|Team whereDeletedAt($value)
+ * @method static Builder|Team whereId($value)
+ * @method static Builder|Team whereName($value)
+ * @method static Builder|Team whereUpdatedAt($value)
+ * @method static Builder|Team whereUuid($value)
+ * @method static Builder|Team withTrashed()
+ * @method static Builder|Team withoutTrashed()
  *
  * @mixin \Eloquent
  */
@@ -96,6 +98,12 @@ class Team extends Model
     //endregion Relations
 
     //region Scopes
+    public function scopeIsMember(Builder $builder, User $user): Builder
+    {
+        return $builder->whereHas('users', function (Builder $builder) use ($user) {
+            $builder->where('id', '=', $user->id);
+        });
+    }
     //endregion Scopes
 
     //region Methods

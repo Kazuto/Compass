@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace App\Models;
 
 use App\Models\Scopes\OrderColumn;
+use Auth;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
@@ -27,20 +29,21 @@ use Str;
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Team> $teams
  * @property-read int|null $teams_count
  *
+ * @method static Builder|BookmarkGroup accessible()
  * @method static \Database\Factories\BookmarkGroupFactory factory($count = null, $state = [])
- * @method static \Illuminate\Database\Eloquent\Builder|BookmarkGroup newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|BookmarkGroup newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|BookmarkGroup onlyTrashed()
- * @method static \Illuminate\Database\Eloquent\Builder|BookmarkGroup query()
- * @method static \Illuminate\Database\Eloquent\Builder|BookmarkGroup whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|BookmarkGroup whereDeletedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|BookmarkGroup whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|BookmarkGroup whereName($value)
- * @method static \Illuminate\Database\Eloquent\Builder|BookmarkGroup whereOrder($value)
- * @method static \Illuminate\Database\Eloquent\Builder|BookmarkGroup whereUpdatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|BookmarkGroup whereUuid($value)
- * @method static \Illuminate\Database\Eloquent\Builder|BookmarkGroup withTrashed()
- * @method static \Illuminate\Database\Eloquent\Builder|BookmarkGroup withoutTrashed()
+ * @method static Builder|BookmarkGroup newModelQuery()
+ * @method static Builder|BookmarkGroup newQuery()
+ * @method static Builder|BookmarkGroup onlyTrashed()
+ * @method static Builder|BookmarkGroup query()
+ * @method static Builder|BookmarkGroup whereCreatedAt($value)
+ * @method static Builder|BookmarkGroup whereDeletedAt($value)
+ * @method static Builder|BookmarkGroup whereId($value)
+ * @method static Builder|BookmarkGroup whereName($value)
+ * @method static Builder|BookmarkGroup whereOrder($value)
+ * @method static Builder|BookmarkGroup whereUpdatedAt($value)
+ * @method static Builder|BookmarkGroup whereUuid($value)
+ * @method static Builder|BookmarkGroup withTrashed()
+ * @method static Builder|BookmarkGroup withoutTrashed()
  *
  * @mixin \Eloquent
  */
@@ -95,6 +98,13 @@ class BookmarkGroup extends Model
     //endregion Relations
 
     //region Scopes
+    public function scopeAccessible(Builder $builder): Builder
+    {
+        return $builder->where(function (Builder $builder) {
+            $builder->whereDoesntHave('teams')
+                ->orWhereHas('teams', fn (Builder $builder) => $builder->isMember(Auth::user()));
+        });
+    }
     //endregion Scopes
 
     //region Methods
