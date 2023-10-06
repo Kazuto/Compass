@@ -1,10 +1,10 @@
-<x-modal title="Delete Bookmark" class="text-left">
-    <x-slot name="button">
+<x-modal title="Delete Team" class="text-left">
+    <x-slot name="button" danger>
         Delete Team
     </x-slot>
 
     <p class="text-lg text-[var(--color-text)] mb-4">
-        Are you sure to delete this team?
+        Are you sure to delete <span class="text-red-500">{{ $team->name }}</span>?
     </p>
     <form
         action="{{ route('settings.teams.delete', ['team' => $team]) }}"

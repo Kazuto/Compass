@@ -4,7 +4,7 @@
     </x-slot>
 
     <p class="text-lg text-[var(--color-text)] mb-4">
-        Are you sure to remove this user from the team?
+        Are you sure to remove <span class="text-red-500">{{ $user->name }}</span>?
     </p>
     <form
         action="{{ route('settings.teams.remove-user', ['team' => $team, 'user' => $user]) }}"

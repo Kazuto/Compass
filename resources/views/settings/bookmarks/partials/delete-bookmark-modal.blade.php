@@ -4,7 +4,7 @@
     </x-slot>
 
     <p class="text-lg text-[var(--color-text)] mb-4">
-        Are you sure to delete this bookmark?
+        Are you sure to delete <span class="text-red-500">{{ $bookmark->name }}</span>?
     </p>
     <form
         action="{{ route('settings.bookmarks.delete', ['bookmark' => $bookmark]) }}"
