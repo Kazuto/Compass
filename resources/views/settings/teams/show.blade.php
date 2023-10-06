@@ -2,8 +2,8 @@
 
 @section('content')
     <div class="w-full">
-        <div class="flex items-center justify-between pb-4 mb-4 border-b border-white/20">
-            <h3 class="block text-3xl mb-4 font-black">
+        <div class="flex items-center justify-between pb-6 mb-6 border-b border-white/20">
+            <h3 class="block text-3xl font-black">
                 Teams: <span class="text-[var(--color-accent)]">{{ $team->name }}</span>
             </h3>
 
@@ -32,6 +32,7 @@
                         <td class="text-left py-3 px-2">{{ $user->name }}</td>
                         <td class="text-left py-3 px-2">{{ $user->email }}</td>
                         <td class="text-right py-3 px-2">
+                            {{--                            @include('settingsdd.whitelist_access.partials.delete-whitelist-access-modal', ['whitelistAccess' => $access])--}}
                         </td>
                     </tr>
                 @empty

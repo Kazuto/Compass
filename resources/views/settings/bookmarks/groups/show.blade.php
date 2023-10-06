@@ -2,9 +2,9 @@
 
 @section('content')
     <div class="w-full">
-        <div class="flex items-center justify-between pb-4 mb-4 border-b border-white/20">
-            <h3 class="block text-3xl mb-4 font-black">
-                Group: <span class="text-[var(--color-accent)]">{{ $bookmarkGroup->name }}</span>
+        <div class="flex items-center justify-between pb-6 mb-6 border-b border-white/20">
+            <h3 class="block text-3xl font-black">
+                Bookmarks: <span class="text-[var(--color-accent)]">{{ $bookmarkGroup->name }}</span>
             </h3>
 
             <div>
