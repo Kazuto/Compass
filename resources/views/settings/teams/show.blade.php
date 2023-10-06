@@ -3,7 +3,7 @@
 @section('content')
     <div class="w-full">
         <div class="flex items-center justify-between pb-4 mb-4 border-b border-white/20">
-            <h3 class="block text-2xl mb-4 font-black">
+            <h3 class="block text-3xl mb-4 font-black">
                 Teams: <span class="text-[var(--color-accent)]">{{ $team->name }}</span>
             </h3>
 
@@ -12,6 +12,10 @@
             </div>
         </div>
 
+        <div>
+            <h4 class="font-bold mb-4 text-2xl">
+                Users
+            </h4>
             <table class="w-full mb-6">
                 <thead class="bg-white/20">
                 <tr class="text-left">
@@ -37,6 +41,19 @@
                 @endforelse
                 </tbody>
             </table>
+        </div>
 
+        <div>
+            <h4 class="font-bold mb-4 text-2xl">
+                Bookmark groups
+            </h4>
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
+                @forelse($team->bookmarkGroups as $bookmarkGroup)
+                    <x-bookmark.group-card :bookmark-group="$bookmarkGroup"></x-bookmark.group-card>
+                @empty
+                    <span class="col-span-full text-neutral-400">No special bookmark groups assigned</span>
+                @endforelse
+            </div>
+        </div>
     </div>
 @endsection

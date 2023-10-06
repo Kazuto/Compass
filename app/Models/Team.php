@@ -19,6 +19,8 @@ use Illuminate\Support\Str;
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property \Illuminate\Support\Carbon|null $deleted_at
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\BookmarkGroup> $bookmarkGroups
+ * @property-read int|null $bookmark_groups_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\User> $users
  * @property-read int|null $users_count
  *
@@ -68,13 +70,25 @@ class Team extends Model
     //endregion ORM
 
     //region Relations
+    public function bookmarkGroups(): BelongsToMany
+    {
+        return $this->belongsToMany(
+            BookmarkGroup::class,
+            'bookmark_group_team',
+            'team_id',
+            'bookmark_group_id',
+            'id',
+            'id'
+        );
+    }
+
     public function users(): BelongsToMany
     {
         return $this->belongsToMany(
             User::class,
             'team_user',
-            'user_id',
             'team_id',
+            'user_id',
             'id',
             'id'
         );

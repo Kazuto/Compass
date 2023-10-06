@@ -13,6 +13,11 @@ class ShowTeamController extends Controller
 {
     public function __invoke(Request $request, Team $team): View
     {
-        return view('settings.teams.show', ['team' => $team->loadMissing('users')]);
+        return view('settings.teams.show', [
+            'team' => $team->loadMissing([
+                'users',
+                'bookmarkGroups.bookmarks',
+            ]),
+        ]);
     }
 }

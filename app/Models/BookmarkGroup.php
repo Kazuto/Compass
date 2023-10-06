@@ -7,6 +7,7 @@ namespace App\Models;
 use App\Models\Scopes\OrderColumn;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Str;
@@ -23,6 +24,8 @@ use Str;
  * @property \Illuminate\Support\Carbon|null $deleted_at
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Bookmark> $bookmarks
  * @property-read int|null $bookmarks_count
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Team> $teams
+ * @property-read int|null $teams_count
  *
  * @method static \Database\Factories\BookmarkGroupFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder|BookmarkGroup newModelQuery()
@@ -76,6 +79,18 @@ class BookmarkGroup extends Model
     public function bookmarks(): HasMany
     {
         return $this->hasMany(Bookmark::class, 'bookmark_group_id', 'id');
+    }
+
+    public function teams(): BelongsToMany
+    {
+        return $this->belongsToMany(
+            Team::class,
+            'bookmark_group_team',
+            'bookmark_group_id',
+            'team_id',
+            'id',
+            'id'
+        );
     }
     //endregion Relations
 

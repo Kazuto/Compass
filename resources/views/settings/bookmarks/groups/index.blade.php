@@ -16,6 +16,5 @@
                 <x-bookmark.group-card :bookmark-group="$bookmarkGroup"></x-bookmark.group-card>
             @endforeach
         </div>
-
     </div>
 @endsection

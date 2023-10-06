@@ -24,7 +24,7 @@
         <div class="w-full flex-shrink-0">
 
             <div class="mb-8">
-                <h2 class="text-3xl font-bold mb-2">Settings</h2>
+                <h2 class="text-5xl font-bold mb-4">Settings</h2>
                 <a href="{{route('home')}}" class="transition-all hover:text-[var(--color-accent)]">Back to
                     Dashboard</a>
             </div>
