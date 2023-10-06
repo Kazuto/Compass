@@ -2,16 +2,16 @@
 
 @section('content')
     <div class="w-full">
-        <div class="flex items-center justify-between pb-6 mb-6 border-b border-white/20">
-            <h3 class="block text-3xl font-black">
+        <x-settings.action-title>
+            <x-slot name="title">
                 Bookmarks
-            </h3>
+            </x-slot>
 
             <div>
                 @include('settings.bookmarks.partials.create-bookmark-modal')
                 @include('settings.bookmarks.partials.create-bookmark-group-modal')
             </div>
-        </div>
+        </x-settings.action-title>
 
         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
             @foreach ($bookmarkGroups as $bookmarkGroup)

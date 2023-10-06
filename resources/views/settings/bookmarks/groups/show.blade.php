@@ -2,17 +2,17 @@
 
 @section('content')
     <div class="w-full">
-        <div class="flex items-center justify-between pb-6 mb-6 border-b border-white/20">
-            <h3 class="block text-3xl font-black">
+        <x-settings.action-title>
+            <x-slot name="title">
                 Bookmarks: <span class="text-[var(--color-accent)]">{{ $bookmarkGroup->name }}</span>
-            </h3>
+            </x-slot>
 
             <div>
                 @include('settings.bookmarks.partials.update-bookmark-group-modal', ['bookmarkGroup' => $bookmarkGroup])
 
                 @include('settings.bookmarks.partials.delete-bookmark-group-modal', ['bookmarkGroup' => $bookmarkGroup])
             </div>
-        </div>
+        </x-settings.action-title>
 
         <table class="w-full mb-6">
             <thead class="bg-white/20">

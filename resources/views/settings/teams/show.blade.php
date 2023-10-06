@@ -2,16 +2,15 @@
 
 @section('content')
     <div class="w-full">
-        <div class="flex items-center justify-between pb-6 mb-6 border-b border-white/20">
-            <h3 class="block text-3xl font-black">
+        <x-settings.action-title>
+            <x-slot name="title">
                 Teams: <span class="text-[var(--color-accent)]">{{ $team->name }}</span>
-            </h3>
-
+            </x-slot>
             <div>
                 @include('settings.teams.partials.add-user-modal', ['team' => $team, 'users' => $users])
                 @include('settings.teams.partials.delete-team-modal', ['team' => $team])
             </div>
-        </div>
+        </x-settings.action-title>
 
         <div>
             <h4 class="font-bold mb-4 text-2xl">

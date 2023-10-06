@@ -2,16 +2,15 @@
 
 @section('content')
     <div class="w-full">
-        <div class="flex items-center justify-between pb-6 mb-6 border-b border-white/20">
-            <h3 class="block text-3xl font-black">
+        <x-settings.action-title>
+            <x-slot name="title">
                 Whitelist
-            </h3>
+            </x-slot>
 
             <div>
                 @include('settings.whitelist_access.partials.create-whitelist-access-modal')
             </div>
-        </div>
-
+        </x-settings.action-title>
 
         <table class="w-full mb-6">
             <thead class="bg-white/20">
