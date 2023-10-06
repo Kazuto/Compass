@@ -40,5 +40,23 @@
             @endforeach
             </tbody>
         </table>
+
+        <div>
+            <h4 class="font-bold mb-4 text-2xl">
+                Restriction
+            </h4>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+                @forelse ($bookmarkGroup->teams as $team)
+                    <x-team.card :team="$team" />
+                @empty
+                    <span class="col-span-full text-neutral-400">
+                        Not assigned to any specific team. Accessible to every user.
+                    </span>
+                @endforelse
+            </div>
+
+        </div>
+
     </div>
 @endsection

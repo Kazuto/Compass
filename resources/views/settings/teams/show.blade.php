@@ -50,7 +50,9 @@
                 @forelse($team->bookmarkGroups as $bookmarkGroup)
                     <x-bookmark.group-card :bookmark-group="$bookmarkGroup"></x-bookmark.group-card>
                 @empty
-                    <span class="col-span-full text-neutral-400">No special bookmark groups assigned</span>
+                    <span class="col-span-full text-neutral-400">
+                        This team has no access to restricted bookmark.
+                    </span>
                 @endforelse
             </div>
         </div>

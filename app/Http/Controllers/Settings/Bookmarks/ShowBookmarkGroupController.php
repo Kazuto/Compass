@@ -14,7 +14,7 @@ class ShowBookmarkGroupController extends Controller
     public function __invoke(Request $request, BookmarkGroup $bookmarkGroup): View
     {
         return view('settings.bookmarks.groups.show', [
-            'bookmarkGroup' => $bookmarkGroup->load('bookmarks'),
+            'bookmarkGroup' => $bookmarkGroup->load(['bookmarks', 'teams.users']),
             'bookmarkGroups' => BookmarkGroup::all(),
         ]);
     }

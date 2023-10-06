@@ -18,6 +18,7 @@ class StoreBookmarkGroupRequest extends FormRequest
     {
         return [
             'name' => 'required',
+            'team_ids' => 'array',
         ];
     }
 }
