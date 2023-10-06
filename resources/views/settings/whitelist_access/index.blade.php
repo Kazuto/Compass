@@ -17,7 +17,7 @@
             <tr class="text-left">
                 <th class="p-2 rounded-l">#</th>
                 <th class="p-2">E-Mail</th>
-                <th class="p-2">Available</th>
+                <th class="p-2">Active</th>
                 <th class="p-2 rounded-r"></th>
             </tr>
             </thead>
@@ -27,7 +27,7 @@
                     <td class="text-left py-3 px-2">{{ $access->id }}</td>
                     <td class="text-left py-3 px-2">{{ $access->email }}</td>
                     <td class="text-left py-3 px-2">
-                        @if($access->is_available)
+                        @if($access->is_active)
                             <span class="icon text-green-600">󰄬</span>
                         @else
                             <span class="icon text-red-600">󰂭</span>

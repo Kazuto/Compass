@@ -17,7 +17,7 @@ class WhitelistAccessFactory extends Factory
     {
         return [
             'email' => fake()->email(),
-            'is_available' => fake()->boolean(85),
+            'is_active' => fake()->boolean(5),
         ];
     }
 }

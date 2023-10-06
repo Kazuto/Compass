@@ -12,7 +12,7 @@ return new class extends Migration
         Schema::create('whitelist_access', function (Blueprint $table) {
             $table->id();
             $table->text('email');
-            $table->boolean('is_available')->default(1);
+            $table->boolean('is_active')->default(0);
             $table->foreignIdFor(User::class)->nullable();
             $table->timestamps();
             $table->softDeletes();
