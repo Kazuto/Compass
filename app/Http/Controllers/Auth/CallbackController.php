@@ -20,17 +20,17 @@ class CallbackController extends Controller
         /** @var \Laravel\Socialite\Two\User $authUser */
         $authUser = Socialite::driver($request->provider)->user();
 
-        if (WhitelistAccess::isNotWhitelisted($authUser->email)) {
+        if (WhitelistAccess::isNotWhitelisted($authUser->getEmail())) {
             Session::flash('error', "The E-Mail assigned to your account is not whitelisted. \n\n Please talk to an administrator for access.");
 
             return redirect(route('auth.login'));
         }
 
         $user = User::updateOrCreate([
-            'github_id' => $authUser->id,
+            'github_id' => $authUser->getId(),
         ], [
-            'name' => $authUser->name,
-            'email' => $authUser->email,
+            'name' => $authUser->getName(),
+            'email' => $authUser->getEmail(),
             'github_token' => $authUser->token,
             'github_refresh_token' => $authUser->refreshToken,
         ]);
@@ -39,7 +39,7 @@ class CallbackController extends Controller
 
         Auth::login($user);
 
-        return redirect()->route('home');
+        return redirect()->route('dashboard');
     }
 
     private function updateOrCreateWhitelistAccess(User $user): void
