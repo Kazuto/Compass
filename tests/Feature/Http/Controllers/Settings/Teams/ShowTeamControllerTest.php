@@ -1,23 +1,22 @@
 <?php
 
-namespace Tests\Http\Controllers\Settings\Bookmarks;
+namespace Tests\Http\Controllers\Settings\Teams;
 
-use App\Models\Bookmark;
-use App\Models\BookmarkGroup;
+use App\Models\Team;
 use App\Models\User;
 use Illuminate\Testing\TestResponse;
 use Symfony\Component\HttpFoundation\Response;
 
 it('redirects to login when unauthenticated', function () {
     // Given
-    $bookmarkGroup = BookmarkGroup::factory()
-        ->has(Bookmark::factory(5))
+    $team = Team::factory()
+        ->has(User::factory(5))
         ->create();
 
     // When
     /** @var TestResponse $response */
     $response = $this
-        ->get(route('settings.bookmarks.groups.show', ['bookmarkGroup' => $bookmarkGroup]));
+        ->get(route('settings.teams.show', ['team' => $team]));
 
     // Then
     $response
@@ -25,21 +24,21 @@ it('redirects to login when unauthenticated', function () {
         ->assertRedirect(route('auth.login'));
 });
 
-it('shows bookmark group', function () {
+it('shows team', function () {
     // Given
-    $bookmarkGroup = BookmarkGroup::factory()
-        ->has(Bookmark::factory(5))
+    $team = Team::factory()
+        ->has(User::factory(5))
         ->create();
 
     // When
     /** @var TestResponse $response */
     $response = $this
         ->actingAs(User::factory()->create())
-        ->get(route('settings.bookmarks.groups.show', ['bookmarkGroup' => $bookmarkGroup]));
+        ->get(route('settings.teams.show', ['team' => $team]));
 
     // Then
     $response
         ->assertStatus(Response::HTTP_OK)
-        ->assertSee($bookmarkGroup->name)
-        ->assertSeeInOrder($bookmarkGroup->bookmarks->pluck('name')->toArray());
+        ->assertSee($team->name)
+        ->assertSeeInOrder($team->users->pluck('name')->toArray());
 });
