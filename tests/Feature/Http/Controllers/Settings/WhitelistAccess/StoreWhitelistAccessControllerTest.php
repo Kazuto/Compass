@@ -27,9 +27,9 @@ it('redirects to login when unauthenticated', function () {
     assertDatabaseEmpty('whitelist_access');
 });
 
-it('creates the team and redirects', function () {
+it('creates the whitelist access entry and redirects', function () {
     // Given
-    $whitelistAccess = WhitelistAccess::factory()->make()->withoutRelations()->toArray();
+    $whitelistAccess = WhitelistAccess::factory()->make(['is_active' => 0])->withoutRelations()->toArray();
 
     // When
     /** @var TestResponse $response */

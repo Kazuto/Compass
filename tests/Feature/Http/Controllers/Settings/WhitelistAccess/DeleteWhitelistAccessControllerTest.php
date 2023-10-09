@@ -24,7 +24,7 @@ it('redirects to login when unauthenticated', function () {
         ->assertRedirect(route('auth.login'));
 });
 
-it('deletes the team and redirects', function () {
+it('deletes the whitelist access entry and redirects', function () {
     // Given
     $whitelistAccess = WhitelistAccess::factory()->create();
 
