@@ -40,13 +40,13 @@ it('updates the bookmark and redirects', function () {
             'name' => $bookmark->name,
             'url' => $bookmark->url,
             'icon' => '󰙨',
-            'bookmark_group_id' => $bookmark->group->id,
+            'bookmark_group_id' => $bookmark->bookmarkGroup->id,
         ]);
 
     // Then
     $response
         ->assertStatus(Response::HTTP_FOUND)
-        ->assertRedirect(route('settings.bookmarks.groups.show', ['bookmarkGroup' => $bookmark->group]))
+        ->assertRedirect(route('settings.bookmarks.groups.show', ['bookmarkGroup' => $bookmark->bookmarkGroup]))
         ->assertSessionHas('success', 'The bookmark was updated successfully.');
 
     tap($bookmark->refresh(), function (Bookmark $bookmark) {

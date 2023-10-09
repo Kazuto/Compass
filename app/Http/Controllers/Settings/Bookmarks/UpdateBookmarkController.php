@@ -15,7 +15,7 @@ class UpdateBookmarkController extends Controller
     public function __invoke(StoreBookmarkRequest $request, Bookmark $bookmark): RedirectResponse
     {
         // For redirection in case the group was changed
-        $bookmarkGroup = $bookmark->group;
+        $bookmarkGroup = $bookmark->bookmarkGroup;
 
         try {
             DB::transaction(function () use ($request, $bookmark) {

@@ -23,7 +23,7 @@ class BookmarkFactory extends Factory
     {
         return $this
             ->afterMaking(function (Bookmark $bookmark) {
-                $bookmark->group()->associate(BookmarkGroup::inRandomOrder()->first() ?? BookmarkGroup::factory()->create());
+                $bookmark->bookmarkGroup()->associate(BookmarkGroup::inRandomOrder()->first() ?? BookmarkGroup::factory()->create());
             })
             ->afterCreating(function (Bookmark $bookmark) {
                 $bookmark->update([

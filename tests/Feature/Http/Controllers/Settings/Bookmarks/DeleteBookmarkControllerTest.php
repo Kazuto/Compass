@@ -40,7 +40,7 @@ it('soft deletes the bookmark and redirects', function () {
     // Then
     $response
         ->assertStatus(Response::HTTP_FOUND)
-        ->assertRedirect(route('settings.bookmarks.groups.show', ['bookmarkGroup' => $bookmark->group]))
+        ->assertRedirect(route('settings.bookmarks.groups.show', ['bookmarkGroup' => $bookmark->bookmarkGroup]))
         ->assertSessionHas('success', 'The bookmark was deleted successfully.');
 
     assertSoftDeleted('bookmarks', ['id' => $bookmark->id]);

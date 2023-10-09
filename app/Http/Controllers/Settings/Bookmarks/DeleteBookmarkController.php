@@ -14,7 +14,7 @@ class DeleteBookmarkController extends Controller
     public function __invoke(Bookmark $bookmark): RedirectResponse
     {
         // For redirection
-        $bookmarkGroup = $bookmark->group;
+        $bookmarkGroup = $bookmark->bookmarkGroup;
 
         try {
             DB::transaction(function () use ($bookmark) {
