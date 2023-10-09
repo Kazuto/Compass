@@ -25,7 +25,7 @@
 
             <div class="mb-8">
                 <h2 class="text-5xl font-bold mb-4">Settings</h2>
-                <a href="{{route('home')}}" class="transition-all hover:text-[var(--color-accent)]">Back to
+                <a href="{{route('dashboard')}}" class="transition-all hover:text-[var(--color-accent)]">Back to
                     Dashboard</a>
             </div>
         </div>
