@@ -23,12 +23,19 @@ class BookmarkFactory extends Factory
     {
         return $this
             ->afterMaking(function (Bookmark $bookmark) {
-                $bookmark->group()->associate(BookmarkGroup::inRandomOrder()->first());
+                $bookmark->group()->associate(BookmarkGroup::inRandomOrder()->first() ?? BookmarkGroup::factory()->create());
             })
             ->afterCreating(function (Bookmark $bookmark) {
                 $bookmark->update([
                     'order' => Bookmark::where('bookmark_group_id', '=', $bookmark->bookmark_group_id)->max('order') + 1,
                 ]);
             });
+    }
+
+    public function withIcon(): static
+    {
+        return $this->afterMaking(function (Bookmark $bookmark) {
+            $bookmark->icon = '󰇉';
+        });
     }
 }

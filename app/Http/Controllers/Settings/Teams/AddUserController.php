@@ -18,7 +18,7 @@ class AddUserController extends Controller
             DB::transaction(function () use ($team, $request) {
                 $team->users()->attach($request->get('user_id'));
 
-                Session::flash('success', 'The user was added from the team successfully.');
+                Session::flash('success', 'The user was added to the team successfully.');
             });
         } catch (Throwable) {
             Session::flash('error', 'Something went wrong!');
