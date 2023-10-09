@@ -12,7 +12,7 @@
         class="inline"
     >
         @csrf
-        @method('DELETE')
+        <input type="hidden" name="user_id" value="{{ $user->id }}">
         <x-button danger>Confirm</x-button>
     </form>
 </x-modal>

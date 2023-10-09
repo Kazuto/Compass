@@ -52,8 +52,8 @@ class SettingsRoutes implements RouteGroup
                         Route::get('/{team:uuid}', ShowTeamController::class)->name('show');
                         Route::delete('/{team:uuid}', DeleteTeamController::class)->name('delete');
 
-                        Route::post('/{team:uuid}', AddUserController::class)->name('add-user');
-                        Route::delete('/{team:uuid}/{user}', RemoveUserController::class)->name('remove-user');
+                        Route::post('/{team:uuid}/add-user', AddUserController::class)->name('add-user');
+                        Route::post('/{team:uuid}/remove-user', RemoveUserController::class)->name('remove-user');
                     });
 
                 Route::as('whitelist.')
