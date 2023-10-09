@@ -24,8 +24,8 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Install dependencies
-        uses: php-actions/composer@v5
+      - name: Install composer dependencies
+        uses: ramsey/composer-install@v2
 
       - name: Execute tests (Unit and Feature tests) via PHPUnit
         run: php artisan test
