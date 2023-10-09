@@ -65,6 +65,11 @@
             "@composer ide-helper",
             "@composer pint",
             "@composer dump-autoload"
+        ],
+        "setup": [
+            "yarn install && yarn build",
+            "composer install",
+            "php artisan migrate:fresh --seed"
         ]
     },
     "extra": {
