@@ -38,4 +38,12 @@ class BookmarkFactory extends Factory
             $bookmark->icon = '󰇉';
         });
     }
+
+    public function belongsToBookmarkGroup(BookmarkGroup $bookmarkGroup): static
+    {
+        return $this
+            ->afterMaking(function (Bookmark $bookmark) use ($bookmarkGroup) {
+                $bookmark->bookmarkGroup()->associate($bookmarkGroup);
+            });
+    }
 }

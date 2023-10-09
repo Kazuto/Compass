@@ -16,7 +16,7 @@ class WhitelistAccessFactory extends Factory
     public function definition(): array
     {
         return [
-            'email' => fake()->email(),
+            'email' => fake()->safeEmail(),
             'is_active' => fake()->boolean(5),
         ];
     }
