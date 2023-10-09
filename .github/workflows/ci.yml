@@ -11,13 +11,13 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  php-test:
+  laravel-test:
     strategy:
       fail-fast: true
       matrix:
         php: [8.1, 8.2]
 
-    name: pest-php-${{ matrix.php }}
+    name: "Pest (PHP ${{ matrix.php }})"
     runs-on: ubuntu-latest
 
     steps:
