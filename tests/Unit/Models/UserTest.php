@@ -12,19 +12,23 @@ use function PHPUnit\Framework\assertInstanceOf;
 use function PHPUnit\Framework\assertTrue;
 
 it('has whitelist access relation and returns model', function () {
+    // When
     $whitelist = User::factory()
         ->hasWhitelistAccess()
         ->create();
 
+    // Then
     assertTrue($whitelist->isRelation('whitelistAccess'));
     assertInstanceOf(WhitelistAccess::class, $whitelist->whitelistAccess);
 });
 
 it('has teams relation and returns collection', function () {
+    // When
     $whitelist = User::factory()
         ->belongsToTeam()
         ->create();
 
+    // Then
     assertTrue($whitelist->isRelation('teams'));
     assertCount(1, $whitelist->teams);
     assertInstanceOf(Collection::class, $whitelist->teams);

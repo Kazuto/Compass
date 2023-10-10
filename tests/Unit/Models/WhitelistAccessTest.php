@@ -13,19 +13,23 @@ use function PHPUnit\Framework\assertInstanceOf;
 use function PHPUnit\Framework\assertTrue;
 
 it('has user relation and returns model', function () {
+    // When
     $whitelist = WhitelistAccess::factory()
         ->for(User::factory())
         ->create();
 
+    // Then
     assertTrue($whitelist->isRelation('user'));
     assertInstanceOf(User::class, $whitelist->user);
 });
 
 it('returns correct entry when scope forEmail is used', function () {
+    // When
     $whitelist = WhitelistAccess::factory()
         ->for(User::factory())
         ->create(['email' => $email = fake()->safeEmail()]);
 
+    // Then
     tap(WhitelistAccess::forEmail($email)->get(), function (Collection $records) use ($whitelist) {
         assertCount(1, $records);
         assertEquals($whitelist->refresh()->toArray(), $records->first()->toArray());
@@ -33,9 +37,11 @@ it('returns correct entry when scope forEmail is used', function () {
 });
 
 it('returns correct entry when scope active is used', function ($activeCount, $inactiveCount) {
+    // When
     WhitelistAccess::factory($activeCount)->create(['is_active' => true]);
     WhitelistAccess::factory($inactiveCount)->create(['is_active' => false]);
 
+    // Then
     tap(WhitelistAccess::active()->get(), function (Collection $records) use ($activeCount) {
         assertCount($activeCount, $records);
     });
@@ -46,9 +52,11 @@ it('returns correct entry when scope active is used', function ($activeCount, $i
 ]);
 
 it('returns correct entry when scope inactive is used', function ($activeCount, $inactiveCount) {
+    // When
     WhitelistAccess::factory($activeCount)->create(['is_active' => true]);
     WhitelistAccess::factory($inactiveCount)->create(['is_active' => false]);
 
+    // Then
     tap(WhitelistAccess::inactive()->get(), function (Collection $records) use ($inactiveCount) {
         assertCount($inactiveCount, $records);
     });
@@ -59,8 +67,10 @@ it('returns correct entry when scope inactive is used', function ($activeCount, 
 ]);
 
 it('returns true for whitelisted email when calling isWhitelisted', function () {
+    // When
     WhitelistAccess::factory()->create(['email' => $email = fake()->safeEmail()]);
 
+    // Then
     assertTrue(WhitelistAccess::isWhitelisted($email));
 });
 
@@ -73,7 +83,9 @@ it('returns true for whitelisted email when calling isNonWhitelisted', function 
 });
 
 it('returns false for whitelisted email when calling isNonWhitelisted', function () {
+    // When
     WhitelistAccess::factory()->create(['email' => $email = fake()->safeEmail()]);
 
+    // Then
     assertFalse(WhitelistAccess::isNotWhitelisted($email));
 });

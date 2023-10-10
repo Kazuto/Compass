@@ -4,6 +4,7 @@ namespace Tests\Unit\Models;
 
 use App\Models\Bookmark;
 use App\Models\BookmarkGroup;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
 
 use function PHPUnit\Framework\assertCount;
@@ -12,7 +13,7 @@ use function PHPUnit\Framework\assertInstanceOf;
 use function PHPUnit\Framework\assertTrue;
 
 it('has bookmarks relation and returns collection', function () {
-    // Given
+    // When
     $bookmark = BookmarkGroup::factory()->withBookmarks(5)->create();
 
     // Then
@@ -23,11 +24,14 @@ it('has bookmarks relation and returns collection', function () {
 });
 
 it('returns bookmark groups sorted by column "order"', function () {
-    // Given
-    BookmarkGroup::factory()->create(['order' => 3]);
-    BookmarkGroup::factory()->create(['order' => 1]);
-    BookmarkGroup::factory()->create(['order' => 2]);
-    BookmarkGroup::factory()->create(['order' => 4]);
+    //
+    $data = ['name' => fake()->name()];
+
+    // When
+    BookmarkGroup::factory()->create(Arr::add($data, 'order', 3));
+    BookmarkGroup::factory()->create(Arr::add($data, 'order', 1));
+    BookmarkGroup::factory()->create(Arr::add($data, 'order', 2));
+    BookmarkGroup::factory()->create(Arr::add($data, 'order', 3));
 
     // Then
     $order = 1;
@@ -41,14 +45,21 @@ it('returns bookmark groups sorted by column "order"', function () {
 
 it('auto increments order', function () {
     // Given
-    BookmarkGroup::factory(rand(2, 10), ['order' => null])->create();
+    $data = ['name' => fake()->name()];
+
+    // When
+    $bookmarkGroups = collect([]);
+
+    for ($i = 1; $i < rand(2, 10); $i++) {
+        $bookmarkGroups->add(BookmarkGroup::create($data));
+    }
 
     // Then
-    $order = 1;
+    $i = 1;
 
-    BookmarkGroup::each(function (BookmarkGroup $bookmarkGroup) use (&$order) {
-        assertEquals($order, $bookmarkGroup->order);
+    $bookmarkGroups->each(function (BookmarkGroup $bookmarkGroup) use (&$i) {
+        assertEquals($i, $bookmarkGroup->order);
 
-        $order++;
+        $i++;
     });
 });

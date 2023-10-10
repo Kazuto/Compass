@@ -13,7 +13,7 @@ use function PHPUnit\Framework\assertInstanceOf;
 use function PHPUnit\Framework\assertTrue;
 
 it('has users relation and returns collection', function () {
-    // Given
+    // When
     $team = Team::factory()->has(User::factory(5))->create();
 
     // Then
@@ -24,7 +24,7 @@ it('has users relation and returns collection', function () {
 });
 
 it('has bookmark groups relation and returns collection', function () {
-    // Given
+    // When
     $team = Team::factory()->has(BookmarkGroup::factory(5))->create();
 
     // Then
