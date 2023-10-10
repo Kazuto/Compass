@@ -24,11 +24,9 @@ class BookmarkGroupFactory extends Factory
     {
         return $this
             ->afterMaking(function (BookmarkGroup $bookmarkGroup) {
+                $bookmarkGroup->order = BookmarkGroup::max('order') + 1;
             })
             ->afterCreating(function (BookmarkGroup $bookmarkGroup) {
-                $bookmarkGroup->update([
-                    'order' => BookmarkGroup::max('order') + 1,
-                ]);
             });
     }
 
