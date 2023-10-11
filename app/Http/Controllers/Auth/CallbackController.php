@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers\Auth;
 
+use App\Actions\User\GitHubUserAction;
+use App\Actions\WhitelistAccess\StoreWhitelistAccessAction;
+use App\Actions\WhitelistAccess\UpdateWhitelistAccessAction;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\AuthRequest;
 use App\Models\User;
@@ -26,14 +29,7 @@ class CallbackController extends Controller
             return redirect(route('auth.login'));
         }
 
-        $user = User::updateOrCreate([
-            'github_id' => $authUser->getId(),
-        ], [
-            'name' => $authUser->getName(),
-            'email' => $authUser->getEmail(),
-            'github_token' => $authUser->token,
-            'github_refresh_token' => $authUser->refreshToken,
-        ]);
+        $user = app(GitHubUserAction::class)->execute($authUser);
 
         $this->updateOrCreateWhitelistAccess($user);
 
@@ -49,7 +45,7 @@ class CallbackController extends Controller
         }
 
         if ($user->email === config('compass.auth.whitelist_admin_email')) {
-            WhitelistAccess::create([
+            app(StoreWhitelistAccessAction::class)->execute([
                 'email' => $user->email,
                 'user_id' => $user->id,
                 'is_active' => true,
@@ -58,11 +54,12 @@ class CallbackController extends Controller
             return;
         }
 
-        WhitelistAccess::query()
-            ->forEmail($user->email)
-            ->update([
+        app(UpdateWhitelistAccessAction::class)->execute(
+            WhitelistAccess::forEmail($user->email)->first(),
+            [
                 'user_id' => $user->id,
                 'is_active' => true,
-            ]);
+            ]
+        );
     }
 }

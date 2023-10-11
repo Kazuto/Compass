@@ -12,11 +12,21 @@ abstract class TestCase extends BaseTestCase
 {
     use CreatesApplication;
 
-    public function mockActionThrows(string $class, string $method = 'execute', \Throwable $exception = null): MockInterface
+    public function mockActionThrows(string $class): MockInterface
     {
-        return $this->partialMock($class, function (MockInterface $mock) use ($method, $exception) {
-            $mock->shouldReceive($method)->once()
-                ->andThrows($exception ?? Exception::class, 'Fun exception');
+        return $this->partialMock($class, function (MockInterface $mock) {
+            $mock->shouldReceive('execute')
+                ->once()
+                ->andThrows(Exception::class, 'Fun exception');
+        });
+    }
+
+    public function mockActionReturns(string $class, mixed $return): MockInterface
+    {
+        return $this->partialMock($class, function (MockInterface $mock) use ($return) {
+            $mock->shouldReceive('execute')
+                ->once()
+                ->andReturns($return);
         });
     }
 }
