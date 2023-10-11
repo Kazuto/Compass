@@ -49,4 +49,11 @@ class UserFactory extends Factory
             $whitelistAccess->saveQuietly();
         });
     }
+
+    public function wasNotRecentlyCreated(): static
+    {
+        return $this->afterCreating(function (User $model) {
+            $model->wasRecentlyCreated = false;
+        });
+    }
 }

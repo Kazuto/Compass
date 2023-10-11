@@ -8,10 +8,7 @@ use App\Actions\User\GitHubUserAction;
 use App\Models\User;
 use App\Models\WhitelistAccess;
 use Illuminate\Support\Facades\Config;
-use Illuminate\Support\Str;
 use Illuminate\Testing\TestResponse;
-use Laravel\Socialite\Facades\Socialite;
-use Mockery;
 use Symfony\Component\HttpFoundation\Response;
 
 use function Pest\Laravel\assertDatabaseHas;
@@ -19,26 +16,9 @@ use function Pest\Laravel\assertDatabaseMissing;
 use function PHPUnit\Framework\assertEquals;
 use function PHPUnit\Framework\assertTrue;
 
-function mockSocialiteUser(string $name = null, string $email = null): void
-{
-    $abstractUser = Mockery::mock('Laravel\Socialite\Two\User');
-
-    $abstractUser
-        ->shouldReceive('getId')
-        ->andReturn(rand())
-        ->shouldReceive('getName')
-        ->andReturn($name ?? Str::random(10))
-        ->shouldReceive('getEmail')
-        ->andReturn($email ?? Str::random(10).'@gmail.com')
-        ->shouldReceive('getAvatar')
-        ->andReturn('https://en.gravatar.com/userimage');
-
-    Socialite::shouldReceive('driver->user')->andReturn($abstractUser);
-}
-
 it('redirects to login when email not whitelisted', function () {
     // Given
-    mockSocialiteUser();
+    $this->mockSocialiteUser();
 
     // When
     /** @var TestResponse $response */
@@ -55,7 +35,7 @@ it('redirects to login when email not whitelisted', function () {
 it('creates whitelist entry if logged in as admin', function () {
     // Given
     Config::set('compass.auth.whitelist_admin_email', $email = 'loren@ipsum.dolor');
-    mockSocialiteUser(email: $email);
+    $this->mockSocialiteUser(email: $email);
 
     // When
     /** @var TestResponse $response */
@@ -73,7 +53,7 @@ it('creates whitelist entry if logged in as admin', function () {
 it('does not create whitelist entry if admin account exists already', function () {
     // Given
     Config::set('compass.auth.whitelist_admin_email', $email = 'loren@ipsum.dolor');
-    mockSocialiteUser(email: $email);
+    $this->mockSocialiteUser(email: $email);
 
     $user = User::factory()->create(['email' => $email]);
     $user->wasRecentlyCreated = false;
@@ -95,7 +75,7 @@ it('does not create whitelist entry if admin account exists already', function (
 
 it('does not update whitelist entry if account exists already', function () {
     // Given
-    mockSocialiteUser(email: $email = 'loren@ipsum.dolor');
+    $this->mockSocialiteUser(email: $email = 'loren@ipsum.dolor');
 
     $user = User::factory()->create(['email' => $email]);
     $user->wasRecentlyCreated = false;
@@ -125,7 +105,7 @@ it('does not update whitelist entry if account exists already', function () {
 it('authenticates if whitelist access entry exists', function () {
     // Given
     WhitelistAccess::factory()->create(['email' => $email = 'loren@ipsum.dolor']);
-    mockSocialiteUser(email: $email);
+    $this->mockSocialiteUser(email: $email);
 
     // When
     /** @var TestResponse $response */
