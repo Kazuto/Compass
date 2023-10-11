@@ -16,15 +16,20 @@ class SelectInput extends Component
         public string $name,
         public Collection $options,
         public string $optionValue = 'id',
-        public string $optionLabel = 'name',
+        public string $optionLabel = 'value',
         public ?string $label = null,
         public ?int $selection = null,
     ) {
-        $this->label = $this->label ?? Str::title($this->name);
+        $this->label = $this->getLabel();
     }
 
     public function render(): View
     {
         return view('components.select-input');
+    }
+
+    private function getLabel(): string
+    {
+        return $this->label ?? Str::of($this->name)->replace(['-', '_'], ' ')->title()->toString();
     }
 }

@@ -6,20 +6,20 @@ namespace Tests\Unit\View\Components\Auth;
 
 use App\View\Components\Auth\Link;
 use Illuminate\Support\Facades\Config;
-use Illuminate\Testing\TestResponse;
+use Illuminate\Testing\TestComponent;
 
 it('disables provider login if config missing', function () {
     // Given
     Config::set('services.github');
 
     // When
-    /** @var TestResponse $response */
-    $response = $this->component(Link::class, [
+    /** @var TestComponent $component */
+    $component = $this->component(Link::class, [
         'provider' => 'github',
     ]);
 
     // Then
-    $response->assertSee('Github (Disabled)');
+    $component->assertSee('Github (Disabled)');
 });
 
 it('enables provider login if config present', function () {
@@ -31,11 +31,11 @@ it('enables provider login if config present', function () {
     ]);
 
     // When
-    /** @var TestResponse $response */
-    $response = $this->component(Link::class, [
+    /** @var TestComponent $component */
+    $component = $this->component(Link::class, [
         'provider' => 'github',
     ]);
 
     // Then
-    $response->assertSee('Github');
+    $component->assertSee('Github');
 });
