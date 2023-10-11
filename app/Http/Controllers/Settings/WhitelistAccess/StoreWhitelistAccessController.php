@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers\Settings\WhitelistAccess;
 
+use App\Actions\WhitelistAccess\StoreWhitelistAccessAction;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreWhitelistAccessRequest;
-use App\Models\WhitelistAccess;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
@@ -18,7 +18,7 @@ class StoreWhitelistAccessController extends Controller
     {
         try {
             DB::transaction(function () use ($request) {
-                WhitelistAccess::create($request->validated());
+                app(StoreWhitelistAccessAction::class)->execute($request->validated());
 
                 Session::flash('success', 'The whitelist entry was added successfully.');
             });

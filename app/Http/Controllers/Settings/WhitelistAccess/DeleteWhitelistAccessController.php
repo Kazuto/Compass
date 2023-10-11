@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers\Settings\WhitelistAccess;
 
+use App\Actions\WhitelistAccess\DeleteWhitelistAccessAction;
 use App\Http\Controllers\Controller;
 use App\Models\WhitelistAccess;
 use Illuminate\Http\RedirectResponse;
@@ -17,7 +18,7 @@ class DeleteWhitelistAccessController extends Controller
     {
         try {
             DB::transaction(function () use ($whitelistAccess) {
-                $whitelistAccess->delete();
+                app(DeleteWhitelistAccessAction::class)->execute($whitelistAccess);
 
                 Session::flash('success', 'The whitelist entry was deleted successfully.');
             });
