@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Tests\Http\Controllers\Auth;
 
 use Illuminate\Testing\TestResponse;
