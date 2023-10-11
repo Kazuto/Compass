@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Tests\Http\Controllers\Settings\WhitelistAccess;
 
 use App\Models\User;
@@ -22,7 +24,7 @@ it('redirects to login when unauthenticated', function () {
         ->assertRedirect(route('auth.login'));
 });
 
-it('shows teams', function () {
+it('shows whitelist access entries', function () {
     // Given
     $whitelistAccess = WhitelistAccess::factory(5)->create();
 

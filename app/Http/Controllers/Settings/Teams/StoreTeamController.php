@@ -1,10 +1,12 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Controllers\Settings\Teams;
 
+use App\Actions\Teams\StoreTeamAction;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreTeamRequest;
-use App\Models\Team;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
@@ -16,7 +18,7 @@ class StoreTeamController extends Controller
     {
         try {
             DB::transaction(function () use ($request) {
-                Team::create($request->validated());
+                app(StoreTeamAction::class)->execute($request->validated());
 
                 Session::flash('success', 'The team was added successfully.');
             });

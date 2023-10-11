@@ -1,7 +1,10 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Controllers\Settings\Teams;
 
+use App\Actions\Teams\AddUserAction;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Teams\AddUserRequest;
 use App\Models\Team;
@@ -16,7 +19,7 @@ class AddUserController extends Controller
     {
         try {
             DB::transaction(function () use ($team, $request) {
-                $team->users()->attach($request->get('user_id'));
+                app(AddUserAction::class)->execute($team, $request->get('user_id'));
 
                 Session::flash('success', 'The user was added to the team successfully.');
             });

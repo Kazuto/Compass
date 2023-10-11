@@ -17,7 +17,7 @@ use function config;
  *
  * @property int $id
  * @property string $email
- * @property int $is_active
+ * @property bool $is_active
  * @property int|null $user_id
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
@@ -62,6 +62,10 @@ class WhitelistAccess extends Model
         'is_active',
         'user_id',
     ];
+
+    protected $casts = [
+        'is_active' => 'boolean',
+    ];
     //endregion ORM
 
     //region Relations
@@ -84,7 +88,7 @@ class WhitelistAccess extends Model
 
     public function scopeInactive(Builder $builder): Builder
     {
-        return $builder->where('is_active', '=', 'false');
+        return $builder->where('is_active', '=', false);
     }
     //endregion Scopes
 

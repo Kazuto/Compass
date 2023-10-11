@@ -24,7 +24,7 @@ use Illuminate\Support\Str;
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property \Illuminate\Support\Carbon|null $deleted_at
- * @property-read \App\Models\BookmarkGroup|null $group
+ * @property-read \App\Models\BookmarkGroup|null $bookmarkGroup
  *
  * @method static \Database\Factories\BookmarkFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder|Bookmark newModelQuery()
@@ -82,7 +82,7 @@ class Bookmark extends Model
     //endregion ORM
 
     //region Relations
-    public function group(): BelongsTo
+    public function bookmarkGroup(): BelongsTo
     {
         return $this->belongsTo(BookmarkGroup::class, 'bookmark_group_id', 'id');
     }

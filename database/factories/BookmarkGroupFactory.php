@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Database\Factories;
 
+use App\Models\Bookmark;
 use App\Models\BookmarkGroup;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -23,11 +24,16 @@ class BookmarkGroupFactory extends Factory
     {
         return $this
             ->afterMaking(function (BookmarkGroup $bookmarkGroup) {
+                $bookmarkGroup->order = BookmarkGroup::max('order') + 1;
             })
             ->afterCreating(function (BookmarkGroup $bookmarkGroup) {
-                $bookmarkGroup->update([
-                    'order' => BookmarkGroup::max('order') + 1,
-                ]);
             });
+    }
+
+    public function withBookmarks(int $count = 1): static
+    {
+        return $this->afterCreating(function (BookmarkGroup $bookmarkGroup) use ($count) {
+            Bookmark::factory($count)->for($bookmarkGroup)->create();
+        });
     }
 }

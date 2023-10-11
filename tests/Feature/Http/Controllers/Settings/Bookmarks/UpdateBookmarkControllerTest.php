@@ -1,7 +1,10 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Tests\Http\Controllers\Settings\Bookmarks;
 
+use App\Actions\Bookmarks\UpdateBookmarkAction;
 use App\Models\Bookmark;
 use App\Models\User;
 use Illuminate\Testing\TestResponse;
@@ -40,13 +43,13 @@ it('updates the bookmark and redirects', function () {
             'name' => $bookmark->name,
             'url' => $bookmark->url,
             'icon' => '󰙨',
-            'bookmark_group_id' => $bookmark->group->id,
+            'bookmark_group_id' => $bookmark->bookmarkGroup->id,
         ]);
 
     // Then
     $response
         ->assertStatus(Response::HTTP_FOUND)
-        ->assertRedirect(route('settings.bookmarks.groups.show', ['bookmarkGroup' => $bookmark->group]))
+        ->assertRedirect(route('settings.bookmarks.groups.show', ['bookmarkGroup' => $bookmark->bookmarkGroup]))
         ->assertSessionHas('success', 'The bookmark was updated successfully.');
 
     tap($bookmark->refresh(), function (Bookmark $bookmark) {
@@ -54,4 +57,32 @@ it('updates the bookmark and redirects', function () {
         assertEquals('http://compass.test', $bookmark->url);
         assertEquals('󰙨', $bookmark->icon);
     });
+});
+
+it('catches exception and redirects with message', function () {
+    // Given
+    $bookmark = Bookmark::factory()->withIcon()->create([
+        'name' => 'test bookmark',
+        'url' => 'http://compass.test',
+        'icon' => '󰤑',
+    ]);
+
+    $this->mockActionThrows(UpdateBookmarkAction::class);
+
+    // When
+    /** @var TestResponse $response */
+    $response = $this
+        ->actingAs(User::factory()->create())
+        ->patch(route('settings.bookmarks.update', ['bookmark' => $bookmark]), [
+            'name' => $bookmark->name,
+            'url' => $bookmark->url,
+            'icon' => '󰙨',
+            'bookmark_group_id' => $bookmark->bookmarkGroup->id,
+        ]);
+
+    // Then
+    $response
+        ->assertStatus(Response::HTTP_FOUND)
+        ->assertRedirect(route('settings.bookmarks.groups.show', ['bookmarkGroup' => $bookmark->bookmarkGroup]))
+        ->assertSessionHas('error', 'Something went wrong!');
 });

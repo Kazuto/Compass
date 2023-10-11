@@ -1,7 +1,10 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Tests\Http\Controllers\Settings\Bookmarks;
 
+use App\Actions\Bookmarks\StoreBookmarkGroupAction;
 use App\Models\BookmarkGroup;
 use App\Models\User;
 use Illuminate\Testing\TestResponse;
@@ -44,4 +47,23 @@ it('creates the bookmark and redirects', function () {
         ->assertSessionHas('success', 'The bookmark group was added successfully.');
 
     assertDatabaseHas('bookmark_groups', $bookmarkGroup);
+});
+
+it('catches exception and redirects with message', function () {
+    // Given
+    $bookmarkGroup = BookmarkGroup::factory()->make()->withoutRelations()->toArray();
+
+    $this->mockActionThrows(StoreBookmarkGroupAction::class);
+
+    // When
+    /** @var TestResponse $response */
+    $response = $this
+        ->actingAs(User::factory()->create())
+        ->post(route('settings.bookmarks.groups.store'), $bookmarkGroup);
+
+    // Then
+    $response
+        ->assertStatus(Response::HTTP_FOUND)
+        ->assertRedirect(route('settings.bookmarks.list'))
+        ->assertSessionHas('error', 'Something went wrong!');
 });

@@ -3,6 +3,10 @@
         <x-alert type="error">{!! Session::get('error') !!}</x-alert>
     @endif
 
+    @if(Session::has('info'))
+        <x-alert type="info">{!! Session::get('info') !!}</x-alert>
+    @endif
+
     @if(Session::has('success'))
         <x-alert type="success">{!! Session::get('success') !!}</x-alert>
     @endif

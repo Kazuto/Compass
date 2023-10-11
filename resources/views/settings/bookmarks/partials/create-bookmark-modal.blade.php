@@ -19,8 +19,8 @@
             id="bookmark_group_id"
             label="Bookmark Group"
             :options="$bookmarkGroups"
-            optionLabel="name"
-            optionValue="id"
+            option-label="name"
+            option-value="id"
         />
 
         <x-button>Save</x-button>

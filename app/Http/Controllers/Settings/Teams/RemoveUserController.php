@@ -1,7 +1,10 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Controllers\Settings\Teams;
 
+use App\Actions\Teams\RemoveUserAction;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Teams\RemoveUserRequest;
 use App\Models\Team;
@@ -16,7 +19,7 @@ class RemoveUserController extends Controller
     {
         try {
             DB::transaction(function () use ($request, $team) {
-                $team->users()->detach($request->get('user_id'));
+                app(RemoveUserAction::class)->execute($team, $request->get('user_id'));
 
                 Session::flash('success', 'The user was removed from the team successfully.');
             });

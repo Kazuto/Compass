@@ -1,7 +1,10 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Tests\Http\Controllers\Settings\Teams;
 
+use App\Actions\Teams\AddUserAction;
 use App\Models\Team;
 use App\Models\User;
 use Illuminate\Testing\TestResponse;
@@ -53,4 +56,26 @@ it('add the user to the team and redirects', function () {
 
     assertNotEmpty($team->users);
     assertCount(1, $team->users);
+});
+
+it('catches exception and redirects with message', function () {
+    // Given
+    $user = User::factory()->create();
+    $team = Team::factory()->create();
+
+    $this->mockActionThrows(AddUserAction::class);
+
+    // When
+    /** @var TestResponse $response */
+    $response = $this
+        ->actingAs(User::factory()->create())
+        ->post(route('settings.teams.add-user', ['team' => $team]), [
+            'user_id' => $user->id,
+        ]);
+
+    // Then
+    $response
+        ->assertStatus(Response::HTTP_FOUND)
+        ->assertRedirect(route('settings.teams.show', ['team' => $team]))
+        ->assertSessionHas('error', 'Something went wrong!');
 });

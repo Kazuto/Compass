@@ -1,7 +1,10 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Controllers\Settings\Bookmarks;
 
+use App\Actions\Bookmarks\UpdateBookmarkGroupAction;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreBookmarkGroupRequest;
 use App\Models\BookmarkGroup;
@@ -16,7 +19,7 @@ class UpdateBookmarkGroupController extends Controller
     {
         try {
             DB::transaction(function () use ($request, $bookmarkGroup) {
-                $bookmarkGroup->update($request->validated());
+                app(UpdateBookmarkGroupAction::class)->execute($bookmarkGroup, $request->validated());
 
                 $bookmarkGroup->teams()->sync($request->get('team_ids'));
 

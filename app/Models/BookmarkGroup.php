@@ -70,6 +70,8 @@ class BookmarkGroup extends Model
     {
         self::creating(function (BookmarkGroup $model) {
             $model->uuid = Str::uuid();
+
+            $model->order = BookmarkGroup::max('order') + 1;
         });
 
         static::addGlobalScope(new OrderColumn);

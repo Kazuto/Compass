@@ -1,10 +1,12 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Controllers\Settings\Bookmarks;
 
+use App\Actions\Bookmarks\StoreBookmarkGroupAction;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreBookmarkGroupRequest;
-use App\Models\BookmarkGroup;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
@@ -16,7 +18,7 @@ class StoreBookmarkGroupController extends Controller
     {
         try {
             DB::transaction(function () use ($request) {
-                BookmarkGroup::create($request->validated());
+                app(StoreBookmarkGroupAction::class)->execute($request->validated());
 
                 Session::flash('success', 'The bookmark group was added successfully.');
             });
