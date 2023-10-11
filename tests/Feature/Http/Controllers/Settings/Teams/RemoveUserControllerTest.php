@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\Http\Controllers\Settings\Teams;
 
+use App\Actions\Teams\RemoveUserAction;
 use App\Models\Team;
 use App\Models\User;
 use Illuminate\Testing\TestResponse;
@@ -59,4 +60,28 @@ it('add the user to the team and redirects', function () {
 
     assertEmpty($team->users);
     assertCount(0, $team->users);
+});
+
+it('catches exception and redirects with message', function () {
+    // Given
+    $user = User::factory()->create();
+    $team = Team::factory()->create();
+
+    $team->users()->attach($user);
+
+    $this->mockActionThrows(RemoveUserAction::class);
+
+    // When
+    /** @var TestResponse $response */
+    $response = $this
+        ->actingAs(User::factory()->create())
+        ->post(route('settings.teams.remove-user', ['team' => $team]), [
+            'user_id' => $user->id,
+        ]);
+
+    // Then
+    $response
+        ->assertStatus(Response::HTTP_FOUND)
+        ->assertRedirect(route('settings.teams.show', ['team' => $team]))
+        ->assertSessionHas('error', 'Something went wrong!');
 });

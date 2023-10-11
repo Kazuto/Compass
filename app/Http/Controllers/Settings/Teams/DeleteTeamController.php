@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers\Settings\Teams;
 
+use App\Actions\Teams\DeleteTeamAction;
 use App\Http\Controllers\Controller;
 use App\Models\Team;
 use Illuminate\Http\RedirectResponse;
@@ -17,7 +18,7 @@ class DeleteTeamController extends Controller
     {
         try {
             DB::transaction(function () use ($team) {
-                $team->delete();
+                app(DeleteTeamAction::class)->execute($team);
 
                 Session::flash('success', 'The team was deleted successfully.');
             });
