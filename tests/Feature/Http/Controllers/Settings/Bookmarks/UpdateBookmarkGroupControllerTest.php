@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\Http\Controllers\Settings\Bookmarks;
 
+use App\Actions\Bookmarks\UpdateBookmarkGroupAction;
 use App\Models\BookmarkGroup;
 use App\Models\User;
 use Illuminate\Testing\TestResponse;
@@ -49,4 +50,27 @@ it('updates the bookmark and redirects', function () {
     tap($bookmarkGroup->refresh(), function (BookmarkGroup $bookmarkGroup) {
         assertEquals('updated bookmark group', $bookmarkGroup->name);
     });
+});
+
+it('catches exception and redirects with message', function () {
+    // Given
+    $bookmarkGroup = BookmarkGroup::factory()->create([
+        'name' => 'test bookmark group',
+    ]);
+
+    $this->mockActionThrows(UpdateBookmarkGroupAction::class);
+
+    // When
+    /** @var TestResponse $response */
+    $response = $this
+        ->actingAs(User::factory()->create())
+        ->patch(route('settings.bookmarks.groups.update', ['bookmarkGroup' => $bookmarkGroup]), [
+            'name' => 'updated bookmark group',
+        ]);
+
+    // Then
+    $response
+        ->assertStatus(Response::HTTP_FOUND)
+        ->assertRedirect(route('settings.bookmarks.groups.show', ['bookmarkGroup' => $bookmarkGroup]))
+        ->assertSessionHas('error', 'Something went wrong!');
 });

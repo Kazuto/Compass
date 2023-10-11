@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers\Settings\Bookmarks;
 
+use App\Actions\Bookmarks\DeleteBookmarkAction;
 use App\Http\Controllers\Controller;
 use App\Models\Bookmark;
 use Illuminate\Http\RedirectResponse;
@@ -20,7 +21,7 @@ class DeleteBookmarkController extends Controller
 
         try {
             DB::transaction(function () use ($bookmark) {
-                $bookmark->delete();
+                app(DeleteBookmarkAction::class)->execute($bookmark);
 
                 Session::flash('success', 'The bookmark was deleted successfully.');
             });

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers\Settings\Bookmarks;
 
+use App\Actions\Bookmarks\UpdateBookmarkAction;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreBookmarkRequest;
 use App\Models\Bookmark;
@@ -21,7 +22,7 @@ class UpdateBookmarkController extends Controller
 
         try {
             DB::transaction(function () use ($request, $bookmark) {
-                $bookmark->update($request->validated());
+                app(UpdateBookmarkAction::class)->execute($bookmark, $request->validated());
 
                 Session::flash('success', 'The bookmark was updated successfully.');
             });
