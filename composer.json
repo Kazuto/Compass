@@ -67,9 +67,11 @@
             "@composer dump-autoload"
         ],
         "setup": [
-            "yarn install && yarn build",
+            "php -r \"file_exists('.env') || copy('.env.example', '.env');\"",
             "composer install",
-            "php artisan migrate:fresh --seed"
+            "php artisan key:generate",
+            "php artisan migrate:fresh",
+            "yarn install && yarn build"
         ]
     },
     "extra": {
