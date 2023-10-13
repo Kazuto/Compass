@@ -2,9 +2,9 @@ name: "CI"
 
 on:
   pull_request:
-    types: [opened, synchronize, reopened, ready_for_review]
+    types: [ opened, synchronize, reopened, ready_for_review ]
   push:
-    branches: ['develop', 'master']
+    branches: [ 'develop', 'master' ]
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
@@ -15,7 +15,7 @@ jobs:
     strategy:
       fail-fast: true
       matrix:
-        php: [8.2]
+        php: [ 8.2 ]
 
     name: "Pest (PHP ${{ matrix.php }})"
     runs-on: ubuntu-latest
@@ -49,17 +49,17 @@ jobs:
           node-version: 20.x
 
       - name: Get node version
-          id: node
-          run: |
-            echo "::set-output name=version::$(node -v)"
+        id: node
+        run: |
+          echo "::set-output name=version::$(node -v)"
 
       - name: Get node_modules cache
-          uses: actions/cache@v3
-          id: node_modules
-          with:
-            path: |
-              **/node_modules
-            key: ${{ runner.os }}-node_modules-${{ hashFiles('**/yarn.lock') }}-${{ steps.node.outputs.version }}
+        uses: actions/cache@v3
+        id: node_modules
+        with:
+          path: |
+            **/node_modules
+          key: ${{ runner.os }}-node_modules-${{ hashFiles('**/yarn.lock') }}-${{ steps.node.outputs.version }}
 
       - name: Compile assets
         run: |
