@@ -31,7 +31,7 @@ it('redirects to login when unauthenticated', function () {
     assertNotSoftDeleted('bookmarks', ['id' => $bookmark->id]);
 });
 
-it('soft deletes the bookmark and redirects', function () {
+it('redirects to dashboard if not admin', function () {
     // Given
     $bookmark = Bookmark::factory()->create();
 
@@ -39,6 +39,24 @@ it('soft deletes the bookmark and redirects', function () {
     /** @var TestResponse $response */
     $response = $this
         ->actingAs(User::factory()->create())
+        ->delete(route('settings.bookmarks.delete', ['bookmark' => $bookmark]));
+
+    // Then
+    $response
+        ->assertStatus(Response::HTTP_FOUND)
+        ->assertRedirect(route('dashboard'));
+
+    assertNotSoftDeleted('bookmarks', ['id' => $bookmark->id]);
+});
+
+it('soft deletes the bookmark and redirects', function () {
+    // Given
+    $bookmark = Bookmark::factory()->create();
+
+    // When
+    /** @var TestResponse $response */
+    $response = $this
+        ->actingAs(User::factory()->isAdmin()->create())
         ->delete(route('settings.bookmarks.delete', ['bookmark' => $bookmark]));
 
     // Then
@@ -60,7 +78,7 @@ it('catches exception and redirects with message', function () {
     // When
     /** @var TestResponse $response */
     $response = $this
-        ->actingAs(User::factory()->create())
+        ->actingAs(User::factory()->isAdmin()->create())
         ->delete(route('settings.bookmarks.delete', ['bookmark' => $bookmark]));
 
     // Then

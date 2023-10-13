@@ -26,7 +26,7 @@ it('redirects to login when unauthenticated', function () {
         ->assertRedirect(route('auth.index'));
 });
 
-it('shows team', function () {
+it('redirects to dashboard if not admin', function () {
     // Given
     $team = Team::factory()
         ->has(User::factory(5))
@@ -36,6 +36,24 @@ it('shows team', function () {
     /** @var TestResponse $response */
     $response = $this
         ->actingAs(User::factory()->create())
+        ->get(route('settings.teams.show', ['team' => $team]));
+
+    // Then
+    $response
+        ->assertStatus(Response::HTTP_FOUND)
+        ->assertRedirect(route('dashboard'));
+});
+
+it('shows team', function () {
+    // Given
+    $team = Team::factory()
+        ->has(User::factory(5))
+        ->create();
+
+    // When
+    /** @var TestResponse $response */
+    $response = $this
+        ->actingAs(User::factory()->isAdmin()->create())
         ->get(route('settings.teams.show', ['team' => $team]));
 
     // Then

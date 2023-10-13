@@ -12,13 +12,12 @@
         <small class="block text-white/70 mb-2">Only these teams will have access to the bookmarks</small>
         <div class="mb-4 text-[var(--color-text)]">
             @foreach(App\Models\Team::all() as $team)
-                <div class="flex items-center gap-2 mb-2">
-                    <input type="checkbox" id="team_{{$team->id}}" name="team_ids[]"
-                           value="{{ $team->id }}" class="w-4 h-4 rounded-lg"
-                        @checked($bookmarkGroup->teams->contains(fn (\App\Models\Team $related) => $related->id === $team->id))
-                    >
-                    <label for="team_{{$team->id}}">{{ $team->name }}</label>
-                </div>
+                <x-toggle-switch
+                    id="team_{{$team->id}}"
+                    name="team_ids[{{$team->id}}]"
+                    label="{{ $team->name }}"
+                    value="{{ $bookmarkGroup->teams->contains(fn (\App\Models\Team $related) => $related->id === $team->id) }}"
+                />
             @endforeach
         </div>
 

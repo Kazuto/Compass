@@ -35,7 +35,7 @@ it('redirects to login when unauthenticated', function () {
     assertCount(0, $team->users);
 });
 
-it('add the user to the team and redirects', function () {
+it('redirects to dashboard if not admin', function () {
     // Given
     $user = User::factory()->create();
     $team = Team::factory()->create();
@@ -44,6 +44,28 @@ it('add the user to the team and redirects', function () {
     /** @var TestResponse $response */
     $response = $this
         ->actingAs(User::factory()->create())
+        ->post(route('settings.teams.add-user', ['team' => $team]), [
+            'user_id' => $user->id,
+        ]);
+
+    // Then
+    $response
+        ->assertStatus(Response::HTTP_FOUND)
+        ->assertRedirect(route('dashboard'));
+
+    assertEmpty($team->users);
+    assertCount(0, $team->users);
+});
+
+it('add the user to the team and redirects', function () {
+    // Given
+    $user = User::factory()->create();
+    $team = Team::factory()->create();
+
+    // When
+    /** @var TestResponse $response */
+    $response = $this
+        ->actingAs(User::factory()->isAdmin()->create())
         ->post(route('settings.teams.add-user', ['team' => $team]), [
             'user_id' => $user->id,
         ]);
@@ -68,7 +90,7 @@ it('catches exception and redirects with message', function () {
     // When
     /** @var TestResponse $response */
     $response = $this
-        ->actingAs(User::factory()->create())
+        ->actingAs(User::factory()->isAdmin()->create())
         ->post(route('settings.teams.add-user', ['team' => $team]), [
             'user_id' => $user->id,
         ]);

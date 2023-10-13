@@ -27,7 +27,7 @@ it('redirects to login when unauthenticated', function () {
         ->assertRedirect(route('auth.index'));
 });
 
-it('shows bookmark group', function () {
+it('redirects to dashboard if not admin', function () {
     // Given
     $bookmarkGroup = BookmarkGroup::factory()
         ->has(Bookmark::factory(5))
@@ -37,6 +37,24 @@ it('shows bookmark group', function () {
     /** @var TestResponse $response */
     $response = $this
         ->actingAs(User::factory()->create())
+        ->get(route('settings.bookmarks.groups.show', ['bookmarkGroup' => $bookmarkGroup]));
+
+    // Then
+    $response
+        ->assertStatus(Response::HTTP_FOUND)
+        ->assertRedirect(route('dashboard'));
+});
+
+it('shows bookmark group', function () {
+    // Given
+    $bookmarkGroup = BookmarkGroup::factory()
+        ->has(Bookmark::factory(5))
+        ->create();
+
+    // When
+    /** @var TestResponse $response */
+    $response = $this
+        ->actingAs(User::factory()->isAdmin()->create())
         ->get(route('settings.bookmarks.groups.show', ['bookmarkGroup' => $bookmarkGroup]));
 
     // Then

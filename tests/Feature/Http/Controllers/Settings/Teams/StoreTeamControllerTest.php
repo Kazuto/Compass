@@ -30,6 +30,24 @@ it('redirects to login when unauthenticated', function () {
     assertDatabaseEmpty('teams');
 });
 
+it('redirects to dashboard if not admin', function () {
+    // Given
+    $team = Team::factory()->make();
+
+    // When
+    /** @var TestResponse $response */
+    $response = $this
+        ->actingAs(User::factory()->create())
+        ->post(route('settings.teams.store'), $team->withoutRelations()->toArray());
+
+    // Then
+    $response
+        ->assertStatus(Response::HTTP_FOUND)
+        ->assertRedirect(route('dashboard'));
+
+    assertDatabaseEmpty('teams');
+});
+
 it('creates the team and redirects', function () {
     // Given
     $team = Team::factory()->make()->withoutRelations()->toArray();
@@ -37,7 +55,7 @@ it('creates the team and redirects', function () {
     // When
     /** @var TestResponse $response */
     $response = $this
-        ->actingAs(User::factory()->create())
+        ->actingAs(User::factory()->isAdmin()->create())
         ->post(route('settings.teams.store'), $team);
 
     // Then
@@ -58,7 +76,7 @@ it('catches exception and redirects with message', function () {
     // When
     /** @var TestResponse $response */
     $response = $this
-        ->actingAs(User::factory()->create())
+        ->actingAs(User::factory()->isAdmin()->create())
         ->post(route('settings.teams.store'), $team);
 
     // Then

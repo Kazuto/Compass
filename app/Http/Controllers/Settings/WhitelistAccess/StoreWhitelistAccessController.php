@@ -6,7 +6,7 @@ namespace App\Http\Controllers\Settings\WhitelistAccess;
 
 use App\Actions\WhitelistAccess\StoreWhitelistAccessAction;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\StoreWhitelistAccessRequest;
+use App\Http\Requests\WhitelistAccess\StoreWhitelistAccessRequest;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;

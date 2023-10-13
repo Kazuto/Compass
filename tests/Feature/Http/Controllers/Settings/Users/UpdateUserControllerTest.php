@@ -4,22 +4,22 @@ declare(strict_types=1);
 
 namespace Tests\Http\Controllers\Settings\Bookmarks;
 
-use App\Actions\Bookmarks\UpdateBookmarkGroupAction;
-use App\Models\BookmarkGroup;
+use App\Actions\User\UpdateUserAction;
 use App\Models\User;
 use Illuminate\Testing\TestResponse;
 use Symfony\Component\HttpFoundation\Response;
 
 use function PHPUnit\Framework\assertEquals;
+use function PHPUnit\Framework\assertTrue;
 
 it('redirects to login when unauthenticated', function () {
     // Given
-    $bookmarkGroup = BookmarkGroup::factory()->create();
+    $user = User::factory()->create();
 
     // When
     /** @var TestResponse $response */
     $response = $this
-        ->patch(route('settings.bookmarks.groups.update', ['bookmarkGroup' => $bookmarkGroup]));
+        ->patch(route('settings.users.update', ['user' => $user]));
 
     // Then
     $response
@@ -29,13 +29,13 @@ it('redirects to login when unauthenticated', function () {
 
 it('redirects to dashboard if not admin', function () {
     // Given
-    $bookmarkGroup = BookmarkGroup::factory()->create();
+    $user = User::factory()->create();
 
     // When
     /** @var TestResponse $response */
     $response = $this
         ->actingAs(User::factory()->create())
-        ->patch(route('settings.bookmarks.groups.update', ['bookmarkGroup' => $bookmarkGroup]));
+        ->patch(route('settings.users.update', ['user' => $user]));
 
     // Then
     $response
@@ -43,50 +43,62 @@ it('redirects to dashboard if not admin', function () {
         ->assertRedirect(route('dashboard'));
 });
 
-it('updates the bookmark and redirects', function () {
+it('updates the user and redirects', function () {
     // Given
-    $bookmarkGroup = BookmarkGroup::factory()->create([
-        'name' => 'test bookmark group',
+    $user = User::factory()->create([
+        'name' => 'John Doe',
+        'username' => 'j_doe',
+        'is_admin' => false,
     ]);
 
     // When
     /** @var TestResponse $response */
     $response = $this
         ->actingAs(User::factory()->isAdmin()->create())
-        ->patch(route('settings.bookmarks.groups.update', ['bookmarkGroup' => $bookmarkGroup]), [
-            'name' => 'updated bookmark group',
+        ->patch(route('settings.users.update', ['user' => $user]), [
+            'name' => 'J.D.',
+            'username' => 'j_d',
+            'email' => $user->email,
+            'is_admin' => true,
         ]);
 
     // Then
     $response
         ->assertStatus(Response::HTTP_FOUND)
-        ->assertRedirect(route('settings.bookmarks.groups.show', ['bookmarkGroup' => $bookmarkGroup]))
-        ->assertSessionHas('success', 'The bookmark group was updated successfully.');
+        ->assertRedirect(route('settings.users.list'))
+        ->assertSessionHas('success', 'The user was updated successfully.');
 
-    tap($bookmarkGroup->refresh(), function (BookmarkGroup $bookmarkGroup) {
-        assertEquals('updated bookmark group', $bookmarkGroup->name);
+    tap($user->refresh(), function (User $user) {
+        assertEquals('J.D.', $user->name);
+        assertEquals('j_d', $user->username);
+        assertTrue($user->is_admin);
     });
 });
 
 it('catches exception and redirects with message', function () {
     // Given
-    $bookmarkGroup = BookmarkGroup::factory()->create([
-        'name' => 'test bookmark group',
+    $user = User::factory()->create([
+        'name' => 'John Doe',
+        'username' => 'j_doe',
+        'is_admin' => false,
     ]);
 
-    $this->mockActionThrows(UpdateBookmarkGroupAction::class);
+    $this->mockActionThrows(UpdateUserAction::class);
 
     // When
     /** @var TestResponse $response */
     $response = $this
         ->actingAs(User::factory()->isAdmin()->create())
-        ->patch(route('settings.bookmarks.groups.update', ['bookmarkGroup' => $bookmarkGroup]), [
-            'name' => 'updated bookmark group',
+        ->patch(route('settings.users.update', ['user' => $user]), [
+            'name' => 'J.D.',
+            'username' => 'j_d',
+            'email' => $user->email,
+            'is_admin' => true,
         ]);
 
     // Then
     $response
         ->assertStatus(Response::HTTP_FOUND)
-        ->assertRedirect(route('settings.bookmarks.groups.show', ['bookmarkGroup' => $bookmarkGroup]))
+        ->assertRedirect(route('settings.users.list'))
         ->assertSessionHas('error', 'Something went wrong!');
 });

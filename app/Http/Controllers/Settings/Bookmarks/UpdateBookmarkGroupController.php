@@ -6,7 +6,7 @@ namespace App\Http\Controllers\Settings\Bookmarks;
 
 use App\Actions\Bookmarks\UpdateBookmarkGroupAction;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\StoreBookmarkGroupRequest;
+use App\Http\Requests\Bookmarks\StoreBookmarkGroupRequest;
 use App\Models\BookmarkGroup;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\DB;
@@ -21,7 +21,11 @@ class UpdateBookmarkGroupController extends Controller
             DB::transaction(function () use ($request, $bookmarkGroup) {
                 app(UpdateBookmarkGroupAction::class)->execute($bookmarkGroup, $request->validated());
 
-                $bookmarkGroup->teams()->sync($request->get('team_ids'));
+                $teamIds = collect($request->get('team_ids'))
+                    ->filter(fn ($item) => (bool) $item)
+                    ->keys();
+
+                $bookmarkGroup->teams()->sync($teamIds);
 
                 Session::flash('success', 'The bookmark group was updated successfully.');
             });

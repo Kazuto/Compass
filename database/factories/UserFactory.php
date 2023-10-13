@@ -55,6 +55,13 @@ class UserFactory extends Factory
         });
     }
 
+    public function isAdmin(): static
+    {
+        return $this->afterMaking(function (User $model) {
+            $model->is_admin = true;
+        });
+    }
+
     public function wasNotRecentlyCreated(): static
     {
         return $this->afterCreating(function (User $model) {

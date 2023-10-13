@@ -10,12 +10,14 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Str;
 use Laravel\Sanctum\HasApiTokens;
 
 /**
  * App\Models\User
  *
  * @property int $id
+ * @property string $uuid
  * @property string $name
  * @property string|null $username
  * @property string $email
@@ -51,6 +53,7 @@ use Laravel\Sanctum\HasApiTokens;
  * @method static \Illuminate\Database\Eloquent\Builder|User whereRememberToken($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereUsername($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|User whereUuid($value)
  *
  * @mixin \Eloquent
  */
@@ -88,6 +91,16 @@ class User extends Authenticatable
         'password' => 'hashed',
         'is_admin' => 'boolean',
     ];
+
+    protected static function boot()
+    {
+        self::creating(function (User $model) {
+            $model->uuid = Str::uuid();
+        });
+
+        parent::boot();
+    }
+
     //endregion ORM
 
     //region Relations

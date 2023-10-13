@@ -6,7 +6,7 @@ namespace App\Http\Controllers\Settings\Teams;
 
 use App\Actions\Teams\StoreTeamAction;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\StoreTeamRequest;
+use App\Http\Requests\Teams\StoreTeamRequest;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
