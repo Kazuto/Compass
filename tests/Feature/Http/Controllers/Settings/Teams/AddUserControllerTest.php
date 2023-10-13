@@ -29,7 +29,7 @@ it('redirects to login when unauthenticated', function () {
     // Then
     $response
         ->assertStatus(Response::HTTP_FOUND)
-        ->assertRedirect(route('auth.login'));
+        ->assertRedirect(route('auth.index'));
 
     assertEmpty($team->users);
     assertCount(0, $team->users);

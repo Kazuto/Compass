@@ -28,7 +28,7 @@ it('redirects to login when email not whitelisted', function () {
     // Then
     $response
         ->assertStatus(Response::HTTP_FOUND)
-        ->assertRedirect(route('auth.login'))
+        ->assertRedirect(route('auth.index'))
         ->assertSessionHas('error', "The E-Mail assigned to your account is not whitelisted. \n\n Please talk to an administrator for access.");
 });
 

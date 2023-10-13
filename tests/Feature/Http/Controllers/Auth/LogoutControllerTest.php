@@ -21,7 +21,7 @@ it('logs out and redirects to login', function () {
     // Then
     $response
         ->assertStatus(Response::HTTP_FOUND)
-        ->assertRedirect(route('auth.login'));
+        ->assertRedirect(route('auth.index'));
 
     assertTrue(Auth::guest());
 });

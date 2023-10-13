@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Routes;
 
 use App\Http\Controllers\Auth\CallbackController;
-use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Auth\IndexController;
 use App\Http\Controllers\Auth\LogOutController;
 use App\Http\Controllers\Auth\RedirectController;
 use Illuminate\Support\Facades\Route;
@@ -16,9 +16,9 @@ class AuthRoutes implements RouteGroup
     {
         Route::as('auth.')
             ->group(function () {
-                Route::get('/login', LoginController::class)
+                Route::get('/login', IndexController::class)
                     ->middleware('guest')
-                    ->name('login');
+                    ->name('index');
 
                 Route::get('/logout', LogOutController::class)
                     ->middleware('auth')

@@ -8,7 +8,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Session;
 use Illuminate\View\View;
 
-class LoginController extends Controller
+class IndexController extends Controller
 {
     public function __invoke(): View
     {

@@ -26,7 +26,7 @@ class CallbackController extends Controller
         if (WhitelistAccess::isNotWhitelisted($authUser->getEmail())) {
             Session::flash('error', "The E-Mail assigned to your account is not whitelisted. \n\n Please talk to an administrator for access.");
 
-            return redirect(route('auth.login'));
+            return redirect(route('auth.index'));
         }
 
         $user = app(GitHubUserAction::class)->execute($authUser);
@@ -44,7 +44,7 @@ class CallbackController extends Controller
             return;
         }
 
-        if ($user->email === config('compass.auth.whitelist_admin_email')) {
+        if ($user->email === config('compass.admin.email')) {
             app(StoreWhitelistAccessAction::class)->execute([
                 'email' => $user->email,
                 'user_id' => $user->id,
