@@ -10,8 +10,6 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-use function config;
-
 /**
  * App\Models\Settings\AccessWhitelist
  *
@@ -95,10 +93,6 @@ class WhitelistAccess extends Model
     //region Methods
     public static function isWhitelisted(string $email): bool
     {
-        if (config('compass.auth.whitelist_admin_email') === $email) {
-            return true;
-        }
-
         return static::forEmail($email)->exists();
     }
 

@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace App\Http\Controllers\Auth;
 
 use App\Actions\User\GitHubUserAction;
-use App\Actions\WhitelistAccess\StoreWhitelistAccessAction;
 use App\Actions\WhitelistAccess\UpdateWhitelistAccessAction;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\AuthRequest;
@@ -31,26 +30,16 @@ class CallbackController extends Controller
 
         $user = app(GitHubUserAction::class)->execute($authUser);
 
-        $this->updateOrCreateWhitelistAccess($user);
+        $this->updateWhitelistAccess($user);
 
         Auth::login($user);
 
         return redirect()->route('dashboard');
     }
 
-    private function updateOrCreateWhitelistAccess(User $user): void
+    private function updateWhitelistAccess(User $user): void
     {
         if (! $user->wasRecentlyCreated) {
-            return;
-        }
-
-        if ($user->email === config('compass.admin.email')) {
-            app(StoreWhitelistAccessAction::class)->execute([
-                'email' => $user->email,
-                'user_id' => $user->id,
-                'is_active' => true,
-            ]);
-
             return;
         }
 
