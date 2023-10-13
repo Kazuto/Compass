@@ -8,6 +8,6 @@
 ])>
     <span class="flex justify-center items-center">
         <span class="icon mr-4 text-2xl">{{ $icon }}</span>
-        {{ Str::title($provider) }} @if($disabled) (Disabled) @endif
+        {{ Str::title($provider) }} @if($disabled)(Disabled)@endif
     </span>
 </a>

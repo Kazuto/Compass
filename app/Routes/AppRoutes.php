@@ -13,7 +13,7 @@ class AppRoutes implements RouteGroup
     {
         Route::middleware('auth')
             ->group(function () {
-                Route::get('/', DashboardController::class)->name('home');
+                Route::get('/', DashboardController::class)->name('dashboard');
             });
     }
 }

@@ -1,0 +1,31 @@
+<?php
+
+declare(strict_types=1);
+
+namespace App\Http\Controllers\Settings\WhitelistAccess;
+
+use App\Actions\WhitelistAccess\DeleteWhitelistAccessAction;
+use App\Http\Controllers\Controller;
+use App\Models\WhitelistAccess;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Session;
+use Throwable;
+
+class DeleteWhitelistAccessController extends Controller
+{
+    public function __invoke(WhitelistAccess $whitelistAccess): RedirectResponse
+    {
+        try {
+            DB::transaction(function () use ($whitelistAccess) {
+                app(DeleteWhitelistAccessAction::class)->execute($whitelistAccess);
+
+                Session::flash('success', 'The whitelist entry was deleted successfully.');
+            });
+        } catch (Throwable) {
+            Session::flash('error', 'Something went wrong!');
+        }
+
+        return redirect(route('settings.whitelist.list'));
+    }
+}

@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace Database\Factories;
 
+use App\Models\Team;
+use App\Models\User;
+use App\Models\WhitelistAccess;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 
@@ -12,29 +15,57 @@ use Illuminate\Support\Str;
  */
 class UserFactory extends Factory
 {
-    /**
-     * Define the model's default state.
-     *
-     * @return array<string, mixed>
-     */
     public function definition(): array
     {
         return [
             'name' => fake()->name(),
+            'username' => fake()->userName(),
             'email' => fake()->unique()->safeEmail(),
-            'email_verified_at' => now(),
             'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
             'remember_token' => Str::random(10),
+            'is_admin' => false,
         ];
     }
 
-    /**
-     * Indicate that the model's email address should be unverified.
-     */
-    public function unverified(): static
+    public function configure(): static
     {
-        return $this->state(fn (array $attributes) => [
-            'email_verified_at' => null,
-        ]);
+        return $this
+            ->afterMaking(function (User $model) {
+            })
+            ->afterCreating(function (User $model) {
+            });
+    }
+
+    public function belongsToTeam(Team $team = null): static
+    {
+        $team = $team ?? Team::factory()->create();
+
+        return $this->afterCreating(function (User $model) use ($team) {
+            $model->teams()->attach($team);
+        });
+    }
+
+    public function hasWhitelistAccess(WhitelistAccess $whitelistAccess = null): static
+    {
+        $whitelistAccess = $whitelistAccess ?? WhitelistAccess::factory()->create(['is_active' => true]);
+
+        return $this->afterCreating(function (User $model) use ($whitelistAccess) {
+            $whitelistAccess->user()->associate($model);
+            $whitelistAccess->saveQuietly();
+        });
+    }
+
+    public function isAdmin(): static
+    {
+        return $this->afterMaking(function (User $model) {
+            $model->is_admin = true;
+        });
+    }
+
+    public function wasNotRecentlyCreated(): static
+    {
+        return $this->afterCreating(function (User $model) {
+            $model->wasRecentlyCreated = false;
+        });
     }
 }

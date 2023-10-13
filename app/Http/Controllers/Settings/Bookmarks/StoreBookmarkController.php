@@ -1,10 +1,12 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Controllers\Settings\Bookmarks;
 
+use App\Actions\Bookmarks\StoreBookmarkAction;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\StoreBookmarkRequest;
-use App\Models\Bookmark;
+use App\Http\Requests\Bookmarks\StoreBookmarkRequest;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
@@ -16,7 +18,7 @@ class StoreBookmarkController extends Controller
     {
         try {
             DB::transaction(function () use ($request) {
-                Bookmark::create($request->validated());
+                app(StoreBookmarkAction::class)->execute($request->validated());
 
                 Session::flash('success', 'The bookmark was added successfully.');
             });
