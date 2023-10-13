@@ -1,4 +1,4 @@
-<div class="fixed bottom-8 left-1/2 -translate-x-1/2 mx-auto">
+<div class="fixed bottom-2 md:bottom-8 left-2 right-2 sm:right-auto sm:left-1/2 sm:-translate-x-1/2 mx-auto z-50">
     @if(Session::has('error'))
         <x-alert type="error">{!! Session::get('error') !!}</x-alert>
     @endif

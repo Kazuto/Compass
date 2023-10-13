@@ -6,6 +6,7 @@ namespace App\Routes;
 
 use App\Http\Controllers\Auth\CallbackController;
 use App\Http\Controllers\Auth\IndexController;
+use App\Http\Controllers\Auth\LogInController;
 use App\Http\Controllers\Auth\LogOutController;
 use App\Http\Controllers\Auth\RedirectController;
 use Illuminate\Support\Facades\Route;
@@ -19,6 +20,10 @@ class AuthRoutes implements RouteGroup
                 Route::get('/login', IndexController::class)
                     ->middleware('guest')
                     ->name('index');
+
+                Route::post('/login', LogInController::class)
+                    ->middleware('guest')
+                    ->name('login');
 
                 Route::get('/logout', LogOutController::class)
                     ->middleware('auth')
