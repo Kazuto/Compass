@@ -32,6 +32,14 @@ jobs:
         with:
           php-version: ${{ matrix.php }}
 
+      - name: Get composer cache
+        uses: actions/cache@v3
+        id: vendor
+        with:
+          path: |
+            **/vendor
+          key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}-${{ matrix.php }}
+
       - name: Install composer dependencies
         uses: ramsey/composer-install@v2
 
@@ -39,6 +47,19 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: 20.x
+
+      - name: Get node version
+          id: node
+          run: |
+            echo "::set-output name=version::$(node -v)"
+
+      - name: Get node_modules cache
+          uses: actions/cache@v3
+          id: node_modules
+          with:
+            path: |
+              **/node_modules
+            key: ${{ runner.os }}-node_modules-${{ hashFiles('**/yarn.lock') }}-${{ steps.node.outputs.version }}
 
       - name: Compile assets
         run: |
