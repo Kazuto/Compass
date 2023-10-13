@@ -44,15 +44,24 @@ In summary, Compass is a bookmark aggregation tool that not only addresses the d
 
 **Instructions**
 1. Clone this repository
-2. Run `composer setup`
-3. Set `WHITELIST_ADMIN_EMAIL=` to your email
-4. Create a new [GitHub OAuth app](https://github.com/settings/developers)
-5. Configure `.env` with app credentials
+2. Set the admin configuration `(default is admin/password)`
+    ```
+    ADMIN_USERNAME=
+    ADMIN_EMAIL=
+    ADMIN_PASSWORD=
+    ```
+3. Run `composer setup`
+
+*Optionally:*
+If you want to enable SSO via GitHub or Teams
+1. Create a new [GitHub OAuth app](https://github.com/settings/developers)
+2. Configure `.env` with app credentials
     ```
    GITHUB_CLIENT_ID=
    GITHUB_CLIENT_SECRET=
    GITHUB_REDIRECT_URI=
     ```
+3. Create `whitelist` records in the settings page
 
 ## Contributing
 

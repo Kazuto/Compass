@@ -17,6 +17,7 @@ it('creates new user', function () {
     // When
     Artisan::call(SetupCommand::class);
 
+    // Then
     assertDatabaseHas('users', [
         'username' => $username,
         'email' => $email,
