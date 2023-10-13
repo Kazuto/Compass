@@ -70,7 +70,9 @@
             "php -r \"file_exists('.env') || copy('.env.example', '.env');\"",
             "composer install",
             "php artisan key:generate",
-            "php artisan migrate:fresh",
+            "php -r \"file_exists('database/database.sqlite') && unlink('database/database.sqlite');\"",
+            "php artisan migrate",
+            "php artisan compass:setup",
             "yarn install && yarn build"
         ]
     },

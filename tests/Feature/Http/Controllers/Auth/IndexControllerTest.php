@@ -11,7 +11,7 @@ it('shows info text', function () {
     // When
     /** @var TestResponse $response */
     $response = $this
-        ->get(route('auth.login'));
+        ->get(route('auth.index'));
 
     // Then
     $response
@@ -23,7 +23,7 @@ it('shows provider', function () {
     // When
     /** @var TestResponse $response */
     $response = $this
-        ->get(route('auth.login'));
+        ->get(route('auth.index'));
 
     // Then
     $response
