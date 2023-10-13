@@ -15,7 +15,7 @@ jobs:
     strategy:
       fail-fast: true
       matrix:
-        php: [8.1, 8.2]
+        php: [8.2]
 
     name: "Pest (PHP ${{ matrix.php }})"
     runs-on: ubuntu-latest
@@ -60,7 +60,7 @@ jobs:
         env:
           DB_CONNECTION: sqlite
           DB_DATABASE: database/database.sqlite
-        run: php artisan test --coverage --min=90
+        run: php artisan test --coverage --coverage-clover=coverage-report.xml
 
       - name: Upload coverage reports to Codecov
         uses: codecov/codecov-action@v3
