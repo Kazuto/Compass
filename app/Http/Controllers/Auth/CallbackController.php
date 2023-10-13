@@ -7,7 +7,7 @@ namespace App\Http\Controllers\Auth;
 use App\Actions\User\GitHubUserAction;
 use App\Actions\WhitelistAccess\UpdateWhitelistAccessAction;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\AuthRequest;
+use App\Http\Requests\Auth\OAuthRequest;
 use App\Models\User;
 use App\Models\WhitelistAccess;
 use Illuminate\Http\RedirectResponse;
@@ -17,7 +17,7 @@ use Session;
 
 class CallbackController extends Controller
 {
-    public function __invoke(AuthRequest $request): RedirectResponse
+    public function __invoke(OAuthRequest $request): RedirectResponse
     {
         /** @var \Laravel\Socialite\Two\User $authUser */
         $authUser = Socialite::driver($request->provider)->user();

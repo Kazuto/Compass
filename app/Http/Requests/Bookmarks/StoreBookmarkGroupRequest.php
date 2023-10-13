@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\Bookmarks;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
 
-class StoreTeamRequest extends FormRequest
+class StoreBookmarkGroupRequest extends FormRequest
 {
     public function authorize(): bool
     {
@@ -17,7 +17,8 @@ class StoreTeamRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required|string',
+            'name' => 'required',
+            'team_ids' => 'array',
         ];
     }
 }

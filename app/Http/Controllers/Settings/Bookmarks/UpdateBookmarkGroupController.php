@@ -6,7 +6,7 @@ namespace App\Http\Controllers\Settings\Bookmarks;
 
 use App\Actions\Bookmarks\UpdateBookmarkGroupAction;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\StoreBookmarkGroupRequest;
+use App\Http\Requests\Bookmarks\StoreBookmarkGroupRequest;
 use App\Models\BookmarkGroup;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\DB;

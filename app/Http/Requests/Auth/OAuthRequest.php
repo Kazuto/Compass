@@ -7,7 +7,8 @@ namespace App\Http\Requests\Auth;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
 
-class LogInRequest extends FormRequest
+/* @property-read string $provider */
+class OAuthRequest extends FormRequest
 {
     public function authorize(): bool
     {
@@ -17,8 +18,7 @@ class LogInRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'username' => ['required'],
-            'password' => ['required'],
+            'provider' => ['in:github,microsoft'],
         ];
     }
 }
