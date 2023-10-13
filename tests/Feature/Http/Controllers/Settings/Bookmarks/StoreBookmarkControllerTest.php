@@ -30,6 +30,24 @@ it('redirects to login when unauthenticated', function () {
     assertDatabaseEmpty('bookmarks');
 });
 
+it('redirects to dashboard if not admin', function () {
+    // Given
+    $bookmark = Bookmark::factory()->make();
+
+    // When
+    /** @var TestResponse $response */
+    $response = $this
+        ->actingAs(User::factory()->create())
+        ->post(route('settings.bookmarks.store'), $bookmark->withoutRelations()->toArray());
+
+    // Then
+    $response
+        ->assertStatus(Response::HTTP_FOUND)
+        ->assertRedirect(route('dashboard'));
+
+    assertDatabaseEmpty('bookmarks');
+});
+
 it('creates the bookmark and redirects', function () {
     // Given
     $bookmark = Bookmark::factory()->withIcon()->make()->withoutRelations()->toArray();
@@ -37,7 +55,7 @@ it('creates the bookmark and redirects', function () {
     // When
     /** @var TestResponse $response */
     $response = $this
-        ->actingAs(User::factory()->create())
+        ->actingAs(User::factory()->isAdmin()->create())
         ->post(route('settings.bookmarks.store'), $bookmark);
 
     // Then
@@ -58,7 +76,7 @@ it('catches exception and redirects with message', function () {
     // When
     /** @var TestResponse $response */
     $response = $this
-        ->actingAs(User::factory()->create())
+        ->actingAs(User::factory()->isAdmin()->create())
         ->post(route('settings.bookmarks.store'), $bookmark);
 
     // Then

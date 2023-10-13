@@ -30,7 +30,7 @@ it('redirects to login when unauthenticated', function () {
     assertNotSoftDeleted('bookmark_groups', ['id' => $bookmarkGroup->id]);
 });
 
-it('soft deletes the bookmark group and redirects', function () {
+it('redirects to dashboard if not admin', function () {
     // Given
     $bookmarkGroup = BookmarkGroup::factory()->create();
 
@@ -38,6 +38,24 @@ it('soft deletes the bookmark group and redirects', function () {
     /** @var TestResponse $response */
     $response = $this
         ->actingAs(User::factory()->create())
+        ->delete(route('settings.bookmarks.groups.delete', ['bookmarkGroup' => $bookmarkGroup]));
+
+    // Then
+    $response
+        ->assertStatus(Response::HTTP_FOUND)
+        ->assertRedirect(route('dashboard'));
+
+    assertNotSoftDeleted('bookmark_groups', ['id' => $bookmarkGroup->id]);
+});
+
+it('soft deletes the bookmark group and redirects', function () {
+    // Given
+    $bookmarkGroup = BookmarkGroup::factory()->create();
+
+    // When
+    /** @var TestResponse $response */
+    $response = $this
+        ->actingAs(User::factory()->isAdmin()->create())
         ->delete(route('settings.bookmarks.groups.delete', ['bookmarkGroup' => $bookmarkGroup]));
 
     // Then
@@ -58,7 +76,7 @@ it('catches exception and redirects with message', function () {
     // When
     /** @var TestResponse $response */
     $response = $this
-        ->actingAs(User::factory()->create())
+        ->actingAs(User::factory()->isAdmin()->create())
         ->delete(route('settings.bookmarks.groups.delete', ['bookmarkGroup' => $bookmarkGroup]));
 
     // Then

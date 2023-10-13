@@ -24,6 +24,22 @@ it('redirects to login when unauthenticated', function () {
         ->assertRedirect(route('auth.index'));
 });
 
+it('redirects to dashboard if not admin', function () {
+    // Given
+    WhitelistAccess::factory(5)->create();
+
+    // When
+    /** @var TestResponse $response */
+    $response = $this
+        ->actingAs(User::factory()->create())
+        ->get(route('settings.whitelist.list'));
+
+    // Then
+    $response
+        ->assertStatus(Response::HTTP_FOUND)
+        ->assertRedirect(route('dashboard'));
+});
+
 it('shows whitelist access entries', function () {
     // Given
     $whitelistAccess = WhitelistAccess::factory(5)->create();
@@ -31,7 +47,7 @@ it('shows whitelist access entries', function () {
     // When
     /** @var TestResponse $response */
     $response = $this
-        ->actingAs(User::factory()->create())
+        ->actingAs(User::factory()->isAdmin()->create())
         ->get(route('settings.whitelist.list'));
 
     // Then

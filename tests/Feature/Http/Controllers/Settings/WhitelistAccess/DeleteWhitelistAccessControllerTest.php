@@ -27,7 +27,7 @@ it('redirects to login when unauthenticated', function () {
         ->assertRedirect(route('auth.index'));
 });
 
-it('deletes the whitelist access entry and redirects', function () {
+it('redirects to dashboard if not admin', function () {
     // Given
     $whitelistAccess = WhitelistAccess::factory()->create();
 
@@ -35,6 +35,22 @@ it('deletes the whitelist access entry and redirects', function () {
     /** @var TestResponse $response */
     $response = $this
         ->actingAs(User::factory()->create())
+        ->delete(route('settings.whitelist.delete', ['whitelistAccess' => $whitelistAccess]));
+
+    // Then
+    $response
+        ->assertStatus(Response::HTTP_FOUND)
+        ->assertRedirect(route('dashboard'));
+});
+
+it('deletes the whitelist access entry and redirects', function () {
+    // Given
+    $whitelistAccess = WhitelistAccess::factory()->create();
+
+    // When
+    /** @var TestResponse $response */
+    $response = $this
+        ->actingAs(User::factory()->isAdmin()->create())
         ->delete(route('settings.whitelist.delete', ['whitelistAccess' => $whitelistAccess]));
 
     // Then
@@ -55,7 +71,7 @@ it('catches exception and redirects with message', function () {
     // When
     /** @var TestResponse $response */
     $response = $this
-        ->actingAs(User::factory()->create())
+        ->actingAs(User::factory()->isAdmin()->create())
         ->delete(route('settings.whitelist.delete', ['whitelistAccess' => $whitelistAccess]));
 
     // Then

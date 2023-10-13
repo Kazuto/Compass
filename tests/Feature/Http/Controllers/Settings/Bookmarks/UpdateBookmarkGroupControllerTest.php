@@ -27,6 +27,22 @@ it('redirects to login when unauthenticated', function () {
         ->assertRedirect(route('auth.index'));
 });
 
+it('redirects to dashboard if not admin', function () {
+    // Given
+    $bookmarkGroup = BookmarkGroup::factory()->create();
+
+    // When
+    /** @var TestResponse $response */
+    $response = $this
+        ->actingAs(User::factory()->create())
+        ->patch(route('settings.bookmarks.groups.update', ['bookmarkGroup' => $bookmarkGroup]));
+
+    // Then
+    $response
+        ->assertStatus(Response::HTTP_FOUND)
+        ->assertRedirect(route('dashboard'));
+});
+
 it('updates the bookmark and redirects', function () {
     // Given
     $bookmarkGroup = BookmarkGroup::factory()->create([
@@ -36,7 +52,7 @@ it('updates the bookmark and redirects', function () {
     // When
     /** @var TestResponse $response */
     $response = $this
-        ->actingAs(User::factory()->create())
+        ->actingAs(User::factory()->isAdmin()->create())
         ->patch(route('settings.bookmarks.groups.update', ['bookmarkGroup' => $bookmarkGroup]), [
             'name' => 'updated bookmark group',
         ]);
@@ -63,7 +79,7 @@ it('catches exception and redirects with message', function () {
     // When
     /** @var TestResponse $response */
     $response = $this
-        ->actingAs(User::factory()->create())
+        ->actingAs(User::factory()->isAdmin()->create())
         ->patch(route('settings.bookmarks.groups.update', ['bookmarkGroup' => $bookmarkGroup]), [
             'name' => 'updated bookmark group',
         ]);
