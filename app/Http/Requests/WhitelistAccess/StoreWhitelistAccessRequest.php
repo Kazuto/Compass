@@ -11,7 +11,7 @@ class StoreWhitelistAccessRequest extends FormRequest
 {
     public function authorize(): bool
     {
-        return Auth::check();
+        return Auth::user()->can('manage-whitelist-access');
     }
 
     public function rules(): array

@@ -29,7 +29,7 @@ class SettingsRoutes implements RouteGroup
     {
         Route::as('settings.')
             ->prefix('settings/')
-            ->middleware('auth')
+            ->middleware(['auth', 'admin'])
             ->group(function () {
                 Route::as('bookmarks.')
                     ->prefix('bookmarks/')

@@ -31,9 +31,15 @@
         </div>
         <div class="grid grid-cols-[250px_1fr] gap-8 ">
             <nav class="flex flex-col gap-2">
-                <x-settings-link route="settings.bookmarks.list">Bookmarks</x-settings-link>
-                <x-settings-link route="settings.whitelist.list">Whitelist</x-settings-link>
-                <x-settings-link route="settings.teams.list">Teams</x-settings-link>
+                @can('manage-bookmarks')
+                    <x-settings-link route="settings.bookmarks.list">Bookmarks</x-settings-link>
+                @endcan
+                @can('manage-whitelist-access')
+                    <x-settings-link route="settings.whitelist.list">Whitelist</x-settings-link>
+                @endcan
+                @can('manage-teams')
+                    <x-settings-link route="settings.teams.list">Teams</x-settings-link>
+                @endcan
             </nav>
 
             <div>
