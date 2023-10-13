@@ -24,6 +24,7 @@ use Laravel\Sanctum\HasApiTokens;
  * @property string|null $github_id
  * @property string|null $github_token
  * @property string|null $github_refresh_token
+ * @property bool $is_admin
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \Illuminate\Notifications\DatabaseNotificationCollection<int, \Illuminate\Notifications\DatabaseNotification> $notifications
@@ -75,6 +76,7 @@ class User extends Authenticatable
         'github_id',
         'github_token',
         'github_refresh_token',
+        'is_admin',
     ];
 
     protected $hidden = [
@@ -84,6 +86,7 @@ class User extends Authenticatable
 
     protected $casts = [
         'password' => 'hashed',
+        'is_admin' => 'boolean',
     ];
     //endregion ORM
 

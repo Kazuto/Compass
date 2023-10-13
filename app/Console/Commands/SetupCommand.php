@@ -33,6 +33,7 @@ class SetupCommand extends Command
             'username' => config('compass.admin.username'),
             'email' => config('compass.admin.email'),
             'password' => bcrypt(config('compass.admin.password')),
+            'is_admin' => true,
         ]);
     }
 }

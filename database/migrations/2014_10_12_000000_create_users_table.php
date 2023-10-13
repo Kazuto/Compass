@@ -23,6 +23,7 @@ return new class extends Migration
             $table->string('github_id')->unique()->nullable();
             $table->string('github_token')->nullable();
             $table->string('github_refresh_token')->nullable();
+            $table->boolean('is_admin')->default(false);
             $table->timestamps();
         });
     }
