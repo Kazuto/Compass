@@ -2,17 +2,17 @@
 
 @section('content')
     <div class="w-full">
-        <div class="flex items-center justify-between pb-4 mb-4 border-b border-white/20">
-            <h3 class="block text-2xl mb-4 font-black">
-                Group: <span class="text-[var(--color-accent)]">{{ $bookmarkGroup->name }}</span>
-            </h3>
+        <x-settings.action-title>
+            <x-slot name="title">
+                Bookmarks: <span class="text-[var(--color-accent)]">{{ $bookmarkGroup->name }}</span>
+            </x-slot>
 
             <div>
                 @include('settings.bookmarks.partials.update-bookmark-group-modal', ['bookmarkGroup' => $bookmarkGroup])
 
                 @include('settings.bookmarks.partials.delete-bookmark-group-modal', ['bookmarkGroup' => $bookmarkGroup])
             </div>
-        </div>
+        </x-settings.action-title>
 
         <table class="w-full mb-6">
             <thead class="bg-white/20">
@@ -40,5 +40,23 @@
             @endforeach
             </tbody>
         </table>
+
+        <div>
+            <h4 class="font-bold mb-4 text-2xl">
+                Restriction
+            </h4>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+                @forelse ($bookmarkGroup->teams as $team)
+                    <x-team.card :team="$team" />
+                @empty
+                    <span class="col-span-full text-neutral-400">
+                        Not assigned to any specific team. Accessible to every user.
+                    </span>
+                @endforelse
+            </div>
+
+        </div>
+
     </div>
 @endsection

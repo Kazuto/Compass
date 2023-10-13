@@ -1,66 +1,68 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+<p align="center"><img src="https://github.com/Kazuto/compass/assets/25435034/6505dad2-9255-4c34-b192-e38efc2ae682" width="400" alt="Laravel Logo"></a></p>
 
 <p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
+<a href="https://github.com/kazuto/compass/actions"><img src="https://github.com/kazuto/compass/workflows/CI/badge.svg" alt="Build Status"></a>
 </p>
 
-## About Laravel
+## About Compass
+"Compass" is a bookmark aggregation tool meticulously crafted to address the shortcomings of existing platforms such as Heimdall and Flame. Recognizing the need for enhanced collaboration and control, Compass introduces several groundbreaking features, including multi-user authentication, team functionalities, and customizable visibility settings for bookmark groups.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## Key Features:
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+1. **Multi-User Authentication:**
+   Compass takes bookmark management to a new level by introducing robust multi-user authentication. This feature allows teams and individuals to have secure and personalized access to their bookmarked content, ensuring data privacy and integrity.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
 
-## Learning Laravel
+2. **Team Collaboration:**
+   One of Compass's standout features is its team collaboration functionality. Users can create teams, making it easier to collaborate on bookmark collections. This is especially beneficial for projects or departments that require shared access to curated resources.
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+3. **Visibility Controls:**
+   Compass empowers users with granular control over the visibility of bookmark groups. You can designate specific groups to be visible only to certain teams, fostering a tailored and organized approach to information sharing within organizations.
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
 
-## Laravel Sponsors
+4. **Role-Based Access:**
+   To enhance security and streamline workflows, Compass incorporates role-based access controls. Administrators can assign different roles to team members, regulating their level of access and authority within the bookmarking system.
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
 
-### Premium Partners
+5. **Centralized Administration Panel:**
+   A centralized administration panel makes managing user accounts, teams, and visibility settings straightforward. This ensures that administrators have a comprehensive view of the bookmarking ecosystem and can make real-time adjustments as needed.
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
+
+6. **User-Friendly Interface:**
+   Despite its powerful features, Compass maintains a user-friendly interface. Navigating through bookmark groups, teams, and visibility settings is intuitive, making the tool accessible to users with varying levels of technical expertise.
+
+In summary, Compass is a bookmark aggregation tool that not only addresses the deficiencies of its predecessors but also introduces cutting-edge features like multi-user authentication, team collaboration, and visibility controls. It is positioned to transform how teams collaborate, share information, and manage their collective knowledge effectively.
+
+## Installing Compass 
+### Docker
+*Docker coming soon*
+
+### Manual Installation
+**Prerequisites**
+- PHP 8.1 or newer
+
+**Instructions**
+1. Clone this repository
+2. Set the admin configuration `(default is admin/password)`
+    ```
+    ADMIN_USERNAME=
+    ADMIN_EMAIL=
+    ADMIN_PASSWORD=
+    ```
+3. Run `composer setup`
+
+*Optionally:*
+If you want to enable SSO via GitHub or Teams
+1. Create a new [GitHub OAuth app](https://github.com/settings/developers)
+2. Configure `.env` with app credentials
+    ```
+   GITHUB_CLIENT_ID=
+   GITHUB_CLIENT_SECRET=
+   GITHUB_REDIRECT_URI=
+    ```
+3. Create `whitelist` records in the settings page
 
 ## Contributing
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+Thank you for considering contributing to compass! The contribution guide can be found in the [CONTRIBUTING.md](/CONTRIBUTING.md).

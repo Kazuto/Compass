@@ -5,21 +5,25 @@ declare(strict_types=1);
 namespace {{ factoryNamespace }};
 
 use Illuminate\Database\Eloquent\Factories\Factory;
-
+use {{ namespacedModel }}
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\{{ namespacedModel }}>
  */
 class {{ factory }}Factory extends Factory
 {
-    /**
-     * Define the model's default state.
-     *
-     * @return array<string, mixed>
-     */
     public function definition(): array
     {
         return [
             //
         ];
+    }
+
+    public function configure(): static
+    {
+        return $this
+            ->afterMaking(function ({{ factory }} $model) {
+            })
+            ->afterCreating(function ({{ factory }} $model) {
+            });
     }
 }

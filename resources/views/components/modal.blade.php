@@ -7,10 +7,10 @@
     data-toggle="modal"
     data-target="modal-{{ $id }}"
     {{ $button->attributes->class([
-        'py-2 px-3 rounded-lg bg-neutral-500/20 hover:bg-neutral-500/40 transition-all',
+        'py-2 px-3 rounded-lg bg-white/10 hover:bg-white/20 transition-all',
         'py-0 px-0 h-9 aspect-square' => $button->attributes->has('icon'),
         'bg-[var(--color-accent)]' => $button->attributes->has('accent'),
-        'bg-red-600' => $button->attributes->has('danger'),
+        '!bg-red-600 hover:!bg-red-500' => $button->attributes->has('danger'),
 ]) }}
 >
     {{ $button }}

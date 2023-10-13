@@ -1,7 +1,10 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Controllers\Settings\Bookmarks;
 
+use App\Actions\Bookmarks\DeleteBookmarkGroupAction;
 use App\Http\Controllers\Controller;
 use App\Models\BookmarkGroup;
 use Illuminate\Http\RedirectResponse;
@@ -15,7 +18,7 @@ class DeleteBookmarkGroupController extends Controller
     {
         try {
             DB::transaction(function () use ($bookmarkGroup) {
-                $bookmarkGroup->delete();
+                app(DeleteBookmarkGroupAction::class)->execute($bookmarkGroup);
 
                 Session::flash('success', 'The bookmark group was deleted successfully.');
             });
