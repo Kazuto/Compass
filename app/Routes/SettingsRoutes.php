@@ -18,6 +18,8 @@ use App\Http\Controllers\Settings\Teams\ListTeamController;
 use App\Http\Controllers\Settings\Teams\RemoveUserController;
 use App\Http\Controllers\Settings\Teams\ShowTeamController;
 use App\Http\Controllers\Settings\Teams\StoreTeamController;
+use App\Http\Controllers\Settings\Users\ListUserController;
+use App\Http\Controllers\Settings\Users\UpdateUserController;
 use App\Http\Controllers\Settings\WhitelistAccess\DeleteWhitelistAccessController;
 use App\Http\Controllers\Settings\WhitelistAccess\ListWhitelistAccessController;
 use App\Http\Controllers\Settings\WhitelistAccess\StoreWhitelistAccessController;
@@ -42,6 +44,13 @@ class SettingsRoutes implements RouteGroup
                         Route::get('/group/{bookmarkGroup:uuid}', ShowBookmarkGroupController::class)->name('groups.show');
                         Route::patch('/group/{bookmarkGroup:uuid}', UpdateBookmarkGroupController::class)->name('groups.update');
                         Route::delete('/group/{bookmarkGroup:uuid}', DeleteBookmarkGroupController::class)->name('groups.delete');
+                    });
+
+                Route::as('users.')
+                    ->prefix('users')
+                    ->group(function () {
+                        Route::get('/', ListUserController::class)->name('list');
+                        Route::patch('/{user:uuid}', UpdateUserController::class)->name('update');
                     });
 
                 Route::as('teams.')

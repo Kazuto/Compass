@@ -34,11 +34,14 @@
                 @can('manage-bookmarks')
                     <x-settings-link route="settings.bookmarks.list">Bookmarks</x-settings-link>
                 @endcan
-                @can('manage-whitelist-access')
-                    <x-settings-link route="settings.whitelist.list">Whitelist</x-settings-link>
+                @can('manage-users')
+                    <x-settings-link route="settings.users.list">Users</x-settings-link>
                 @endcan
                 @can('manage-teams')
                     <x-settings-link route="settings.teams.list">Teams</x-settings-link>
+                @endcan
+                @can('manage-whitelist-access')
+                    <x-settings-link route="settings.whitelist.list">Whitelist</x-settings-link>
                 @endcan
             </nav>
 

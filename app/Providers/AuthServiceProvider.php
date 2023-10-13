@@ -27,7 +27,8 @@ class AuthServiceProvider extends ServiceProvider
     {
         Gate::define('access-settings', fn (User $user) => $user->is_admin);
         Gate::define('manage-bookmarks', fn (User $user) => $user->is_admin);
-        Gate::define('manage-whitelist-access', fn (User $user) => $user->is_admin);
+        Gate::define('manage-users', fn (User $user) => $user->is_admin);
         Gate::define('manage-teams', fn (User $user) => $user->is_admin);
+        Gate::define('manage-whitelist-access', fn (User $user) => $user->is_admin);
     }
 }
