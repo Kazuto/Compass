@@ -40,10 +40,10 @@ it('shows bookmark icon', function ($name, $icon) {
     ]);
 
     // Then
-    $component->assertSee($icon);
+    $component->assertSeeInOrder(['svg', '@fontawesome']);
 })->with([
-    ['Laravel Documentation', '󰫐'],
-    ['Laravel/Laravel', '󰊤'],
-    ['AWS', '󰸏'],
-    ['YouTube', ''],
+    ['Laravel Documentation', 'fab-laravel'],
+    ['Laravel/Laravel', 'fab-github'],
+    ['AWS', 'fab-aws'],
+    ['YouTube', 'fab-youtube'],
 ]);

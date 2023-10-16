@@ -16,6 +16,7 @@ it('disables provider login if config missing', function () {
     /** @var TestComponent $component */
     $component = $this->component(Link::class, [
         'provider' => 'github',
+        'icon' => 'fab-github',
     ]);
 
     // Then
@@ -34,6 +35,7 @@ it('enables provider login if config present', function () {
     /** @var TestComponent $component */
     $component = $this->component(Link::class, [
         'provider' => 'github',
+        'icon' => 'fab-github',
     ]);
 
     // Then
