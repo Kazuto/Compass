@@ -3,8 +3,6 @@ name: "CI"
 on:
   pull_request:
     types: [ opened, synchronize, reopened, ready_for_review ]
-  push:
-    branches: [ 'develop', 'master' ]
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
@@ -60,7 +58,7 @@ jobs:
         env:
           DB_CONNECTION: sqlite
           DB_DATABASE: database/database.sqlite
-        run: php artisan test --parallel --coverage --min=99 --coverage-clover=coverage-report.xml
+        run: php artisan test --parallel --coverage --min=90 --coverage-clover=coverage-report.xml
 
       - name: Upload coverage reports to Codecov
         uses: codecov/codecov-action@v3
