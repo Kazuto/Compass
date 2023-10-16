@@ -14,7 +14,7 @@ return new class extends Migration
             $table->uuid()->unique();
             $table->text('name');
             $table->text('url');
-            $table->text('icon');
+            $table->text('icon')->nullable();
             $table->integer('order')->default('0');
             $table->foreignIdFor(BookmarkGroup::class);
             $table->timestamps();

@@ -19,11 +19,11 @@ class AddUserController extends Controller
     {
         try {
             DB::transaction(function () use ($team, $request) {
-                app(AddUserAction::class)->execute($team, $request->get('user_id'));
+                app(AddUserAction::class)->execute($team, (int) $request->get('user_id'));
 
                 Session::flash('success', 'The user was added to the team successfully.');
             });
-        } catch (Throwable) {
+        } catch (Throwable $e) {
             Session::flash('error', 'Something went wrong!');
         }
 
