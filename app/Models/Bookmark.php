@@ -18,7 +18,7 @@ use Illuminate\Support\Str;
  * @property string $uuid
  * @property string $name
  * @property string $url
- * @property string $icon
+ * @property string|null $icon
  * @property int $order
  * @property int $bookmark_group_id
  * @property \Illuminate\Support\Carbon|null $created_at

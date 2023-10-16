@@ -34,9 +34,33 @@
 
 In summary, Compass is a bookmark aggregation tool that not only addresses the deficiencies of its predecessors but also introduces cutting-edge features like multi-user authentication, team collaboration, and visibility controls. It is positioned to transform how teams collaborate, share information, and manage their collective knowledge effectively.
 
-## Installing Compass 
+## Installing Compass
 ### Docker
-*Docker coming soon*
+**Environment variables**
+
+| Name | Default | Description |
+|:-|:-|:-|
+| ADMIN_USERNAME | admin | administrator username |
+| ADMIN_PASSWORD | password | administrator password |
+| ADMIN_EMAIL | admin@app.test | administrator email|
+| TEXT_COLOR | ![ffffff](https://github.com/Kazuto/compass/assets/25435034/e6935346-04fe-41ee-a9fc-f1bd0a0eaa6c) #ffffff | text color |
+| ACCENT_COLOR | ![c6a375](https://github.com/Kazuto/compass/assets/25435034/65a568b1-dbe0-40ad-b497-ef11dc2ee619) #c6a375 | primary (accent) color of links, buttons etc. |
+| BACKGROUND_COLOR | ![142534](https://github.com/Kazuto/compass/assets/25435034/ab355db3-a25f-4240-9d79-f7d4480ff926) #142534 | background color |
+| GITHUB_CLIENT_ID |  | GitHub OAuth client id |
+| GITHUB_CLIENT_SECRET |  | GitHub OAuth client secret |
+
+```
+  compass:
+    image: devkazuto/compass:latest
+    container_name: compass
+    ports:
+      - 80:80
+    environment:
+      - ADMIN_USERNAME=
+      - ADMIN_PASSWORD=
+      - ADMIN_EMAIL=
+    restart: unless-stopped
+```
 
 ### Manual Installation
 **Prerequisites**
@@ -59,7 +83,6 @@ If you want to enable SSO via GitHub or Teams
     ```
    GITHUB_CLIENT_ID=
    GITHUB_CLIENT_SECRET=
-   GITHUB_REDIRECT_URI=
     ```
 3. Create `whitelist` records in the settings page
 
