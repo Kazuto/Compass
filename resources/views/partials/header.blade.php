@@ -5,13 +5,13 @@
                 <a
                     href="{{ route('settings.bookmarks.list') }}"
                     class="w-10 h-10 flex items-center justify-center rounded-lg text-lg font-semibold text-gray-900 dark:text-white transition-all duration-250 focus:outline focus:outline-2 focus:outline-[var(--color-accent)]">
-                    <span class="icon">󰒓</span>
+                    @svg('fas-cog', ['class' => 'h-4'])
                 </a>
             @endcan
             <a
                 href="{{ route('auth.logout') }}"
                 class="w-10 h-10 flex items-center justify-center rounded-lg text-lg font-semibold text-gray-900 dark:text-white transition-all duration-250 focus:outline focus:outline-2 focus:outline-[var(--color-accent)]">
-                <span class="icon">󰍃</span>
+                @svg('fas-sign-out-alt', ['class' => 'h-4'])
             </a>
         </nav>
     </header>

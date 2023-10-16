@@ -1,7 +1,7 @@
 <li>
-    <a class="inline-block text-sm transition-all hover:translate-x-2" href="{{ $bookmark->url }}">
-        @if($bookmark->icon)
-        <span class="icon mr-1">{{ $bookmark->icon }}</span>
+    <a class="inline-flex items-center gap-1 text-sm transition-all hover:translate-x-2" href="{{ $bookmark->url }}">
+        @if(filled($bookmark->icon))
+            @svg($bookmark->icon, ['class' => 'h-3 w-3'])
         @endif
         {{ $bookmark->name }}
     </a>
