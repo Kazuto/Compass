@@ -14,8 +14,8 @@
                 </p>
 
                 <div class="flex flex-col gap-4">
-                    <x-auth.link provider="github" icon="󰊤" class="mb-4"/>
-                    <x-auth.link provider="microsoft" icon="󰍲" class="mb-4"/>
+                    <x-auth.link provider="github" icon="fab-github" class="mb-4"/>
+                    <x-auth.link provider="microsoft" icon="fab-microsoft" class="mb-4"/>
                 </div>
             </div>
         </div>

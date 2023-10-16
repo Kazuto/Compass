@@ -16,7 +16,7 @@
                 <th class="p-2">Username</th>
                 <th class="p-2">E-Mail</th>
                 <th class="p-2">Administrator</th>
-                <th class="p-2">Provider</th>
+                <th class="p-2">Auth Method</th>
                 <th class="p-2 rounded-r"></th>
             </tr>
             </thead>
@@ -29,18 +29,18 @@
                     <td class="text-left py-3 px-2">{{ $user->email }}</td>
                     <td class="text-left py-3 px-2">
                         @if($user->is_admin)
-                            <span class="icon text-green-600">󰄬</span>
+                            @svg('far-check-circle', ['class' => 'h-4 w-4 text-green-600'])
                         @else
-                            <span class="icon text-red-600">󰂭</span>
+                            @svg('far-times-circle', ['class' => 'h-4 w-4 text-red-600'])
                         @endif
                     </td>
                     <td class="text-left py-3 px-2">
                         @if(isset($user->github_id))
-                            <span class="icon text-[var(--color-text)]" title="GitHub OAuth">GitHub</span>
+                            @svg('fab-github', ['class' => 'h-4 w-4', 'title' => 'GitHub OAuth'])
                         @elseif(isset($user->microsoft_id))
-                            <span class="icon text-[var(--color-text)]" title="Microsoft OAuth">󰍲</span>
+                            @svg('fab-microsoft', ['class' => 'h-4 w-4', 'title' => 'Microsoft OAuth'])
                         @else
-                            <span class="icon text-[var(--color-text)]" title="Basic Auth (Password)">󰟵</span>
+                            @svg('phosphor-password', ['class' => 'h-4 w-4', 'title' => 'Basic Auth (Password)'])
                         @endif
                     </td>
                     <td class="text-right py-3 px-2">
