@@ -17,11 +17,11 @@ class StoreBookmarkRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required|string',
-            'url' => 'required|url',
-            'icon' => 'string',
-            'order' => 'integer',
-            'bookmark_group_id' => 'required|integer',
+            'name' => ['required', 'string'],
+            'url' => ['required', 'url'],
+            'icon' => ['string', 'nullable'],
+            'order' => ['integer'],
+            'bookmark_group_id' => ['required', 'integer'],
         ];
     }
 }
