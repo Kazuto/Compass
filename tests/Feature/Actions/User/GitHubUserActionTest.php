@@ -22,6 +22,9 @@ it('creates new user', function () {
     $user = app(GitHubUserAction::class)->execute($authUser);
 
     assertTrue($user->wasRecentlyCreated);
+    assertEquals($authUser->getName(), $user->name);
+    assertEquals($authUser->getNickname(), $user->username);
+    assertEquals($authUser->getEmail(), $user->email);
 });
 
 it('updates existing user', function () {
