@@ -8,10 +8,10 @@
         <x-text-input name="name" id="name" label="Name"/>
         <x-text-input name="url" id="url" label="URL" type="url"/>
         <div class="mb-4">
-            <x-text-input name="icon" id="icon" label="Icon" class="!mb-0 icon-font"/>
-            <small class="text-[var(--color-text)]">For icons please see <a href="https://www.nerdfonts.com/cheat-sheet"
+            <x-text-input name="icon" id="icon" label="Icon" class="!mb-0"/>
+            <small class="text-[var(--color-text)]">For icons please see <a href="https://blade-ui-kit.com/blade-icons?set=9#search"
                                                                             class="text-[var(--color-accent)]"
-                                                                            target="_blank">NF Icons</a></small>
+                                                                            target="_blank">FontAwesome or Phosphor Icons</a></small>
         </div>
 
         <x-select-input

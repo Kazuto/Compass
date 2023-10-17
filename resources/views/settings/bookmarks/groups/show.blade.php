@@ -29,7 +29,7 @@
                 <tr class="border-b border-white/10 last:border-transparent">
                     <td class="text-left py-3 px-2">{{ $bookmark->name }}</td>
                     <td class="text-left py-3 px-2">{{ $bookmark->url }}</td>
-                    <td class="text-left py-3 px-2"><span class="icon">{{ $bookmark->icon }}</span></td>
+                    <td class="text-left py-3 px-2">@if($bookmark->icon)@svg($bookmark->icon, ['class' => 'h-4'])@endif</span></td>
                     <td class="text-left py-3 px-2">{{ $bookmark->order }}</td>
                     <td class="text-right py-3 px-2">
                         @include('settings.bookmarks.partials.update-bookmark-modal', ['bookmark' => $bookmark, 'bookmarkGroups' => $bookmarkGroups])

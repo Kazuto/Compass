@@ -1,6 +1,6 @@
 <x-modal title="Update user" id="update-user-{{ $user->uuid }}" class="text-left">
     <x-slot name="button" icon>
-        <span class="icon">󰏫</span>
+        @svg('fas-edit', ['class' => 'h-3 w-3'])
     </x-slot>
 
     <form action="{{ route('settings.users.update', ['user' => $user]) }}" method="POST">

@@ -1,6 +1,6 @@
 <x-modal title="Remove User" id="remove-user-{{ $user->id }}" class="text-left">
     <x-slot name="button" icon>
-        <span class="icon">󰩹</span>
+        @svg('fas-trash', ['class' => 'h-3 w-3'])
     </x-slot>
 
     <p class="text-lg text-[var(--color-text)] mb-4">

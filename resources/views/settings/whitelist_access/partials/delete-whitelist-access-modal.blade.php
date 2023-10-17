@@ -1,6 +1,6 @@
 <x-modal title="Delete Entry" id="delete-bookmark-{{ $whitelistAccess->uuid }}" class="text-left">
     <x-slot name="button" icon>
-        <span class="icon">󰩹</span>
+        @svg('fas-trash', ['class' => 'h-3 w-3'])
     </x-slot>
 
     <p class="text-lg text-[var(--color-text)] mb-4">

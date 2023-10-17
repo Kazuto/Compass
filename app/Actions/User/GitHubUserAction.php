@@ -26,6 +26,7 @@ class GitHubUserAction
             'github_id' => $socialiteUser->getId(),
         ], [
             'name' => $socialiteUser->getName(),
+            'username' => $socialiteUser->getNickname(),
             'email' => $socialiteUser->getEmail(),
             'github_token' => $socialiteUser->token,
             'github_refresh_token' => $socialiteUser->refreshToken,
