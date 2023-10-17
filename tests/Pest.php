@@ -17,6 +17,8 @@ uses(
     Illuminate\Foundation\Testing\RefreshDatabase::class,
 )->in('Feature', 'Unit');
 
+uses()->compact();
+
 /*
 |--------------------------------------------------------------------------
 | Expectations

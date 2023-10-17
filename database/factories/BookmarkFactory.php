@@ -15,7 +15,14 @@ class BookmarkFactory extends Factory
         return [
             'name' => fake()->words(rand(1, 3), true),
             'url' => fake()->url(),
-            'icon' => fake()->randomElement(['󰋜', '󰎖', '󱂚', '󰀻', '󰠄', '󰸏', '󰨥', '󰭹', '󰄜', '', '󰙀', '󰒓', '󰥧', '󰊤', '󰊢', '󰌄', '󰌽', '󰫐']),
+            'icon' => fake()->randomElement([
+                'fab-github',
+                'fab-microsoft',
+                'phosphor-microsoft-outlook-logo-fill',
+                'fab-confluence',
+                'fab-atlassian',
+                '',
+            ]),
         ];
     }
 

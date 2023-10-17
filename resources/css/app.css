@@ -3,24 +3,6 @@
 @tailwind utilities;
 
 @font-face {
-    font-family: 'JetBrainsMono NF';
-    src: url('../fonts/JetBrainsMonoNF-Regular.woff2') format('woff2'),
-    url('../fonts/JetBrainsMonoNF-Regular.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
-    font-display: swap;
-}
-
-@font-face {
-    font-family: 'JetBrainsMono NF';
-    src: url('../fonts/JetBrainsMonoNF-Bold.woff2') format('woff2'),
-    url('../fonts/JetBrainsMonoNF-Bold.woff') format('woff');
-    font-weight: bold;
-    font-style: normal;
-    font-display: swap;
-}
-
-@font-face {
     font-family: 'Quicksand';
     src: url('../fonts/Quicksand.ttf') format('truetype');
     font-style: normal;
@@ -33,15 +15,6 @@ body {
     background-color: var(--color-background);
     color: var(--color-text);
     font-family: 'Quicksand', sans-serif;
-}
-
-.icon {
-    @apply inline-block;
-    font-family: 'JetBrainsMono NF', monospace;
-}
-
-.icon-font {
-    font-family: 'JetBrainsMono NF', monospace;
 }
 
 ::backdrop {

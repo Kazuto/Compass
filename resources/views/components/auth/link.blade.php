@@ -7,7 +7,7 @@
     'pointer-events-none opacity-50' => $disabled,
 ])>
     <span class="flex justify-center items-center">
-        <span class="icon mr-4 text-2xl">{{ $icon }}</span>
+        @svg($icon, ['class' => 'h-6 mr-3'])
         {{ Str::title($provider) }} @if($disabled)(Disabled)@endif
     </span>
 </a>

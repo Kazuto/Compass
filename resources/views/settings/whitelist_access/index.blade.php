@@ -28,9 +28,9 @@
                     <td class="text-left py-3 px-2">{{ $access->email }}</td>
                     <td class="text-left py-3 px-2">
                         @if($access->is_active)
-                            <span class="icon text-green-600">󰄬</span>
+                            @svg('far-check-circle', ['class' => 'h-4 w-4 text-green-600'])
                         @else
-                            <span class="icon text-red-600">󰂭</span>
+                            @svg('far-times-circle', ['class' => 'h-4 w-4 text-red-600'])
                         @endif
                     </td>
                     <td class="text-right py-3 px-2">
