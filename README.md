@@ -2,6 +2,7 @@
 
 <p align="center">
 <a href="https://github.com/kazuto/compass/actions"><img src="https://github.com/kazuto/compass/workflows/CI/badge.svg" alt="Build Status"></a>
+<a href="https://codecov.io/gh/Kazuto/compass"><img src="https://codecov.io/gh/Kazuto/compass/graph/badge.svg?token=CTC6T2YWU3"/></a>
 </p>
 
 ## About Compass
