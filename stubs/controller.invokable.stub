@@ -9,6 +9,8 @@ use Illuminate\Http\Request;
 
 class {{ class }} extends Controller
 {
+    public string $description = '{{ class }}';
+
     public function __invoke(Request $request)
     {
     }
