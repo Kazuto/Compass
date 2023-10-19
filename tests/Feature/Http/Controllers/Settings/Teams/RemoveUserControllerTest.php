@@ -61,7 +61,7 @@ it('redirects to dashboard if not admin', function () {
     assertCount(1, $team->users);
 });
 
-it('add the user to the team and redirects', function () {
+it('removes the user from the team and redirects', function () {
     // Given
     $user = User::factory()->create();
     $team = Team::factory()->create();

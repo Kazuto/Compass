@@ -11,5 +11,13 @@ class {{ class }} extends Controller
 {
     public function __invoke(Request $request)
     {
+        return raid(
+            '{{ class }}',
+            fn(Raid $raid) => $this->handle($raid)
+        );
     }
+
+   public function handle(Raid $raid)
+   {
+   }
 }
