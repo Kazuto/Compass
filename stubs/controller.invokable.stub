@@ -9,9 +9,15 @@ use Illuminate\Http\Request;
 
 class {{ class }} extends Controller
 {
-    public string $description = '{{ class }}';
-
     public function __invoke(Request $request)
     {
+        return raid(
+            '{{ class }}',
+            fn(Raid $raid) => $this->handle($raid)
+        );
     }
+
+   public function handle(Raid $raid)
+   {
+   }
 }

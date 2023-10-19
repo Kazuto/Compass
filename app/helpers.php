@@ -3,8 +3,14 @@
 use App\Support\Logging\Raid;
 
 if (! function_exists('raid')) {
-    function raid(string $description = null): Raid
+    function raid(string $description, Closure $closure): mixed
     {
-        return Raid::new($description);
+        $raid = Raid::new()->start($description);
+
+        $response = $closure($raid);
+
+        $raid->end($description);
+
+        return $response;
     }
 }

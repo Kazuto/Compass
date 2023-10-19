@@ -124,7 +124,7 @@ class Raid
     private function unsetContext(array $context): void
     {
         foreach ($context as $key => $value) {
-            $this->removeContext($key, $value);
+            $this->removeContext($key);
         }
     }
 }
