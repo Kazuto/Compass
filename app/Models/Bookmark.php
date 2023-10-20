@@ -94,8 +94,12 @@ class Bookmark extends Model
     //endregion Scopes
 
     //region Methods
-    public function svgIcon(string $class = '', array $attributes = []): Svg
+    public function svgIcon(string $class = '', array $attributes = []): ?Svg
     {
+        if (empty($this->icon)) {
+            return null;
+        }
+
         try {
             return svg($this->icon, $class);
         } catch (Throwable) {
