@@ -5,6 +5,7 @@ ENV PGID=1000
 ENV USERNAME=application
 
 ENV APP_HOME=/app
+ENV CONFIG_HOME=/config
 ENV WEB_DOCUMENT_ROOT=$APP_HOME/public
 
 # Install system dependencies
@@ -15,30 +16,20 @@ COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 RUN chmod +x /usr/bin/composer
 ENV COMPOSER_ALLOW_SUPERUSER 1
 
+COPY /docker-entrypoint.sh /entrypoint.d
+
 # Set working directory
 WORKDIR $APP_HOME
 
 COPY . .
-COPY ./.env.docker $APP_HOME/.env
 
 # Install Composer dependencies
 RUN composer install --no-interaction --optimize-autoloader --no-dev
 
-# Initialize Laravel
-RUN php artisan key:generate --force && \
-    touch database/database.sqlite && \
-    php artisan migrate --force && \
-    php artisan compass:setup && \
-    yarn install && yarn build && \
-    rm -rf node_modules
-
-# Optimize Laravel Instance
-RUN php artisan config:cache && \
-    php artisan route:cache && \
-    php artisan view:cache && \
-    php artisan optimize
+# Building Assets
+RUN yarn install && yarn build && rm -rf node_modules
 
 # Change owner
 RUN chown -R ${USERNAME}:${USERNAME} $APP_HOME
 
-VOLUME /app/database
+VOLUME ["/config"]
