@@ -8,6 +8,7 @@ use App\Actions\Bookmarks\UpdateBookmarkAction;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Bookmarks\StoreBookmarkRequest;
 use App\Models\Bookmark;
+use App\Support\Logging\Raid;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
@@ -17,16 +18,32 @@ class UpdateBookmarkController extends Controller
 {
     public function __invoke(StoreBookmarkRequest $request, Bookmark $bookmark): RedirectResponse
     {
+        return raid(
+            'Update Bookmark',
+            fn (Raid $raid) => $this->handle($request, $bookmark, $raid)
+        );
+    }
+
+    private function handle(StoreBookmarkRequest $request, Bookmark $bookmark, Raid $raid): RedirectResponse
+    {
+        $raid
+            ->addContext('bookmarkId', $bookmark->id)
+            ->addContext('data', $request->validated());
+
         // For redirection in case the group was changed
         $bookmarkGroup = $bookmark->bookmarkGroup;
 
         try {
-            DB::transaction(function () use ($request, $bookmark) {
+            DB::transaction(function () use ($request, $bookmark, $raid) {
+                $raid->debug('Calling Action', ['action' => UpdateBookmarkAction::class]);
+
                 app(UpdateBookmarkAction::class)->execute($bookmark, $request->validated());
 
                 Session::flash('success', 'The bookmark was updated successfully.');
             });
-        } catch (Throwable) {
+        } catch (Throwable $e) {
+            $raid->error('Exception occurred', ['exception' => $e->getMessage()]);
+
             Session::flash('error', 'Something went wrong!');
         }
 
