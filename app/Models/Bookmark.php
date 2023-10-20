@@ -5,11 +5,13 @@ declare(strict_types=1);
 namespace App\Models;
 
 use App\Models\Scopes\OrderColumn;
+use BladeUI\Icons\Svg;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Str;
+use Throwable;
 
 /**
  * App\Models\Bookmark
@@ -92,5 +94,13 @@ class Bookmark extends Model
     //endregion Scopes
 
     //region Methods
+    public function svgIcon(string $class = '', array $attributes = []): Svg
+    {
+        try {
+            return svg($this->icon, $class);
+        } catch (Throwable) {
+            return svg('fas-question-circle', $class);
+        }
+    }
     //endregion Methods
 }
