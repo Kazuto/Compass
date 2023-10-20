@@ -16,7 +16,7 @@
     </style>
     @vite('resources/css/app.css')
 </head>
-<body class="antialiased selection:bg-indigo-500 selection:text-white">
+<body class="selection:bg-indigo-500 selection:text-white">
 <div class="container mx-auto">
     @include('partials.header')
 

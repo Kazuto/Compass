@@ -27,13 +27,17 @@
             <tbody>
             @foreach ($bookmarkGroup->bookmarks as $bookmark)
                 <tr class="border-b border-white/10 last:border-transparent">
-                    <td class="text-left py-3 px-2">{{ $bookmark->name }}</td>
-                    <td class="text-left py-3 px-2">{{ $bookmark->url }}</td>
-                    <td class="text-left py-3 px-2">
+                    <td class="text-left py-3 px-2 w-2/12">{{ $bookmark->name }}</td>
+                    <td class="text-left py-3 px-2 w-6/12 whitespace-nowrap">
+                        <a href="{{ $bookmark->url }}" target="_blank" class="flex items-center gap-2 text-[var(--color-accent)]">
+                            {{ \Illuminate\Support\Str::limit($bookmark->url, 65) }}
+                        </a>
+                    </td>
+                    <td class="text-left py-3 px-2 w-1/12">
                         {{ $bookmark->svgIcon('h-4') }}
                     </td>
-                    <td class="text-left py-3 px-2">{{ $bookmark->order }}</td>
-                    <td class="text-right py-3 px-2">
+                    <td class="text-left py-3 px-2 w-1/12">{{ $bookmark->order }}</td>
+                    <td class="text-right py-3 px-2 w-1/12">
                         @include('settings.bookmarks.partials.update-bookmark-modal', ['bookmark' => $bookmark, 'bookmarkGroups' => $bookmarkGroups])
 
                         @include('settings.bookmarks.partials.delete-bookmark-modal', ['bookmark' => $bookmark])
