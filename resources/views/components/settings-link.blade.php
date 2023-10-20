@@ -1,8 +1,8 @@
 <a
     href="{{ route($route) }}"
     @class([
-        'transition-all hover:bg-[var(--color-accent)] hover:text-white rounded-lg py-2 px-3 border border-transparent',
-        '!border-[var(--color-accent)] text-[var(--color-accent)] ' =>  $isActive()
+        'transition-all hover:bg-accent-medium hover:text-white rounded-lg py-2 px-3 border border-transparent',
+        '!border-accent-medium text-accent-medium ' =>  $isActive()
     ])
 >
     {{ $slot }}

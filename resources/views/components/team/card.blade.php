@@ -4,7 +4,7 @@
             {{ $team->name }}
         </h4>
 
-        <ol class="text-neutral-400">
+        <ol class="opacity-75">
             @forelse($team->users as $user)
                 <li class="text-sm">{{ $user->name }}</li>
             @empty

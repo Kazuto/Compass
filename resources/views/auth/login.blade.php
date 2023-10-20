@@ -3,7 +3,7 @@
 @section('content')
     <div class="flex items-center justify-center w-full lg:w-9/12 xl:w-7/12 2xl:w-1/2 min-h-screen">
         <div class="w-full">
-            <h2 class="text-white text-3xl font-bold mb-8 text-center">Sign in to {{ config('app.name') }}</h2>
+            <h2 class="text-3xl font-bold mb-8 text-center">Sign in to {{ config('app.name') }}</h2>
             <div class="grid grid-cols-1 md:grid-cols-[1fr_50px_1fr] w-full sm:w-8/12 md:w-full items-center justify-center gap-8 mx-auto">
                 <div class="w-full">
                     <x-auth.login></x-auth.login>

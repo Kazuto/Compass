@@ -16,7 +16,7 @@
     </style>
     @vite('resources/css/app.css')
 </head>
-<body class="selection:bg-indigo-500 selection:text-white">
+<body class="selection:bg-base-dark selection:text-base-light dark:selection:bg-base-light dark:selection:text-base-dark">
 <div class="container mx-auto">
     @include('partials.header')
 
@@ -25,7 +25,7 @@
 
             <div class="mb-8">
                 <h2 class="text-5xl font-bold mb-4">Settings</h2>
-                <a href="{{route('dashboard')}}" class="transition-all hover:text-[var(--color-accent)]">Back to
+                <a href="{{route('dashboard')}}" class="transition-all hover:text-accent-medium">Back to
                     Dashboard</a>
             </div>
         </div>

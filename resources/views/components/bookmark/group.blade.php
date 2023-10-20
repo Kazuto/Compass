@@ -1,5 +1,5 @@
 <div>
-    <h3 class="text-[var(--color-accent)] font-bold uppercase tracking-wide">
+    <h3 class="text-accent-medium font-bold uppercase tracking-wide">
         {{ $bookmarkGroup->name }}
     </h3>
     <ol>

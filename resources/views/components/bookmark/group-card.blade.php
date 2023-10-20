@@ -4,7 +4,7 @@
             {{ $bookmarkGroup->name }}
         </h4>
 
-        <ol class="text-neutral-300">
+        <ol class="opacity-75">
             @forelse($bookmarkGroup->bookmarks->take(3) as $bookmark)
                 <li class="text-sm">{{ $bookmark->name }}</li>
             @empty

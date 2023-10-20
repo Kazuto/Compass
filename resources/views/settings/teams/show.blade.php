@@ -4,7 +4,7 @@
     <div class="w-full">
         <x-settings.action-title>
             <x-slot name="title">
-                Teams: <span class="text-[var(--color-accent)]">{{ $team->name }}</span>
+                Teams: <span class="text-accent-medium">{{ $team->name }}</span>
             </x-slot>
             <div>
                 @include('settings.teams.partials.add-user-modal', ['team' => $team, 'users' => $users])
@@ -17,7 +17,7 @@
                 Users
             </h4>
             <table class="w-full mb-6">
-                <thead class="bg-white/20">
+                <thead class="bg-base-dark/10 dark:bg-base-light/10">
                 <tr class="text-left">
                     <th class="p-2 rounded-l">Name</th>
                     <th class="p-2">E-Mail</th>
@@ -26,7 +26,7 @@
                 </thead>
                 <tbody>
                 @forelse ($team->users as $user)
-                    <tr class="border-b border-white/10 last:border-transparent">
+                    <tr class="border-b border-black/10 dark:border-white/10 last:border-transparent">
                         <td class="text-left py-3 px-2">{{ $user->name }}</td>
                         <td class="text-left py-3 px-2">{{ $user->email }}</td>
                         <td class="text-right py-3 px-2">

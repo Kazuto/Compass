@@ -3,7 +3,7 @@
         Delete Group
     </x-slot>
 
-    <p class="text-lg text-[var(--color-text)] mb-4">
+    <p class="text-lg mb-4">
         Are you sure to delete <span class="text-red-500">{{ $bookmarkGroup->name }}</span>?
     </p>
     <form

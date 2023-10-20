@@ -13,7 +13,7 @@
         </x-settings.action-title>
 
         <table class="w-full mb-6">
-            <thead class="bg-white/20">
+            <thead class="bg-base-dark/10 dark:bg-base-light/10">
             <tr class="text-left">
                 <th class="p-2 rounded-l">#</th>
                 <th class="p-2">E-Mail</th>
@@ -23,7 +23,7 @@
             </thead>
             <tbody>
             @foreach ($whitelistAccess as $access)
-                <tr class="border-b border-white/10 last:border-transparent">
+                <tr class="border-b border-black/10 dark:border-white/10 last:border-transparent">
                     <td class="text-left py-3 px-2">{{ $access->id }}</td>
                     <td class="text-left py-3 px-2">{{ $access->email }}</td>
                     <td class="text-left py-3 px-2">

@@ -8,9 +8,9 @@
         @method('PATCH')
         <x-text-input name="name" id="name" label="Name" :value="old('name', $bookmarkGroup->name)" />
 
-        <p class="text-[var(--color-text)]">Restriction</p>
-        <small class="block text-white/70 mb-2">Only these teams will have access to the bookmarks</small>
-        <div class="mb-4 text-[var(--color-text)]">
+        <p>Restriction</p>
+        <small class="block text-neutral-500 dark:text-neutral-400 mb-4">Only these teams will have access to the bookmarks</small>
+        <div class="mb-4">
             @foreach(App\Models\Team::all() as $team)
                 <x-toggle-switch
                     id="team_{{$team->id}}"

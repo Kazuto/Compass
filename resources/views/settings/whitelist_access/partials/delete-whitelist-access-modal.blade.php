@@ -3,7 +3,7 @@
         @svg('fas-trash', ['class' => 'h-3 w-3'])
     </x-slot>
 
-    <p class="text-lg text-[var(--color-text)] mb-4">
+    <p class="text-lg mb-4">
         Are you sure to delete the entry for <span class="text-red-500">{{ $whitelistAccess->email }}</span>?
     </p>
     <form

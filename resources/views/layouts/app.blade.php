@@ -16,7 +16,7 @@
     </style>
     @vite('resources/css/app.css')
 </head>
-<body class="selection:bg-indigo-500 selection:text-white">
+<body class="selection:bg-base-dark selection:text-base-light dark:selection:bg-base-light dark:selection:text-base-dark">
 <div class="container mx-auto">
 
     <div class="relative sm:flex sm:justify-center sm:items-center min-h-screen p-6 pb-20 md:p-8">

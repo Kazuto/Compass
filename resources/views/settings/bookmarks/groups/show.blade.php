@@ -4,7 +4,7 @@
     <div class="w-full">
         <x-settings.action-title>
             <x-slot name="title">
-                Bookmarks: <span class="text-[var(--color-accent)]">{{ $bookmarkGroup->name }}</span>
+                Bookmarks: <span class="text-accent-medium">{{ $bookmarkGroup->name }}</span>
             </x-slot>
 
             <div>
@@ -15,7 +15,7 @@
         </x-settings.action-title>
 
         <table class="w-full mb-6">
-            <thead class="bg-white/20">
+            <thead class="bg-base-dark/10 dark:bg-base-light/10">
             <tr class="text-left">
                 <th class="p-2 rounded-l">Name</th>
                 <th class="p-2">URL</th>
@@ -26,10 +26,10 @@
             </thead>
             <tbody>
             @foreach ($bookmarkGroup->bookmarks as $bookmark)
-                <tr class="border-b border-white/10 last:border-transparent">
+                <tr class="border-b border-black/10 dark:border-white/10 last:border-transparent">
                     <td class="text-left py-3 px-2 w-2/12">{{ $bookmark->name }}</td>
                     <td class="text-left py-3 px-2 w-6/12 whitespace-nowrap">
-                        <a href="{{ $bookmark->url }}" target="_blank" class="flex items-center gap-2 text-[var(--color-accent)]">
+                        <a href="{{ $bookmark->url }}" target="_blank" class="flex items-center gap-2 text-accent-medium transition-all hover:text-accent-dark dark:hover:text-accent-light">
                             {{ \Illuminate\Support\Str::limit($bookmark->url, 65) }}
                         </a>
                     </td>
@@ -56,7 +56,7 @@
                 @forelse ($bookmarkGroup->teams as $team)
                     <x-team.card :team="$team" />
                 @empty
-                    <span class="col-span-full text-neutral-400">
+                    <span class="col-span-full text-neutral-500 dark:text-neutral-400">
                         Not assigned to any specific team. Accessible to every user.
                     </span>
                 @endforelse

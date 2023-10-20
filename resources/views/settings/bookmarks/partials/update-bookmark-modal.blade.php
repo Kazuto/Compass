@@ -9,10 +9,10 @@
         <x-text-input name="name" id="name" label="Name" :value="$bookmark->name"/>
         <x-text-input name="url" id="url" label="URL" type="url" :value="$bookmark->url"/>
         <div class="mb-4">
-            <x-text-input name="icon" id="icon" label="Icon" class="!mb-0 icon-font" :value="$bookmark->icon"/>
-            <small class="text-[var(--color-text)]">
+            <x-text-input name="icon" id="icon" label="Icon" class="!mb-0" :value="$bookmark->icon"/>
+            <small>
                 Please see <a href="https://blade-ui-kit.com/blade-icons?set=9#search"
-                                        class="text-[var(--color-accent)]"
+                                        class="text-accent-medium"
                                         target="_blank">Blade UI Icons</a>.
                 (FontAwesome, Phosphor or Simple Icons)
             </small>
