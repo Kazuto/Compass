@@ -52,10 +52,12 @@ In summary, Compass is a bookmark aggregation tool that not only addresses the d
 
 ```
   compass:
-    image: devkazuto/compass:latest
+    image: ghcr.io/kazuto/compass:latest
     container_name: compass
     ports:
       - 80:80
+    volume:
+      - /path/to/dir:/config
     environment:
       - ADMIN_USERNAME=
       - ADMIN_PASSWORD=
