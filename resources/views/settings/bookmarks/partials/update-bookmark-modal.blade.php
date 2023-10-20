@@ -11,9 +11,10 @@
         <div class="mb-4">
             <x-text-input name="icon" id="icon" label="Icon" class="!mb-0 icon-font" :value="$bookmark->icon"/>
             <small class="text-[var(--color-text)]">
-                For icons please see <a href="https://www.nerdfonts.com/cheat-sheet"
+                Please see <a href="https://blade-ui-kit.com/blade-icons?set=9#search"
                                         class="text-[var(--color-accent)]"
-                                        target="_blank">NF Icons</a>
+                                        target="_blank">Blade UI Icons</a>.
+                (FontAwesome, Phosphor or Simple Icons)
             </small>
         </div>
 
