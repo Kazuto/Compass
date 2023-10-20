@@ -18,13 +18,14 @@
 </head>
 <body class="antialiased selection:bg-indigo-500 selection:text-white">
 <div class="container mx-auto">
-    @include('partials.header')
 
-    <div class="relative sm:flex sm:justify-center sm:items-center min-h-screen px-8">
+    <div class="relative sm:flex sm:justify-center sm:items-center min-h-screen p-6 pb-20 md:p-8">
         @include('partials.alert')
 
         @yield('content')
     </div>
+
+    @include('partials.header')
 </div>
 </body>
 

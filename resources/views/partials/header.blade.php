@@ -1,6 +1,6 @@
 @auth
-    <header class="py-4 px-8 fixed bottom-0 right-0 z-10">
-        <nav class="flex">
+    <header class="py-2 px-4 bg-black/20 rounded-tl-lg fixed bottom-0 right-0 z-10">
+        <nav class="flex gap-4">
             @can('access-settings')
                 <a
                     href="{{ route('settings.bookmarks.list') }}"
