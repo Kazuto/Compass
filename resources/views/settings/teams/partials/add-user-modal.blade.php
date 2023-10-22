@@ -3,7 +3,10 @@
         Add User
     </x-slot>
 
-    <form action="{{ route('settings.teams.add-user', ['team' => $team]) }}" method="POST">
+    <form
+        action="{{ route('settings.teams.add-user', ['team' => $team]) }}"
+        method="POST"
+    >
         @csrf
         <x-select-input
             id="user_id"
