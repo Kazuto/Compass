@@ -22,7 +22,7 @@
                     <tr class="text-left">
                         <th class="rounded-l p-2">Name</th>
                         <th class="p-2">E-Mail</th>
-                        <th class="rounded-r p-2"></th>
+                        <th class="min-w-[112px] rounded-r p-2"></th>
                     </tr>
                 </thead>
                 <tbody>

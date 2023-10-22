@@ -25,7 +25,6 @@ return new class extends Migration
             $table->string('github_token')->nullable();
             $table->string('github_refresh_token')->nullable();
             $table->boolean('is_admin')->default(false);
-            $table->boolean('dark_mode')->default(false);
             $table->timestamps();
         });
     }

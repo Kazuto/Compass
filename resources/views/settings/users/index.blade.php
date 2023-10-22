@@ -18,7 +18,7 @@
                         <th class="p-2">E-Mail</th>
                         <th class="p-2">Admin</th>
                         <th class="p-2">Auth Method</th>
-                        <th class="rounded-r p-2"></th>
+                        <th class="min-w-[112px] rounded-r p-2"></th>
                     </tr>
                 </thead>
                 <tbody>

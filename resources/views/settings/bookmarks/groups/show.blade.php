@@ -22,19 +22,19 @@
             <table class="mb-6 w-full">
                 <thead class="bg-base-dark/10 dark:bg-base-light/10">
                     <tr class="text-left">
-                        <th class="rounded-l p-2">Name</th>
-                        <th class="hidden p-2">URL</th>
-                        <th class="p-2">Icon</th>
-                        <th class="hidden p-2">Order</th>
-                        <th class="w-full rounded-r p-2"></th>
+                        <th class="w-16 rounded-l p-2">Name</th>
+                        <th class="w-32 p-2">URL</th>
+                        <th class="w-8 p-2">Icon</th>
+                        <th class="w-8 p-2">Order</th>
+                        <th class="min-w-[112px] rounded-r p-2"></th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach ($bookmarkGroup->bookmarks as $bookmark)
                         <tr
                             class="border-b border-black/10 last:border-transparent dark:border-white/10 dark:last:border-transparent">
-                            <td class="w-2/12 px-2 py-3 text-left">{{ $bookmark->name }}</td>
-                            <td class="w-6/12 whitespace-nowrap px-2 py-3 text-left">
+                            <td class="px-2 py-3 text-left">{{ $bookmark->name }}</td>
+                            <td class="whitespace-nowrap px-2 py-3 text-left">
                                 <a
                                     href="{{ $bookmark->url }}"
                                     target="_blank"
@@ -43,11 +43,11 @@
                                     {{ \Illuminate\Support\Str::limit($bookmark->url, 65) }}
                                 </a>
                             </td>
-                            <td class="w-1/12 px-2 py-3 text-left">
+                            <td class="px-2 py-3 text-left">
                                 {{ $bookmark->svgIcon('h-4') }}
                             </td>
-                            <td class="w-1/12 px-2 py-3 text-left">{{ $bookmark->order }}</td>
-                            <td class="w-1/12 px-2 py-3 text-right">
+                            <td class="px-2 py-3 text-left">{{ $bookmark->order }}</td>
+                            <td class="px-2 py-3 text-right">
                                 @include('settings.bookmarks.partials.update-bookmark-modal', [
                                     'bookmark' => $bookmark,
                                     'bookmarkGroups' => $bookmarkGroups,
