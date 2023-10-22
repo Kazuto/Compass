@@ -1,4 +1,5 @@
 import './bootstrap';
+import initTheme from './theme';
 
 document.querySelectorAll(`[data-toggle="modal"]`)
     .forEach((button) => {
@@ -22,3 +23,5 @@ document.querySelectorAll(`input[type="checkbox"][data-target]`)
             hidden.value = checkbox.checked ? 1 : 0;
         });
     })
+
+initTheme()

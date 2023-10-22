@@ -80,6 +80,7 @@ class User extends Authenticatable
         'github_token',
         'github_refresh_token',
         'is_admin',
+        'dark_mode',
     ];
 
     protected $hidden = [

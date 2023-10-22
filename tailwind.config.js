@@ -3,7 +3,7 @@ import defaultTheme from 'tailwindcss/defaultTheme';
 import colors from './theme.config.js'
 
 export default {
-    // darkMode: 'class',
+    darkMode: 'class',
     content: [
         "./resources/**/*.blade.php",
         "./resources/**/*.js",
