@@ -1,4 +1,4 @@
-name: "CI"
+name: 'CI'
 
 on:
   pull_request:
@@ -15,9 +15,9 @@ jobs:
     strategy:
       fail-fast: true
       matrix:
-        php: [ 8.2 ]
+        php: [8.2]
 
-    name: "Pest (PHP ${{ matrix.php }})"
+    name: 'Pest (PHP ${{ matrix.php }})'
     runs-on: ubuntu-latest
 
     steps:

@@ -12,7 +12,7 @@
             </div>
         </x-settings.action-title>
 
-        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+        <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3">
             @foreach ($teams as $team)
                 <x-team.card :team="$team" />
             @endforeach

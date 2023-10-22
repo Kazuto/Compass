@@ -6,6 +6,8 @@ namespace App\View\Components\Auth;
 
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Str;
+use Illuminate\Support\Stringable;
 use Illuminate\View\Component;
 
 use function route;
@@ -40,5 +42,16 @@ class Link extends Component
             || blank(Arr::get($config, 'client_id'))
             || blank(Arr::get($config, 'client_secret'))
             || blank(Arr::get($config, 'redirect'));
+    }
+
+    public function title(): string
+    {
+        return Str::of($this->provider)
+            ->title()
+            ->when(
+                $this->disabled,
+                fn (Stringable $string) => $string->append(' (Disabled)')
+            )
+            ->toString();
     }
 }

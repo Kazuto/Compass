@@ -4,7 +4,7 @@
     <div class="w-full">
         <x-settings.action-title>
             <x-slot name="title">
-                Teams: <span class="text-[var(--color-accent)]">{{ $team->name }}</span>
+                Teams: <span class="text-accent-medium">{{ $team->name }}</span>
             </x-slot>
             <div>
                 @include('settings.teams.partials.add-user-modal', ['team' => $team, 'users' => $users])
@@ -12,41 +12,53 @@
             </div>
         </x-settings.action-title>
 
-        <div>
-            <h4 class="font-bold mb-4 text-2xl">
-                Users
-            </h4>
-            <table class="w-full mb-6">
-                <thead class="bg-white/20">
-                <tr class="text-left">
-                    <th class="p-2 rounded-l">Name</th>
-                    <th class="p-2">E-Mail</th>
-                    <th class="p-2 rounded-r"></th>
-                </tr>
+        <h4 class="mb-4 text-2xl font-bold">
+            Users
+        </h4>
+
+        <div class="overflow-auto">
+            <table class="mb-6 w-full">
+                <thead class="bg-base-dark/10 dark:bg-base-light/10">
+                    <tr class="text-left">
+                        <th class="rounded-l p-2">Name</th>
+                        <th class="p-2">E-Mail</th>
+                        <th
+                            class="rounded-r p-2"
+                            style="width: 128px"
+                        ></th>
+                    </tr>
                 </thead>
                 <tbody>
-                @forelse ($team->users as $user)
-                    <tr class="border-b border-white/10 last:border-transparent">
-                        <td class="text-left py-3 px-2">{{ $user->name }}</td>
-                        <td class="text-left py-3 px-2">{{ $user->email }}</td>
-                        <td class="text-right py-3 px-2">
-                            @include('settings.teams.partials.remove-user-modal', ['team' => $team, 'user' => $user])
-                        </td>
-                    </tr>
-                @empty
-                    <tr>
-                        <td colspan="999" class="text-center pt-4 px-2 text-xl text-neutral-400">No users added yet</td>
-                    </tr>
-                @endforelse
+                    @forelse ($team->users as $user)
+                        <tr
+                            class="border-b border-black/10 last:border-transparent dark:border-white/10 dark:last:border-transparent">
+                            <td class="px-2 py-3 text-left">{{ $user->name }}</td>
+                            <td class="px-2 py-3 text-left">{{ $user->email }}</td>
+                            <td class="px-2 py-3 text-right">
+                                @include('settings.teams.partials.remove-user-modal', [
+                                    'team' => $team,
+                                    'user' => $user,
+                                ])
+                            </td>
+                        </tr>
+                    @empty
+                        <tr>
+                            <td
+                                colspan="999"
+                                class="px-2 pt-4 text-center text-xl text-neutral-400"
+                            >No users added yet
+                            </td>
+                        </tr>
+                    @endforelse
                 </tbody>
             </table>
         </div>
 
         <div>
-            <h4 class="font-bold mb-4 text-2xl">
+            <h4 class="mb-4 text-2xl font-bold">
                 Bookmark groups
             </h4>
-            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
+            <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-4">
                 @forelse($team->bookmarkGroups as $bookmarkGroup)
                     <x-bookmark.group-card :bookmark-group="$bookmarkGroup"></x-bookmark.group-card>
                 @empty

@@ -3,9 +3,16 @@
         Create Group
     </x-slot>
 
-    <form action="{{ route('settings.bookmarks.groups.store') }}" method="POST">
+    <form
+        action="{{ route('settings.bookmarks.groups.store') }}"
+        method="POST"
+    >
         @csrf
-        <x-text-input name="name" id="name" label="Name"></x-text-input>
+        <x-text-input
+            name="name"
+            id="name"
+            label="Name"
+        ></x-text-input>
 
         <x-button>Save</x-button>
     </form>

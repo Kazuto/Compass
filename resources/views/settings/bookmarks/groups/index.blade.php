@@ -13,7 +13,7 @@
             </div>
         </x-settings.action-title>
 
-        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+        <div class="grid grid-cols-1 gap-8 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
             @foreach ($bookmarkGroups as $bookmarkGroup)
                 <x-bookmark.group-card :bookmark-group="$bookmarkGroup"></x-bookmark.group-card>
             @endforeach

@@ -1,9 +1,12 @@
 <x-modal title="Delete Bookmark Group">
-    <x-slot name="button" danger>
+    <x-slot
+        name="button"
+        danger
+    >
         Delete Group
     </x-slot>
 
-    <p class="text-lg text-[var(--color-text)] mb-4">
+    <p class="mb-4 text-lg">
         Are you sure to delete <span class="text-red-500">{{ $bookmarkGroup->name }}</span>?
     </p>
     <form
