@@ -18,48 +18,50 @@
             </div>
         </x-settings.action-title>
 
-        <table class="mb-6 w-full">
-            <thead class="bg-base-dark/10 dark:bg-base-light/10">
-                <tr class="text-left">
-                    <th class="rounded-l p-2">Name</th>
-                    <th class="p-2">URL</th>
-                    <th class="p-2">Icon</th>
-                    <th class="p-2">Order</th>
-                    <th class="rounded-r p-2"></th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach ($bookmarkGroup->bookmarks as $bookmark)
-                    <tr
-                        class="border-b border-black/10 last:border-transparent dark:border-white/10 dark:last:border-transparent">
-                        <td class="w-2/12 px-2 py-3 text-left">{{ $bookmark->name }}</td>
-                        <td class="w-6/12 whitespace-nowrap px-2 py-3 text-left">
-                            <a
-                                href="{{ $bookmark->url }}"
-                                target="_blank"
-                                class="flex items-center gap-2 text-accent-medium transition-all hover:text-accent-dark dark:hover:text-accent-light"
-                            >
-                                {{ \Illuminate\Support\Str::limit($bookmark->url, 65) }}
-                            </a>
-                        </td>
-                        <td class="w-1/12 px-2 py-3 text-left">
-                            {{ $bookmark->svgIcon('h-4') }}
-                        </td>
-                        <td class="w-1/12 px-2 py-3 text-left">{{ $bookmark->order }}</td>
-                        <td class="w-1/12 px-2 py-3 text-right">
-                            @include('settings.bookmarks.partials.update-bookmark-modal', [
-                                'bookmark' => $bookmark,
-                                'bookmarkGroups' => $bookmarkGroups,
-                            ])
-
-                            @include('settings.bookmarks.partials.delete-bookmark-modal', [
-                                'bookmark' => $bookmark,
-                            ])
-                        </td>
+        <div class="overflow-scroll">
+            <table class="mb-6 w-full">
+                <thead class="bg-base-dark/10 dark:bg-base-light/10">
+                    <tr class="text-left">
+                        <th class="rounded-l p-2">Name</th>
+                        <th class="hidden p-2">URL</th>
+                        <th class="p-2">Icon</th>
+                        <th class="hidden p-2">Order</th>
+                        <th class="w-full rounded-r p-2"></th>
                     </tr>
-                @endforeach
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+                    @foreach ($bookmarkGroup->bookmarks as $bookmark)
+                        <tr
+                            class="border-b border-black/10 last:border-transparent dark:border-white/10 dark:last:border-transparent">
+                            <td class="w-2/12 px-2 py-3 text-left">{{ $bookmark->name }}</td>
+                            <td class="w-6/12 whitespace-nowrap px-2 py-3 text-left">
+                                <a
+                                    href="{{ $bookmark->url }}"
+                                    target="_blank"
+                                    class="flex items-center gap-2 text-accent-medium transition-all hover:text-accent-dark dark:hover:text-accent-light"
+                                >
+                                    {{ \Illuminate\Support\Str::limit($bookmark->url, 65) }}
+                                </a>
+                            </td>
+                            <td class="w-1/12 px-2 py-3 text-left">
+                                {{ $bookmark->svgIcon('h-4') }}
+                            </td>
+                            <td class="w-1/12 px-2 py-3 text-left">{{ $bookmark->order }}</td>
+                            <td class="w-1/12 px-2 py-3 text-right">
+                                @include('settings.bookmarks.partials.update-bookmark-modal', [
+                                    'bookmark' => $bookmark,
+                                    'bookmarkGroups' => $bookmarkGroups,
+                                ])
+
+                                @include('settings.bookmarks.partials.delete-bookmark-modal', [
+                                    'bookmark' => $bookmark,
+                                ])
+                            </td>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
 
         <div>
             <h4 class="mb-4 text-2xl font-bold">

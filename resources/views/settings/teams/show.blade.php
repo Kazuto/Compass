@@ -12,10 +12,11 @@
             </div>
         </x-settings.action-title>
 
-        <div>
-            <h4 class="mb-4 text-2xl font-bold">
-                Users
-            </h4>
+        <h4 class="mb-4 text-2xl font-bold">
+            Users
+        </h4>
+
+        <div class="overflow-scroll">
             <table class="mb-6 w-full">
                 <thead class="bg-base-dark/10 dark:bg-base-light/10">
                     <tr class="text-left">
@@ -42,7 +43,8 @@
                             <td
                                 colspan="999"
                                 class="px-2 pt-4 text-center text-xl text-neutral-400"
-                            >No users added yet</td>
+                            >No users added yet
+                            </td>
                         </tr>
                     @endforelse
                 </tbody>

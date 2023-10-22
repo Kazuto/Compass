@@ -26,20 +26,18 @@
     <div class="container mx-auto">
         @include('partials.header')
 
-        <div class="relative min-h-screen p-8">
+        <div class="relative min-h-screen p-6 pb-20 md:p-8">
             <div class="w-full flex-shrink-0">
-
                 <div class="mb-8">
                     <h2 class="mb-4 text-5xl font-bold">Settings</h2>
                     <a
                         href="{{ route('dashboard') }}"
                         class="transition-all hover:text-accent-medium"
-                    >Back to
-                        Dashboard</a>
+                    >Back to Dashboard</a>
                 </div>
             </div>
-            <div class="grid grid-cols-[250px_1fr] gap-8">
-                <nav class="flex flex-col gap-2">
+            <div class="grid grid-cols-1 gap-8 lg:grid-cols-[250px_1fr]">
+                <nav class="flex flex-row gap-2 overflow-scroll lg:flex-col">
                     @can('manage-bookmarks')
                         <x-settings-link route="settings.bookmarks.list">Bookmarks</x-settings-link>
                     @endcan

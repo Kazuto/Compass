@@ -7,8 +7,8 @@
     {{ $button->attributes->class([
         'py-2 px-3 rounded-lg bg-base-dark/10 hover:bg-base-dark/20 dark:bg-white/10 dark:hover:bg-white/20 transition-all',
         'py-0 px-0 h-9 aspect-square' => $button->attributes->has('icon'),
-        'bg-primary-base' => $button->attributes->has('accent'),
-        'text-white bg-red-500 hover:bg-red-600 dark:bg-red-600 dark:hover:bg-red-500' => $button->attributes->has(
+        '!bg-primary-base' => $button->attributes->has('accent'),
+        'text-white !bg-red-500 hover:!bg-red-600 dark:!bg-red-600 dark:hover:!bg-red-500' => $button->attributes->has(
             'danger',
         ),
     ]) }}
