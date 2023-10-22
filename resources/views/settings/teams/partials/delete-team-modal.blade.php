@@ -1,9 +1,15 @@
-<x-modal title="Delete Team" class="text-left">
-    <x-slot name="button" danger>
+<x-modal
+    title="Delete Team"
+    class="text-left"
+>
+    <x-slot
+        name="button"
+        danger
+    >
         Delete Team
     </x-slot>
 
-    <p class="text-lg mb-4">
+    <p class="mb-4 text-lg">
         Are you sure to delete <span class="text-red-500">{{ $team->name }}</span>?
     </p>
     <form

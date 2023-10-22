@@ -1,8 +1,12 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1"
+    >
 
     <title>{{ Config::get('app.name') }}</title>
 
@@ -16,18 +20,21 @@
     </style>
     @vite('resources/css/app.css')
 </head>
-<body class="selection:bg-base-dark selection:text-base-light dark:selection:bg-base-light dark:selection:text-base-dark">
-<div class="container mx-auto">
 
-    <div class="relative sm:flex sm:justify-center sm:items-center min-h-screen p-6 pb-20 md:p-8">
-        @include('partials.alert')
+<body
+    class="selection:bg-base-dark selection:text-base-light dark:selection:bg-base-light dark:selection:text-base-dark">
+    <div class="container mx-auto">
 
-        @yield('content')
+        <div class="relative min-h-screen p-6 pb-20 sm:flex sm:items-center sm:justify-center md:p-8">
+            @include('partials.alert')
+
+            @yield('content')
+        </div>
+
+        @include('partials.header')
     </div>
-
-    @include('partials.header')
-</div>
 </body>
 
 @vite('resources/js/app.js')
+
 </html>

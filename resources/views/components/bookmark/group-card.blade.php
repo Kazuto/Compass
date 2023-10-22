@@ -1,6 +1,6 @@
 <a href="{{ route('settings.bookmarks.groups.show', ['bookmarkGroup' => $bookmarkGroup]) }}">
     <x-card>
-        <h4 class="text-lg font-bold mb-2">
+        <h4 class="mb-2 text-lg font-bold">
             {{ $bookmarkGroup->name }}
         </h4>
 
@@ -10,7 +10,7 @@
             @empty
                 <li>No bookmarks yet</li>
             @endforelse
-            @if($bookmarkGroup->bookmarks->count() > 3)
+            @if ($bookmarkGroup->bookmarks->count() > 3)
                 <li class="text-sm">...</li>
             @endif
         </ol>

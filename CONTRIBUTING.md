@@ -1,4 +1,4 @@
-# Contributing to Compass 
+# Contributing to Compass
 
 Thank you for considering contributing to the "Compass" project! Your contributions are vital to the growth and improvement of this bookmark aggregation tool. Here's a quick guide on how you can contribute:
 
@@ -10,16 +10,16 @@ Thank you for considering contributing to the "Compass" project! Your contributi
 2. **Clone the Repository:**
    Clone your forked repository to your local machine using:
 
-   ```bash
-   git clone https://github.com/your-username/Compass.git
-   ```
+    ```bash
+    git clone https://github.com/your-username/Compass.git
+    ```
 
 3. **Create a Branch:**
    Before making changes, create a new branch to work on. This keeps your changes isolated.
 
-   ```bash
-   git checkout -b feature/your-feature
-   ```
+    ```bash
+    git checkout -b feature/your-feature
+    ```
 
 ## Making Changes
 
@@ -29,16 +29,16 @@ Thank you for considering contributing to the "Compass" project! Your contributi
 2. **Commit Changes:**
    Commit your changes with clear and concise messages. Follow a conventional commit style for consistency.
 
-   ```bash
-   git commit -m "feat: Add new feature" -m "A concise summary of the changes."
-   ```
+    ```bash
+    git commit -m "feat: Add new feature" -m "A concise summary of the changes."
+    ```
 
 3. **Push Changes:**
    Push your changes to your forked repository on GitHub.
 
-   ```bash
-   git push origin feature/your-feature
-   ```
+    ```bash
+    git push origin feature/your-feature
+    ```
 
 ## Submitting a Pull Request
 

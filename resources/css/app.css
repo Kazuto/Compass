@@ -10,7 +10,7 @@
 }
 
 body {
-    @apply antialiased font-medium text-base-dark dark:text-base-light bg-base-light dark:bg-base-dark;
+    @apply bg-base-light font-medium text-base-dark antialiased dark:bg-base-dark dark:text-base-light;
 }
 
 ::backdrop {
