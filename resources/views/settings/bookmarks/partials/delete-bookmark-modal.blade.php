@@ -1,9 +1,16 @@
-<x-modal title="Delete Bookmark" id="delete-bookmark-{{ $bookmark->uuid }}" class="text-left">
-    <x-slot name="button" icon>
+<x-modal
+    title="Delete Bookmark"
+    id="delete-bookmark-{{ $bookmark->uuid }}"
+    class="text-left"
+>
+    <x-slot
+        name="button"
+        icon
+    >
         @svg('fas-trash', ['class' => 'h-3 w-3'])
     </x-slot>
 
-    <p class="text-lg text-[var(--color-text)] mb-4">
+    <p class="mb-4 text-lg">
         Are you sure to delete <span class="text-red-500">{{ $bookmark->name }}</span>?
     </p>
     <form

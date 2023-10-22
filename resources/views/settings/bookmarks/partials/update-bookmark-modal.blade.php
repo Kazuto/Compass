@@ -1,23 +1,59 @@
-<x-modal title="Update Bookmark" id="update-bookmark-{{ $bookmark->uuid }}" class="text-left">
-    <x-slot name="button" icon>
+<x-modal
+    title="Update Bookmark"
+    id="update-bookmark-{{ $bookmark->uuid }}"
+    class="text-left"
+>
+    <x-slot
+        name="button"
+        icon
+    >
         @svg('fas-edit', ['class' => 'h-3 w-3'])
     </x-slot>
 
-    <form action="{{ route('settings.bookmarks.update', ['bookmark' => $bookmark]) }}" method="POST">
+    <form
+        action="{{ route('settings.bookmarks.update', ['bookmark' => $bookmark]) }}"
+        method="POST"
+    >
         @csrf
         @method('PATCH')
-        <x-text-input name="name" id="name" label="Name" :value="$bookmark->name"/>
-        <x-text-input name="url" id="url" label="URL" type="url" :value="$bookmark->url"/>
+        <x-text-input
+            name="name"
+            id="name"
+            label="Name"
+            :value="$bookmark->name"
+        />
+        <x-text-input
+            name="url"
+            id="url"
+            label="URL"
+            type="url"
+            :value="$bookmark->url"
+        />
         <div class="mb-4">
-            <x-text-input name="icon" id="icon" label="Icon" class="!mb-0 icon-font" :value="$bookmark->icon"/>
-            <small class="text-[var(--color-text)]">
-                For icons please see <a href="https://www.nerdfonts.com/cheat-sheet"
-                                        class="text-[var(--color-accent)]"
-                                        target="_blank">NF Icons</a>
+            <x-text-input
+                name="icon"
+                id="icon"
+                label="Icon"
+                class="!mb-0"
+                :value="$bookmark->icon"
+            />
+            <small>
+                Please see <a
+                    href="https://blade-ui-kit.com/blade-icons?set=9#search"
+                    class="text-accent-medium"
+                    target="_blank"
+                >Blade UI Icons</a>.
+                (FontAwesome, Phosphor or Simple Icons)
             </small>
         </div>
 
-        <x-text-input name="order" id="order" label="Order" type="number" :value="$bookmark->order"/>
+        <x-text-input
+            name="order"
+            id="order"
+            label="Order"
+            type="number"
+            :value="$bookmark->order"
+        />
         <x-select-input
             name="bookmark_group_id"
             id="bookmark_group_id"
