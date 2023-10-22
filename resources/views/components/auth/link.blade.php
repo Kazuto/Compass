@@ -8,8 +8,6 @@
 >
     <span class="flex items-center justify-center">
         @svg($icon, ['class' => 'h-6 mr-3'])
-        {{ Str::title($provider) }} @if ($disabled)
-            (Disabled)
-        @endif
+        {{ $title }}
     </span>
 </a>
