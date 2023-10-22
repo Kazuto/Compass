@@ -8,7 +8,7 @@
             </x-slot>
         </x-settings.action-title>
 
-        <div class="overflow-scroll">
+        <div class="overflow-auto">
             <table class="mb-6 w-full">
                 <thead class="bg-base-dark/10 dark:bg-base-light/10">
                     <tr class="text-left">
@@ -18,7 +18,10 @@
                         <th class="p-2">E-Mail</th>
                         <th class="p-2">Admin</th>
                         <th class="p-2">Auth Method</th>
-                        <th class="min-w-[112px] rounded-r p-2"></th>
+                        <th
+                            class="rounded-r p-2"
+                            style="width: 128px"
+                        ></th>
                     </tr>
                 </thead>
                 <tbody>

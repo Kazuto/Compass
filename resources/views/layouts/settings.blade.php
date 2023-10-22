@@ -30,7 +30,7 @@
                 </div>
             </div>
             <div class="grid grid-cols-1 gap-8 lg:grid-cols-[250px_1fr]">
-                <nav class="flex flex-row gap-2 overflow-scroll lg:flex-col">
+                <nav class="flex flex-row gap-2 overflow-auto lg:flex-col">
                     @can('manage-bookmarks')
                         <x-settings-link route="settings.bookmarks.list">Bookmarks</x-settings-link>
                     @endcan

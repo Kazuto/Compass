@@ -1,6 +1,8 @@
 import './bootstrap';
 import initTheme from './theme';
 
+initTheme();
+
 document.querySelectorAll(`[data-toggle="modal"]`).forEach((button) => {
     const modal = document.querySelector(
         `#${button.getAttribute('data-target')}`
@@ -28,5 +30,3 @@ document
             hidden.value = checkbox.checked ? 1 : 0;
         });
     });
-
-initTheme();
