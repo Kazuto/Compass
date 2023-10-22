@@ -11,13 +11,6 @@
     <title>{{ Config::get('app.name') }}</title>
 
     <!-- Styles -->
-    <style>
-        :root {
-            --color-text: {{ config('compass.theme.colors.text') }};
-            --color-accent: {{ config('compass.theme.colors.accent') }};
-            --color-background: {{ config('compass.theme.colors.background') }};
-        }
-    </style>
     @vite('resources/css/app.css')
 </head>
 
