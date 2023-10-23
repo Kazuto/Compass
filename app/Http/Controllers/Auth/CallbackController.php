@@ -14,7 +14,7 @@ use App\Support\Logging\Raid;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
 use Laravel\Socialite\Facades\Socialite;
-use Session;
+use Illuminate\Support\Facades\Session;
 
 class CallbackController extends Controller
 {
@@ -53,7 +53,7 @@ class CallbackController extends Controller
 
         $raid->info('User authenticated.');
 
-        return redirect()->route('dashboard');
+        return to_route('dashboard');
     }
 
     private function updateWhitelistAccess(User $user, Raid $raid): void

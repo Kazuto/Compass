@@ -6,7 +6,6 @@ namespace App\View\Components\Auth;
 
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Arr;
-use Illuminate\Support\Str;
 use Illuminate\Support\Stringable;
 use Illuminate\View\Component;
 
@@ -46,7 +45,7 @@ class Link extends Component
 
     public function title(): string
     {
-        return Str::of($this->provider)
+        return str($this->provider)
             ->title()
             ->when(
                 $this->disabled,

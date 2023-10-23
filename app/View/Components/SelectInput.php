@@ -6,7 +6,6 @@ namespace App\View\Components;
 
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Collection;
-use Illuminate\Support\Str;
 use Illuminate\View\Component;
 
 class SelectInput extends Component
@@ -30,6 +29,6 @@ class SelectInput extends Component
 
     private function getLabel(): string
     {
-        return $this->label ?? Str::of($this->name)->replace(['-', '_'], ' ')->title()->toString();
+        return $this->label ?? str($this->name)->replace(['-', '_'], ' ')->title()->toString();
     }
 }

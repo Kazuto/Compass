@@ -5,14 +5,14 @@ declare(strict_types=1);
 namespace App\Models;
 
 use App\Models\Scopes\OrderColumn;
-use Auth;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Str;
+use Illuminate\Support\Str;
 
 /**
  * App\Models\Category
