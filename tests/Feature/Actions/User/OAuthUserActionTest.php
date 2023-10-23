@@ -41,6 +41,7 @@ it('updates existing user', function () {
         ->create([
             'email' => $authUser->getEmail(),
             'oauth_id' => $authUser->getId(),
+            'oauth_provider' => 'github',
         ]);
 
     $this->travel(5)->days();

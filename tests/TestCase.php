@@ -42,6 +42,8 @@ abstract class TestCase extends BaseTestCase
             ->andReturn(rand())
             ->shouldReceive('getName')
             ->andReturn($name ?? Str::random(10))
+            ->shouldReceive('getNickname')
+            ->andReturn($name ?? Str::random(10))
             ->shouldReceive('getEmail')
             ->andReturn($email ?? Str::random(10).'@gmail.com')
             ->shouldReceive('getAvatar')
