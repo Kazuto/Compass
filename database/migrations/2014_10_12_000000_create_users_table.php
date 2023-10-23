@@ -21,11 +21,14 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->string('password')->nullable();
             $table->rememberToken();
-            $table->string('github_id')->unique()->nullable();
-            $table->string('github_token')->nullable();
-            $table->string('github_refresh_token')->nullable();
+            $table->string('oauth_provider')->nullable();
+            $table->string('oauth_id')->nullable();
+            $table->string('oauth_token')->nullable();
+            $table->string('oauth_refresh_token')->nullable();
             $table->boolean('is_admin')->default(false);
             $table->timestamps();
+
+            $table->unique(['oauth_provider', 'oauth_id']);
         });
     }
 
