@@ -81,7 +81,7 @@ class Raid
             return Arr::get($item, 'class') === self::class;
         })->last();
 
-        return Arr::get($backtrace, 'line');
+        return (string) Arr::get($backtrace, 'line');
     }
 
     private function message(string $message): string
