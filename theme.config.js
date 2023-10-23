@@ -1,8 +1,8 @@
 export default {
     accent: {
-        light: '#FFCA7A',
-        medium: '#FF9900',
-        dark: '#B36B00',
+        light: '#EADDCC',
+        medium: '#c6a375',
+        dark: '#684D2B',
     },
     base: {
         light: '#F2F6FA',
