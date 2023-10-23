@@ -9,7 +9,7 @@ use App\Http\Requests\Auth\LogInRequest;
 use App\Support\Logging\Raid;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
-use Session;
+use Illuminate\Support\Facades\Session;
 
 class LogInController extends Controller
 {

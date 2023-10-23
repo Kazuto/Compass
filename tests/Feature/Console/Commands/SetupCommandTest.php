@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Tests\Feature\Console\Commands;
 
 use App\Console\Commands\SetupCommand;
-use Artisan;
+use Illuminate\Support\Facades\Artisan;
 
 use function Pest\Laravel\assertDatabaseHas;
 
