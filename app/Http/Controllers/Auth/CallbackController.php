@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers\Auth;
 
-use App\Actions\User\GitHubUserAction;
+use App\Actions\User\OAuthUserAction;
 use App\Actions\WhitelistAccess\UpdateWhitelistAccessAction;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\OAuthRequest;
@@ -41,9 +41,9 @@ class CallbackController extends Controller
             return redirect(route('auth.index'));
         }
 
-        $raid->debug('Calling Action', ['action' => GitHubUserAction::class]);
+        $raid->debug('Calling Action', ['action' => OAuthUserAction::class]);
 
-        $user = app(GitHubUserAction::class)->execute($authUser);
+        $user = app(OAuthUserAction::class)->execute($authUser, $request->provider);
 
         $raid->debug('User fetched', ['userId' => $user->id]);
 

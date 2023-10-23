@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\Feature\Actions\User;
 
-use App\Actions\User\GitHubUserAction;
+use App\Actions\User\OAuthUserAction;
 use App\Models\User;
 use Laravel\Socialite\Facades\Socialite;
 
@@ -19,7 +19,7 @@ it('creates new user', function () {
     $authUser = Socialite::driver('github')->user();
 
     // When
-    $user = app(GitHubUserAction::class)->execute($authUser);
+    $user = app(OAuthUserAction::class)->execute($authUser, 'github');
 
     assertTrue($user->wasRecentlyCreated);
     assertEquals($authUser->getName(), $user->name);
@@ -40,17 +40,17 @@ it('updates existing user', function () {
         ->wasNotRecentlyCreated()
         ->create([
             'email' => $authUser->getEmail(),
-            'github_id' => $authUser->getId(),
+            'oauth_id' => $authUser->getId(),
         ]);
 
     $this->travel(5)->days();
 
     // When
-    $response = app(GitHubUserAction::class)->execute($authUser);
+    $response = app(OAuthUserAction::class)->execute($authUser, 'github');
 
     // Then
     assertEquals($response->email, $user->email);
     assertTrue($response->updated_at->isAfter($user->updated_at));
-    assertEquals($token, $response->github_token);
-    assertEquals($refreshToken, $response->github_refresh_token);
+    assertEquals($token, $response->oauth_token);
+    assertEquals($refreshToken, $response->oauth_refresh_token);
 });
