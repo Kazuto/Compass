@@ -37,15 +37,15 @@ In summary, Compass is a bookmark aggregation tool that not only addresses the d
 
 **Environment variables**
 
-| Name                    | Default                                                                                                   | Description                                   |
-|:------------------------|:----------------------------------------------------------------------------------------------------------|:----------------------------------------------|
-| ADMIN_USERNAME          | admin                                                                                                     | administrator username                        |
-| ADMIN_PASSWORD          | password                                                                                                  | administrator password                        |
-| ADMIN_EMAIL             | admin@app.test                                                                                            | administrator email                           |
-| GITHUB_CLIENT_ID        |                                                                                                           | GitHub OAuth client id                        |
-| GITHUB_CLIENT_SECRET    |                                                                                                           | GitHub OAuth client secret                    |
-| MICROSOFT_CLIENT_ID     |                                                                                                           | Microsoft OAuth client id                     |
-| MICROSOFT_CLIENT_SECRET |                                                                                                           | Microsoft OAuth client secret                 |
+| Name                    | Default        | Description                   |
+| :---------------------- | :------------- | :---------------------------- |
+| ADMIN_USERNAME          | admin          | administrator username        |
+| ADMIN_PASSWORD          | password       | administrator password        |
+| ADMIN_EMAIL             | admin@app.test | administrator email           |
+| GITHUB_CLIENT_ID        |                | GitHub OAuth client id        |
+| GITHUB_CLIENT_SECRET    |                | GitHub OAuth client secret    |
+| MICROSOFT_CLIENT_ID     |                | Microsoft OAuth client id     |
+| MICROSOFT_CLIENT_SECRET |                | Microsoft OAuth client secret |
 
 ```
   compass:

@@ -33,7 +33,7 @@ abstract class TestCase extends BaseTestCase
         });
     }
 
-    public function mockSocialiteUser(string $name = null, string $email = null): void
+    public function mockSocialiteUser(string $name = null, string $nickName = null, string $email = null): void
     {
         $abstractUser = Mockery::mock('Laravel\Socialite\Two\User')->makePartial();
 
@@ -43,7 +43,7 @@ abstract class TestCase extends BaseTestCase
             ->shouldReceive('getName')
             ->andReturn($name ?? Str::random(10))
             ->shouldReceive('getNickname')
-            ->andReturn($name ?? Str::random(10))
+            ->andReturn($nickName)
             ->shouldReceive('getEmail')
             ->andReturn($email ?? Str::random(10).'@gmail.com')
             ->shouldReceive('getAvatar')

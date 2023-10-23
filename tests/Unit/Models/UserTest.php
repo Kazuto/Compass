@@ -11,6 +11,7 @@ use Illuminate\Support\Collection;
 
 use function PHPUnit\Framework\assertCount;
 use function PHPUnit\Framework\assertInstanceOf;
+use function PHPUnit\Framework\assertStringContainsString;
 use function PHPUnit\Framework\assertTrue;
 
 it('has whitelist access relation and returns model', function () {
@@ -36,3 +37,19 @@ it('has teams relation and returns collection', function () {
     assertInstanceOf(Collection::class, $whitelist->teams);
     assertInstanceOf(Team::class, $whitelist->teams()->first());
 });
+
+it('returns icon for oauth provider', function ($provider, $hint) {
+    // Given
+    $user = User::factory()
+        ->hasWhitelistAccess()
+        ->create([
+            'oauth_provider' => $provider,
+        ]);
+
+    // Then
+    assertStringContainsString($hint, $user->getAuthProviderIcon()->toHtml());
+})->with([
+    ['github', 'GitHub OAuth'],
+    ['microsoft', 'Microsoft OAuth'],
+    [null, 'Basic Auth (Password)'],
+]);
