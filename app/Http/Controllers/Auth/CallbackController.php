@@ -53,7 +53,7 @@ class CallbackController extends Controller
 
         $raid->info('User authenticated.');
 
-        return redirect()->route('dashboard');
+        return to_route('dashboard');
     }
 
     private function updateWhitelistAccess(User $user, Raid $raid): void

@@ -24,6 +24,6 @@ class LogOutController extends Controller
     {
         Auth::logout();
 
-        return redirect()->route('auth.index');
+        return to_route('auth.index');
     }
 }

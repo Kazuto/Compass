@@ -16,7 +16,7 @@ class AdminMiddleware
         if (! Auth::user()->is_admin) {
             return $request->expectsJson()
                 ? abort(403)
-                : redirect()->route('dashboard');
+                : to_route('dashboard');
         }
 
         return $next($request);

@@ -30,11 +30,11 @@ class LogInController extends Controller
 
             Session::flash('success', "Welcome back, $user->name!");
 
-            return redirect()->route('dashboard');
+            return to_route('dashboard');
         }
 
         Session::flash('error', 'Invalid username or password.');
 
-        return redirect()->route('auth.index');
+        return to_route('auth.index');
     }
 }
