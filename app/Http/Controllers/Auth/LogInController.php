@@ -9,7 +9,7 @@ use App\Http\Requests\Auth\LogInRequest;
 use App\Support\Logging\Raid;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
-use Session;
+use Illuminate\Support\Facades\Session;
 
 class LogInController extends Controller
 {
@@ -30,11 +30,11 @@ class LogInController extends Controller
 
             Session::flash('success', "Welcome back, $user->name!");
 
-            return redirect()->route('dashboard');
+            return to_route('dashboard');
         }
 
         Session::flash('error', 'Invalid username or password.');
 
-        return redirect()->route('auth.index');
+        return to_route('auth.index');
     }
 }

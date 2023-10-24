@@ -7,6 +7,7 @@ need_migration=false
 symlinks=(
     $APP_HOME/storage/logs
     $APP_HOME/database/database.sqlite
+    $APP_HOME/theme.config.js
     $APP_HOME/.env
 )
 
@@ -25,6 +26,13 @@ fi
 if [[ ! -f $CONFIG_HOME/database.sqlite ]]; then
     echo "Creating database"
     touch $CONFIG_HOME/database.sqlite
+
+    need_migration=true
+fi
+
+if [[ ! -f $CONFIG_HOME/theme.config.js ]]; then
+    echo "Creating theme file"
+    cp $APP_HOME/theme.config.js.example $CONFIG_HOME/theme.config.js
 
     need_migration=true
 fi

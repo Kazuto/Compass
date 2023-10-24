@@ -40,13 +40,7 @@
                                 @endif
                             </td>
                             <td class="px-2 py-3 text-left">
-                                @if (isset($user->github_id))
-                                    @svg('fab-github', ['class' => 'h-4 w-4', 'title' => 'GitHub OAuth'])
-                                @elseif(isset($user->microsoft_id))
-                                    @svg('fab-microsoft', ['class' => 'h-4 w-4', 'title' => 'Microsoft OAuth'])
-                                @else
-                                    @svg('phosphor-password', ['class' => 'h-4 w-4', 'title' => 'Basic Auth (Password)'])
-                                @endif
+                                {{ $user->getAuthProviderIcon() }}
                             </td>
                             <td class="px-2 py-3 text-right">
                                 @include('settings.users.partials.update-user-modal', ['user' => $user])
