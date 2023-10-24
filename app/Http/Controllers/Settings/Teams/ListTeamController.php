@@ -8,7 +8,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Team;
 use App\Support\Logging\Raid;
 use Illuminate\View\View;
-use Request;
+use Illuminate\Support\Facades\Request;
 
 use function view;
 

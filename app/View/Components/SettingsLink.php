@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace App\View\Components;
 
 use Illuminate\Contracts\View\View;
-use Illuminate\Support\Str;
 use Illuminate\View\Component;
 
 class SettingsLink extends Component
@@ -22,7 +21,7 @@ class SettingsLink extends Component
 
     public function activeRoutePattern(): string
     {
-        $segments = Str::of($this->route)->explode('.');
+        $segments = str($this->route)->explode('.');
 
         $segments->pop();
 

@@ -9,7 +9,7 @@ use App\Models\Team;
 use App\Models\User;
 use App\Support\Logging\Raid;
 use Illuminate\View\View;
-use Request;
+use Illuminate\Support\Facades\Request;
 
 use function view;
 

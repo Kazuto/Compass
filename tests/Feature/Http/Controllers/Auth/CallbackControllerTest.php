@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\Http\Controllers\Auth;
 
-use App\Actions\User\GitHubUserAction;
+use App\Actions\User\OAuthUserAction;
 use App\Models\User;
 use App\Models\WhitelistAccess;
 use Illuminate\Testing\TestResponse;
@@ -57,7 +57,7 @@ it('does not update whitelist entry if account exists already', function () {
 
     $whitelistAccess = WhitelistAccess::factory()->create(['email' => $email]);
 
-    $this->mockActionReturns(GitHubUserAction::class, $user);
+    $this->mockActionReturns(OAuthUserAction::class, $user);
     $this->travel(5)->days();
 
     // When

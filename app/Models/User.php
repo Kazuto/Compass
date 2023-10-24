@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use BladeUI\Icons\Svg;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
@@ -23,9 +24,10 @@ use Laravel\Sanctum\HasApiTokens;
  * @property string $email
  * @property mixed|null $password
  * @property string|null $remember_token
- * @property string|null $github_id
- * @property string|null $github_token
- * @property string|null $github_refresh_token
+ * @property string|null $oauth_provider
+ * @property string|null $oauth_id
+ * @property string|null $oauth_token
+ * @property string|null $oauth_refresh_token
  * @property bool $is_admin
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
@@ -43,12 +45,13 @@ use Laravel\Sanctum\HasApiTokens;
  * @method static \Illuminate\Database\Eloquent\Builder|User query()
  * @method static \Illuminate\Database\Eloquent\Builder|User whereCreatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereEmail($value)
- * @method static \Illuminate\Database\Eloquent\Builder|User whereGithubId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|User whereGithubRefreshToken($value)
- * @method static \Illuminate\Database\Eloquent\Builder|User whereGithubToken($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereIsAdmin($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|User whereOauthId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|User whereOauthProvider($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|User whereOauthRefreshToken($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|User whereOauthToken($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User wherePassword($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereRememberToken($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereUpdatedAt($value)
@@ -63,6 +66,7 @@ class User extends Authenticatable
     use HasApiTokens;
     use HasFactory;
     use Notifiable;
+
     //endregion Traits
 
     //region Constants
@@ -76,9 +80,10 @@ class User extends Authenticatable
         'username',
         'email',
         'password',
-        'github_id',
-        'github_token',
-        'github_refresh_token',
+        'oauth_provider',
+        'oauth_id',
+        'oauth_token',
+        'oauth_refresh_token',
         'is_admin',
     ];
 
@@ -126,5 +131,17 @@ class User extends Authenticatable
     //endregion Scopes
 
     //region Methods
+    public function getAuthProviderIcon(): Svg
+    {
+        if (blank($this->oauth_provider)) {
+            return svg('phosphor-password', ['class' => 'h-4 w-4', 'title' => 'Basic Auth (Password)']);
+        }
+
+        if ($this->oauth_provider === 'github') {
+            return svg('fab-github', ['class' => 'h-4 w-4', 'title' => 'GitHub OAuth']);
+        }
+
+        return svg('fab-microsoft', ['class' => 'h-4 w-4', 'title' => 'Microsoft OAuth']);
+    }
     //endregion Methods
 }

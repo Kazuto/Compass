@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers\Auth;
 
-use App\Actions\User\GitHubUserAction;
+use App\Actions\User\OAuthUserAction;
 use App\Actions\WhitelistAccess\UpdateWhitelistAccessAction;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\OAuthRequest;
@@ -14,7 +14,7 @@ use App\Support\Logging\Raid;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
 use Laravel\Socialite\Facades\Socialite;
-use Session;
+use Illuminate\Support\Facades\Session;
 
 class CallbackController extends Controller
 {
@@ -41,9 +41,9 @@ class CallbackController extends Controller
             return redirect(route('auth.index'));
         }
 
-        $raid->debug('Calling Action', ['action' => GitHubUserAction::class]);
+        $raid->debug('Calling Action', ['action' => OAuthUserAction::class]);
 
-        $user = app(GitHubUserAction::class)->execute($authUser);
+        $user = app(OAuthUserAction::class)->execute($authUser, $request->provider);
 
         $raid->debug('User fetched', ['userId' => $user->id]);
 
@@ -53,7 +53,7 @@ class CallbackController extends Controller
 
         $raid->info('User authenticated.');
 
-        return redirect()->route('dashboard');
+        return to_route('dashboard');
     }
 
     private function updateWhitelistAccess(User $user, Raid $raid): void
