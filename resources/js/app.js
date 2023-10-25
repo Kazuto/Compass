@@ -30,3 +30,13 @@ document
             hidden.value = checkbox.checked ? 1 : 0;
         });
     });
+
+document.querySelectorAll('input[type="color"]').forEach((input) => {
+    const preview = document.querySelector(input.getAttribute('data-preview'));
+
+    input.oninput = (event) => {
+        if (preview) {
+        }
+            preview.innerHTML = event.target.value;
+    };
+});

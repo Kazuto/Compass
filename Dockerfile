@@ -23,12 +23,6 @@ WORKDIR $APP_HOME
 
 COPY . .
 
-# Install Composer dependencies
-RUN composer install --no-interaction --optimize-autoloader --no-dev
-
-# Building Assets
-RUN yarn install && yarn build && rm -rf node_modules
-
 # Change owner
 RUN chown -R ${USERNAME}:${USERNAME} $APP_HOME
 

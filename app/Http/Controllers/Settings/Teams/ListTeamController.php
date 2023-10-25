@@ -7,8 +7,8 @@ namespace App\Http\Controllers\Settings\Teams;
 use App\Http\Controllers\Controller;
 use App\Models\Team;
 use App\Support\Logging\Raid;
-use Illuminate\View\View;
 use Illuminate\Support\Facades\Request;
+use Illuminate\View\View;
 
 use function view;
 
