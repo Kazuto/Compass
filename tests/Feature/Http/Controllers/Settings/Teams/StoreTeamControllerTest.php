@@ -15,12 +15,12 @@ use function Pest\Laravel\assertDatabaseHas;
 
 it('redirects to login when unauthenticated', function () {
     // Given
-    $team = Team::factory()->make();
+    $team = Team::factory()->make()->withoutRelations()->toArray();
 
     // When
     /** @var TestResponse $response */
     $response = $this
-        ->post(route('settings.teams.store'), $team->withoutRelations()->toArray());
+        ->post(route('settings.teams.store'), $team);
 
     // Then
     $response
@@ -32,13 +32,13 @@ it('redirects to login when unauthenticated', function () {
 
 it('redirects to dashboard if not admin', function () {
     // Given
-    $team = Team::factory()->make();
+    $team = Team::factory()->make()->withoutRelations()->toArray();
 
     // When
     /** @var TestResponse $response */
     $response = $this
         ->actingAs(User::factory()->create())
-        ->post(route('settings.teams.store'), $team->withoutRelations()->toArray());
+        ->post(route('settings.teams.store'), $team);
 
     // Then
     $response

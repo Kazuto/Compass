@@ -6,6 +6,10 @@
             <x-slot name="title">
                 Users
             </x-slot>
+
+            <div>
+                @include('settings.users.partials.store-user-modal')
+            </div>
         </x-settings.action-title>
 
         <div class="overflow-auto">
