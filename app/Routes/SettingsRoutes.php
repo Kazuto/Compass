@@ -19,6 +19,7 @@ use App\Http\Controllers\Settings\Teams\RemoveUserController;
 use App\Http\Controllers\Settings\Teams\ShowTeamController;
 use App\Http\Controllers\Settings\Teams\StoreTeamController;
 use App\Http\Controllers\Settings\Users\ListUserController;
+use App\Http\Controllers\Settings\Users\StoreUserController;
 use App\Http\Controllers\Settings\Users\UpdateUserController;
 use App\Http\Controllers\Settings\WhitelistAccess\DeleteWhitelistAccessController;
 use App\Http\Controllers\Settings\WhitelistAccess\ListWhitelistAccessController;
@@ -50,6 +51,7 @@ class SettingsRoutes implements RouteGroup
                     ->prefix('users')
                     ->group(function () {
                         Route::get('/', ListUserController::class)->name('list');
+                        Route::post('/', StoreUserController::class)->name('store');
                         Route::patch('/{user:uuid}', UpdateUserController::class)->name('update');
                     });
 

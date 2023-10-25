@@ -13,8 +13,8 @@ use App\Models\WhitelistAccess;
 use App\Support\Logging\Raid;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
-use Laravel\Socialite\Facades\Socialite;
 use Illuminate\Support\Facades\Session;
+use Laravel\Socialite\Facades\Socialite;
 
 class CallbackController extends Controller
 {

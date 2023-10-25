@@ -6,7 +6,7 @@ namespace App\Http\Controllers\Settings\Bookmarks;
 
 use App\Actions\Bookmarks\UpdateBookmarkGroupAction;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Bookmarks\StoreBookmarkGroupRequest;
+use App\Http\Requests\Bookmarks\UpdateBookmarkGroupRequest;
 use App\Models\BookmarkGroup;
 use App\Support\Logging\Raid;
 use Illuminate\Http\RedirectResponse;
@@ -16,7 +16,7 @@ use Throwable;
 
 class UpdateBookmarkGroupController extends Controller
 {
-    public function __invoke(StoreBookmarkGroupRequest $request, BookmarkGroup $bookmarkGroup): RedirectResponse
+    public function __invoke(UpdateBookmarkGroupRequest $request, BookmarkGroup $bookmarkGroup): RedirectResponse
     {
         return raid(
             'Update Bookmark Group',
@@ -24,7 +24,7 @@ class UpdateBookmarkGroupController extends Controller
         );
     }
 
-    private function handle(StoreBookmarkGroupRequest $request, BookmarkGroup $bookmarkGroup, Raid $raid): RedirectResponse
+    private function handle(UpdateBookmarkGroupRequest $request, BookmarkGroup $bookmarkGroup, Raid $raid): RedirectResponse
     {
         $raid
             ->addContext('bookmarkGroupId', $bookmarkGroup->id)
