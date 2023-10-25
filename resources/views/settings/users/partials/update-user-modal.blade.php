@@ -41,9 +41,7 @@
             id="is_admin-{{ $user->uuid }}"
             label="Is Administrator?"
             :value="$user->is_admin"
-        >
-
-        </x-toggle-switch>
+        />
 
         <x-button>Save</x-button>
     </form>

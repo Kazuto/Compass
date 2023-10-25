@@ -4,22 +4,25 @@ declare(strict_types=1);
 
 namespace Tests\Http\Controllers\Settings\Users;
 
+use App\Actions\User\StoreUserAction;
 use App\Actions\User\UpdateUserAction;
 use App\Models\User;
 use Illuminate\Testing\TestResponse;
 use Symfony\Component\HttpFoundation\Response;
 
+use function Pest\Laravel\assertDatabaseCount;
+use function Pest\Laravel\travel;
 use function PHPUnit\Framework\assertEquals;
 use function PHPUnit\Framework\assertTrue;
 
 it('redirects to login when unauthenticated', function () {
     // Given
-    $user = User::factory()->create();
+    $user = User::factory()->make();
 
     // When
     /** @var TestResponse $response */
     $response = $this
-        ->patch(route('settings.users.update', ['user' => $user]));
+        ->post(route('settings.users.store'), $user->withoutRelations()->toArray());
 
     // Then
     $response
@@ -29,13 +32,13 @@ it('redirects to login when unauthenticated', function () {
 
 it('redirects to dashboard if not admin', function () {
     // Given
-    $user = User::factory()->create();
+    $user = User::factory()->make();
 
     // When
     /** @var TestResponse $response */
     $response = $this
         ->actingAs(User::factory()->create())
-        ->patch(route('settings.users.update', ['user' => $user]));
+        ->post(route('settings.users.store'), $user->withoutRelations()->toArray());
 
     // Then
     $response
@@ -43,58 +46,58 @@ it('redirects to dashboard if not admin', function () {
         ->assertRedirect(route('dashboard'));
 });
 
-it('updates the user and redirects', function () {
+it('creates the user and redirects', function () {
     // Given
-    $user = User::factory()->create([
-        'name' => 'John Doe',
-        'username' => 'j_doe',
-        'is_admin' => false,
-    ]);
+    $payload = [
+        'name' => 'J.D.',
+        'username' => 'j_d',
+        'password' => $password = fake()->password(8),
+        'confirm_password' => $password,
+        'email' => 'jdoe@app.test',
+        'is_admin' => true,
+    ];
 
     // When
     /** @var TestResponse $response */
     $response = $this
         ->actingAs(User::factory()->isAdmin()->create())
-        ->patch(route('settings.users.update', ['user' => $user]), [
-            'name' => 'J.D.',
-            'username' => 'j_d',
-            'email' => $user->email,
-            'is_admin' => true,
-        ]);
+        ->post(route('settings.users.store'), $payload);
 
     // Then
     $response
         ->assertStatus(Response::HTTP_FOUND)
         ->assertRedirect(route('settings.users.list'))
-        ->assertSessionHas('success', 'The user was updated successfully.');
+        ->assertSessionHas('success', 'The user was created successfully.');
 
-    tap($user->refresh(), function (User $user) {
+    assertDatabaseCount('users', 2);
+
+
+    tap(User::latest('id')->first(), function (User $user) {
         assertEquals('J.D.', $user->name);
         assertEquals('j_d', $user->username);
+        assertEquals('jdoe@app.test', $user->email);
         assertTrue($user->is_admin);
     });
 });
 
 it('catches exception and redirects with message', function () {
     // Given
-    $user = User::factory()->create([
-        'name' => 'John Doe',
-        'username' => 'j_doe',
-        'is_admin' => false,
-    ]);
+    $payload = [
+        'name' => 'J.D.',
+        'username' => 'j_d',
+        'password' => $password = fake()->password(8),
+        'confirm_password' => $password,
+        'email' => 'jdoe@app.test',
+        'is_admin' => true,
+    ];
 
-    $this->mockActionThrows(UpdateUserAction::class);
+    $this->mockActionThrows(StoreUserAction::class);
 
     // When
     /** @var TestResponse $response */
     $response = $this
         ->actingAs(User::factory()->isAdmin()->create())
-        ->patch(route('settings.users.update', ['user' => $user]), [
-            'name' => 'J.D.',
-            'username' => 'j_d',
-            'email' => $user->email,
-            'is_admin' => true,
-        ]);
+        ->post(route('settings.users.store'), $payload);
 
     // Then
     $response
