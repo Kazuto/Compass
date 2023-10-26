@@ -13,7 +13,7 @@ use function PHPUnit\Framework\assertStringNotContainsString;
 use function PHPUnit\Framework\assertTrue;
 
 beforeEach(function (): void {
-    $this->testFile = sprintf('tests/tmp/%s-%s.json', now()->unix(), uniqid());
+    $this->testFile = sprintf('/tests/tmp/%s-%s.json', now()->unix(), uniqid());
     File::copy('theme.config.example.json', $this->testFile);
 
     File::replace($this->testFile, json_encode($this->themeConfig(), JSON_PRETTY_PRINT));
