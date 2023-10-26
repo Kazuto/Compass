@@ -7,8 +7,8 @@ use Throwable;
 
 class Exception extends BaseException
 {
-    public static function forward(Throwable $e): self
+    public static function forward(Throwable $e): static
     {
-        return new self($e->getMessage());
+        return new static($e->getMessage());
     }
 }

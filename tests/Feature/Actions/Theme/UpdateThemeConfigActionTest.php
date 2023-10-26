@@ -11,6 +11,7 @@ use Mockery\MockInterface;
 
 use function PHPUnit\Framework\assertEquals;
 use function PHPUnit\Framework\assertNotEquals;
+use function PHPUnit\Framework\assertTrue;
 
 beforeEach(function (): void {
     $this->tmpfile = tmpfile();
@@ -22,7 +23,32 @@ beforeEach(function (): void {
 });
 
 afterEach(function (): void {
+    if (is_resource($this->tmpfile)) {
+        fclose($this->tmpfile);
+    }
+});
+
+it('copies example file if theme config file is missing', function () {
+    // Given
     fclose($this->tmpfile);
+    assertTrue(File::missing($this->testFile));
+
+    // When
+    $action = $this->partialMock(UpdateThemeConfigAction::class, function (MockInterface $mock) {
+        $mock->shouldAllowMockingProtectedMethods()
+            ->shouldReceive('getConfigPath')
+            ->once()
+            ->andReturns($this->testFile);
+
+        $mock->shouldReceive('getConfigExamplePath')
+            ->once()
+            ->andReturns('theme.config.example.json');
+    });
+
+    $action->execute($this->themeConfig());
+
+    // Then
+    assertTrue(File::exists($this->testFile));
 });
 
 it('updates theme config file', function () {

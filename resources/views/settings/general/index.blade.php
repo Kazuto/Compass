@@ -20,7 +20,9 @@
         >
             @csrf
 
-            @include('settings.general.partials.color-group')
+            @if($colors)
+                @include('settings.general.partials.color-group')
+            @endif
 
             <x-button>Rebuild Theme</x-button>
         </form>

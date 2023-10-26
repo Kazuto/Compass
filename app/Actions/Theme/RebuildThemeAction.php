@@ -24,7 +24,7 @@ class RebuildThemeAction
 
         $result = Process::path(app()->basePath())->run($command);
 
-        if (! $result->successful()) {
+        if ($result->failed()) {
             throw CommandException::unsuccessful();
         }
 

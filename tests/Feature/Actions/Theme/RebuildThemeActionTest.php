@@ -5,7 +5,9 @@ declare(strict_types=1);
 namespace Tests\Feature\Actions\Theme;
 
 use App\Actions\Theme\RebuildThemeAction;
+use App\Exceptions\CommandException;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Process;
 
 use function PHPUnit\Framework\assertStringContainsString;
 use function PHPUnit\Framework\assertTrue;
@@ -39,3 +41,17 @@ it('rebuilds the theme with correct colors', function () {
         assertStringContainsString('.bg-base-dark{--tw-bg-opacity: 1;background-color:rgb(20 37 52 / var(--tw-bg-opacity))}', $newStylesheet);
     });
 });
+
+it('throws exception if unsuccessful', function () {
+    Process::fake([
+        '*' => Process::result(
+            output: 'Test output',
+            errorOutput: 'Test error output',
+            exitCode: 1,
+        ),
+    ]);
+
+    // When
+    app(RebuildThemeAction::class)->execute();
+})
+    ->throws(CommandException::class, 'The command did not execute successfully.');
