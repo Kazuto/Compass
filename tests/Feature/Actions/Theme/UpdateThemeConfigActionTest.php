@@ -13,13 +13,16 @@ use function PHPUnit\Framework\assertEquals;
 use function PHPUnit\Framework\assertNotEquals;
 
 beforeEach(function (): void {
-    $this->testFile = sprintf('tests/tmp/%s-%s.json', now()->unix(), uniqid());
+    $this->tmpfile = tmpfile();
 
-    File::copy('theme.config.example.json', $this->testFile);
+    fwrite($this->tmpfile, File::get('theme.config.example.json'));
+
+    $metaData = stream_get_meta_data($this->tmpfile);
+    $this->testFile = $metaData['uri'];
 });
 
 afterEach(function (): void {
-    File::delete($this->testFile);
+    fclose($this->tmpfile);
 });
 
 it('updates theme config file', function () {
@@ -31,7 +34,7 @@ it('updates theme config file', function () {
         $mock->shouldAllowMockingProtectedMethods()
             ->shouldReceive('getConfigPath')
             ->once()
-            ->andReturns(app()->basePath($this->testFile));
+            ->andReturns($this->testFile);
     });
 
     $action->execute($this->themeConfig());

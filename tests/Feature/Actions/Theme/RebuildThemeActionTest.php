@@ -13,16 +13,16 @@ use function PHPUnit\Framework\assertStringNotContainsString;
 use function PHPUnit\Framework\assertTrue;
 
 beforeEach(function (): void {
-    $this->testFile = sprintf('/tests/tmp/%s-%s.json', now()->unix(), uniqid());
-    File::copy('theme.config.example.json', $this->testFile);
+    $this->tmpfile = tmpfile();
 
-    File::replace($this->testFile, json_encode($this->themeConfig(), JSON_PRETTY_PRINT));
+    fwrite($this->tmpfile, json_encode($this->themeConfig(), JSON_PRETTY_PRINT));
+    $metaData = stream_get_meta_data($this->tmpfile);
 
-    $this->config = File::get($this->testFile);
+    $this->config = File::get($metaData['uri']);
 });
 
 afterEach(function (): void {
-    File::delete($this->testFile);
+    fclose($this->tmpfile);
 });
 
 it('rebuilds the theme', function () {
