@@ -12,6 +12,8 @@ use App\Http\Controllers\Settings\Bookmarks\StoreBookmarkController;
 use App\Http\Controllers\Settings\Bookmarks\StoreBookmarkGroupController;
 use App\Http\Controllers\Settings\Bookmarks\UpdateBookmarkController;
 use App\Http\Controllers\Settings\Bookmarks\UpdateBookmarkGroupController;
+use App\Http\Controllers\Settings\General\GeneralController;
+use App\Http\Controllers\Settings\General\RebuildThemeController;
 use App\Http\Controllers\Settings\Teams\AddUserController;
 use App\Http\Controllers\Settings\Teams\DeleteTeamController;
 use App\Http\Controllers\Settings\Teams\ListTeamController;
@@ -34,6 +36,13 @@ class SettingsRoutes implements RouteGroup
             ->prefix('settings/')
             ->middleware(['auth', 'admin'])
             ->group(function () {
+                Route::as('general.')
+                    ->prefix('general/')
+                    ->group(function () {
+                        Route::get('/', GeneralController::class)->name('index');
+                        Route::post('/', RebuildThemeController::class)->name('rebuild-theme');
+                    });
+
                 Route::as('bookmarks.')
                     ->prefix('bookmarks/')
                     ->group(function () {

@@ -1,8 +1,8 @@
-<p align="center"><img src="https://github.com/Kazuto/compass/assets/25435034/6505dad2-9255-4c34-b192-e38efc2ae682" width="400" alt="Laravel Logo"></a></p>
+<p align="center"><img src="https://github.com/Kazuto/Compass/assets/25435034/11558f9b-8df8-4b43-95de-3a1327a2d5a5" width="400" alt="Compass Logo"></a></p>
 
 <p align="center">
-<a href="https://github.com/kazuto/compass/actions"><img src="https://github.com/kazuto/compass/workflows/CI/badge.svg" alt="Build Status"></a>
-<a href="https://codecov.io/gh/Kazuto/compass"><img src="https://codecov.io/gh/Kazuto/compass/graph/badge.svg?token=CTC6T2YWU3"/></a>
+<a href="https://github.com/Kazuto/Compass/actions/workflows/ci.yml"><img src="https://github.com/Kazuto/Compass/actions/workflows/ci.yml/badge.svg?branch=master" alt="Build Status"></a>
+<a href="https://codecov.io/gh/Kazuto/compass"><img src="https://codecov.io/gh/Kazuto/compass/graph/badge.svg?token=CTC6T2YWU3" alt="Code coverage"/></a>
 </p>
 
 ## About Compass

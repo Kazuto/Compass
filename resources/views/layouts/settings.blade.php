@@ -8,6 +8,28 @@
         content="width=device-width, initial-scale=1"
     >
 
+    <link
+        rel="apple-touch-icon"
+        sizes="180x180"
+        href="{{ asset('/images/favicon/apple-touch-icon.png') }}"
+    >
+    <link
+        rel="icon"
+        type="image/png"
+        sizes="32x32"
+        href="{{ asset('/images/favicon/favicon-32x32.png') }}"
+    >
+    <link
+        rel="icon"
+        type="image/png"
+        sizes="16x16"
+        href="{{ asset('/images/favicon/favicon-16x16.png') }}"
+    >
+    <link
+        rel="manifest"
+        href="{{ asset('site.webmanifest') }}"
+    >
+
     <title>{{ Config::get('app.name') }}</title>
 
     <!-- Styles -->
@@ -15,7 +37,8 @@
 </head>
 
 <body
-    class="selection:bg-base-dark selection:text-base-light dark:selection:bg-base-light dark:selection:text-base-dark">
+    class="selection:bg-base-dark selection:text-base-light dark:selection:bg-base-light dark:selection:text-base-dark"
+>
     <div class="container mx-auto">
         @include('partials.header')
 
@@ -31,6 +54,9 @@
             </div>
             <div class="grid grid-cols-1 gap-8 lg:grid-cols-[250px_1fr]">
                 <nav class="flex flex-row gap-2 overflow-auto lg:flex-col">
+                    @can('manage-theme')
+                        <x-settings-link route="settings.general.index">General</x-settings-link>
+                    @endcan
                     @can('manage-bookmarks')
                         <x-settings-link route="settings.bookmarks.list">Bookmarks</x-settings-link>
                     @endcan

@@ -25,6 +25,7 @@ it('creates new user', function () {
     // When
     $user = app(OAuthUserAction::class)->execute($authUser, 'github');
 
+    // Then
     assertTrue($user->wasRecentlyCreated);
     assertEquals($authUser->getName(), $user->name);
     assertEquals($authUser->getNickname(), $user->username);

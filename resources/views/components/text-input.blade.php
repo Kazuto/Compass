@@ -1,10 +1,16 @@
-<div {{ $attributes->merge(['class' => 'mb-4']) }}>
+<div
+    {{ $attributes->class([
+        'mb-4' => !$attributes->has('inline'),
+        'w-full flex gap-4 items-center' => $attributes->has('inline'),
+    ]) }}>
     <label
         id="label-{{ $id }}"
         for="{{ $id }}"
-        class="mb-2 block"
+        class="{{ $attributes->has('inline') ? '' : 'mb-2' }} block whitespace-nowrap"
         aria-label="{{ $label }}"
-    >{{ $label }}</label>
+    >
+        {{ $label }}
+    </label>
     <input
         type="{{ $type }}"
         id="{{ $id }}"

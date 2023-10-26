@@ -5,13 +5,11 @@ declare(strict_types=1);
 namespace Tests\Http\Controllers\Settings\Users;
 
 use App\Actions\User\StoreUserAction;
-use App\Actions\User\UpdateUserAction;
 use App\Models\User;
 use Illuminate\Testing\TestResponse;
 use Symfony\Component\HttpFoundation\Response;
 
 use function Pest\Laravel\assertDatabaseCount;
-use function Pest\Laravel\travel;
 use function PHPUnit\Framework\assertEquals;
 use function PHPUnit\Framework\assertTrue;
 
@@ -70,7 +68,6 @@ it('creates the user and redirects', function () {
         ->assertSessionHas('success', 'The user was created successfully.');
 
     assertDatabaseCount('users', 2);
-
 
     tap(User::latest('id')->first(), function (User $user) {
         assertEquals('J.D.', $user->name);

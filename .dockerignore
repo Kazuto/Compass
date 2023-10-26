@@ -1,4 +1,7 @@
 .git
 .github
 .gitignore
+**/*.sqlite
+node_modules
+vendor
 Dockerfile
