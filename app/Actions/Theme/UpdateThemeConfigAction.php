@@ -15,10 +15,10 @@ class UpdateThemeConfigAction
      */
     public function execute(array $data): void
     {
-        $configPath = app()->basePath('theme.config.json');
+        $configPath = $this->getConfigPath();
 
         if (File::missing($configPath)) {
-            File::copy(app()->basePath('theme.config.example.json'), $configPath);
+            File::copy($this->getConfigExamplePath(), $configPath);
         }
 
         $file = File::get($configPath);
@@ -30,5 +30,15 @@ class UpdateThemeConfigAction
         });
 
         File::replace($configPath, json_encode($file, JSON_PRETTY_PRINT));
+    }
+
+    protected function getConfigPath(): string
+    {
+        return app()->basePath('theme.config.json');
+    }
+
+    protected function getConfigExamplePath(): string
+    {
+        return app()->basePath('theme.config.example.json');
     }
 }

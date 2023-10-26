@@ -51,4 +51,14 @@ abstract class TestCase extends BaseTestCase
 
         Socialite::shouldReceive('driver->user')->andReturn($abstractUser);
     }
+
+    public function themeConfig(): array
+    {
+        return [
+            'colors' => [
+                'accent' => ['light' => '#FFFFFF', 'medium' => '#777777', 'dark' => '#000000'],
+                'base' => ['light' => '#FFFFFF', 'medium' => '#777777', 'dark' => '#000000'],
+            ],
+        ];
+    }
 }

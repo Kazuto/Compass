@@ -15,18 +15,19 @@ class RebuildThemeAction
     /**
      * @throws CommandException
      */
-    public function execute(): void
+    public function execute(): bool
     {
         $command = [
             (new ExecutableFinder())->find('yarn', 'yarn', self::PATHS),
             'build',
         ];
 
-        $result = Process::path(app()->basePath())
-            ->run($command);
+        $result = Process::path(app()->basePath())->run($command);
 
         if (! $result->successful()) {
             throw CommandException::unsuccessful();
         }
+
+        return true;
     }
 }

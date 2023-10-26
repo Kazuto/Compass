@@ -3,10 +3,8 @@
     id="create-user"
     class="text-left"
 >
-    <x-slot
-        name="button"
-    >
-     Create User
+    <x-slot name="button">
+        Create User
     </x-slot>
 
     <form
@@ -41,7 +39,7 @@
             type="password"
             required
         />
-        <span class="text-xs block mb-4">Minimum 8 characters</span>
+        <span class="mb-4 block text-xs">Minimum 8 characters</span>
 
         <x-text-input
             name="confirm_password"

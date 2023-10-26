@@ -36,7 +36,7 @@ fi
 
 if [[ ! -f $CONFIG_HOME/theme.config.json ]]; then
     info "Creating Theme Config"
-    cp $APP_HOME/theme.config.json.example $CONFIG_HOME/theme.config.json
+    cp $APP_HOME/theme.config.example.json $CONFIG_HOME/theme.config.json
 fi
 
 for i in "${symlinks[@]}"; do
