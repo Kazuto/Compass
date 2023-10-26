@@ -6,7 +6,7 @@ namespace App\Http\Controllers\Settings\Bookmarks;
 
 use App\Actions\Bookmarks\UpdateBookmarkAction;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Bookmarks\StoreBookmarkRequest;
+use App\Http\Requests\Bookmarks\UpdateBookmarkRequest;
 use App\Models\Bookmark;
 use App\Support\Logging\Raid;
 use Illuminate\Http\RedirectResponse;
@@ -16,7 +16,7 @@ use Throwable;
 
 class UpdateBookmarkController extends Controller
 {
-    public function __invoke(StoreBookmarkRequest $request, Bookmark $bookmark): RedirectResponse
+    public function __invoke(UpdateBookmarkRequest $request, Bookmark $bookmark): RedirectResponse
     {
         return raid(
             'Update Bookmark',
@@ -24,7 +24,7 @@ class UpdateBookmarkController extends Controller
         );
     }
 
-    private function handle(StoreBookmarkRequest $request, Bookmark $bookmark, Raid $raid): RedirectResponse
+    private function handle(UpdateBookmarkRequest $request, Bookmark $bookmark, Raid $raid): RedirectResponse
     {
         $raid
             ->addContext('bookmarkId', $bookmark->id)
