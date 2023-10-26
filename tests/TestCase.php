@@ -6,6 +6,8 @@ namespace Tests;
 
 use Exception;
 use Illuminate\Foundation\Testing\TestCase as BaseTestCase;
+use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Str;
 use Laravel\Socialite\Facades\Socialite;
 use Mockery;
@@ -50,6 +52,14 @@ abstract class TestCase extends BaseTestCase
             ->andReturn('https://en.gravatar.com/userimage');
 
         Socialite::shouldReceive('driver->user')->andReturn($abstractUser);
+    }
+
+    public function getStylesheet(): string
+    {
+        $manifest = json_decode(File::get(public_path('/build/manifest.json')), true);
+        $fileUrl = Arr::get($manifest, 'resources/css/app.css')['file'];
+
+        return File::get(public_path('build/'.$fileUrl));
     }
 
     public function themeConfig(): array

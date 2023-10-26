@@ -1,4 +1,4 @@
-<p align="center"><img src="https://github.com/Kazuto/compass/assets/25435034/6505dad2-9255-4c34-b192-e38efc2ae682" width="400" alt="Laravel Logo"></a></p>
+<p align="center"><img src="https://github.com/Kazuto/Compass/assets/25435034/11558f9b-8df8-4b43-95de-3a1327a2d5a5" width="400" alt="Compass Logo"></a></p>
 
 <p align="center">
 <a href="https://github.com/kazuto/compass/actions"><img src="https://github.com/kazuto/compass/workflows/CI/badge.svg" alt="Build Status"></a>
