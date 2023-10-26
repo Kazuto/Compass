@@ -27,19 +27,21 @@ abstract class TestCase extends BaseTestCase
         return $method->invokeArgs($object, $args);
     }
 
-    public function mockActionThrows(string $class): MockInterface
+    public function mockActionThrows(string $class, string $method = 'execute'): MockInterface
     {
-        return $this->partialMock($class, function (MockInterface $mock) {
-            $mock->shouldReceive('execute')
+        return $this->partialMock($class, function (MockInterface $mock) use ($method) {
+            $mock->shouldAllowMockingProtectedMethods()
+                ->shouldReceive($method)
                 ->once()
                 ->andThrows(Exception::class, 'Fun exception');
         });
     }
 
-    public function mockActionReturns(string $class, mixed $return): MockInterface
+    public function mockActionReturns(string $class, mixed $return, string $method = 'execute'): MockInterface
     {
-        return $this->partialMock($class, function (MockInterface $mock) use ($return) {
-            $mock->shouldReceive('execute')
+        return $this->partialMock($class, function (MockInterface $mock) use ($return, $method) {
+            $mock->shouldAllowMockingProtectedMethods()
+                ->shouldReceive($method)
                 ->once()
                 ->andReturns($return);
         });

@@ -20,7 +20,7 @@
         >
             @csrf
 
-            @if($colors)
+            @if ($colors)
                 @include('settings.general.partials.color-group')
             @endif
 

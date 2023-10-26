@@ -1,9 +1,9 @@
 {
     "colors": {
         "accent": {
-            "light": "#EADDCC",
-            "medium": "#C6A375",
-            "dark": "#684D2B"
+            "light": "#FFCA7A",
+            "medium": "#FF9900",
+            "dark": "#B36B00"
         },
         "base": {
             "light": "#F2F6FA",

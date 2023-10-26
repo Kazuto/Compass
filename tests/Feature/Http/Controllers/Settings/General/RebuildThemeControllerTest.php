@@ -7,10 +7,26 @@ namespace Tests\Http\Controllers\Settings\Teams;
 use App\Actions\Theme\RebuildThemeAction;
 use App\Actions\Theme\UpdateThemeConfigAction;
 use App\Models\User;
+use Exception;
+use Illuminate\Support\Facades\File;
 use Illuminate\Testing\TestResponse;
+use Mockery\MockInterface;
 use Symfony\Component\HttpFoundation\Response;
 
-use function Pest\Laravel\assertDatabaseEmpty;
+beforeEach(function (): void {
+    $this->tmpfile = tmpfile();
+
+    fwrite($this->tmpfile, File::get('theme.config.example.json'));
+
+    $metaData = stream_get_meta_data($this->tmpfile);
+    $this->testFile = $metaData['uri'];
+});
+
+afterEach(function (): void {
+    if (is_resource($this->tmpfile)) {
+        fclose($this->tmpfile);
+    }
+});
 
 it('redirects to login when unauthenticated', function () {
     // Given
@@ -41,13 +57,13 @@ it('redirects to dashboard if not admin', function () {
     $response
         ->assertStatus(Response::HTTP_FOUND)
         ->assertRedirect(route('dashboard'));
-
-    assertDatabaseEmpty('whitelist_access');
 });
 
-it('updates theme access entry and redirects', function () {
+it('updates theme and redirects', function () {
     // Given
     $colors = $this->themeConfig();
+
+    $this->mockActionReturns(UpdateThemeConfigAction::class, $this->testFile, 'getConfigPath');
 
     // When
     /** @var TestResponse $response */
@@ -66,7 +82,14 @@ it('catches exception when config not saved and redirects with message', functio
     // Given
     $colors = $this->themeConfig();
 
-    $this->mockActionThrows(UpdateThemeConfigAction::class);
+    $this->partialMock(UpdateThemeConfigAction::class, function (MockInterface $mock) {
+        $mock->shouldAllowMockingProtectedMethods()
+            ->shouldReceive('execute')
+            ->once()
+            ->andThrows(Exception::class, 'Fun exception');
+
+        $mock->shouldReceive('getConfigPath')->andReturn($this->testFile);
+    });
 
     // When
     /** @var TestResponse $response */
@@ -84,6 +107,8 @@ it('catches exception when config not saved and redirects with message', functio
 it('catches exception when theme not rebuilt and redirects with message', function () {
     // Given
     $colors = $this->themeConfig();
+
+    $this->mockActionReturns(UpdateThemeConfigAction::class, $this->testFile, 'getConfigPath');
 
     $this->mockActionThrows(RebuildThemeAction::class);
 
