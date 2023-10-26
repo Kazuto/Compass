@@ -54,12 +54,16 @@ abstract class TestCase extends BaseTestCase
         Socialite::shouldReceive('driver->user')->andReturn($abstractUser);
     }
 
-    public function getStylesheet(): string
+    public function getStylesheetPath(): string
     {
         $manifest = json_decode(File::get(public_path('/build/manifest.json')), true);
-        $fileUrl = Arr::get($manifest, 'resources/css/app.css')['file'];
+        $filePath = Arr::get($manifest, 'resources/css/app.css')['file'];
 
-        return File::get(public_path('build/'.$fileUrl));
+        return public_path(
+            str('build/')
+                ->append($filePath)
+                ->toString()
+        );
     }
 
     public function themeConfig(): array
