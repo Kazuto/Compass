@@ -4,16 +4,16 @@
     <div class="w-full">
         <x-settings.action-title>
             <x-slot name="title">
-                Theme
+                General
             </x-slot>
         </x-settings.action-title>
 
         <div class="mb-4">
-            <h3 class="mb-2 text-2xl font-medium">General</h3>
+            <h3 class="mb-2 text-2xl font-medium">Application</h3>
             <p>Version: {{ config('compass.version') }}</p>
         </div>
 
-        <h3 class="mb-2 text-2xl font-medium">Colors</h3>
+        <h3 class="mb-2 text-2xl font-medium">Theme</h3>
         <form
             action="{{ route('settings.general.rebuild-theme') }}"
             method="POST"
