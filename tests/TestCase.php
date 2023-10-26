@@ -12,10 +12,20 @@ use Illuminate\Support\Str;
 use Laravel\Socialite\Facades\Socialite;
 use Mockery;
 use Mockery\MockInterface;
+use ReflectionClass;
 
 abstract class TestCase extends BaseTestCase
 {
     use CreatesApplication;
+
+    public function invokeMethod($object, string $methodName, array $args = []): mixed
+    {
+        $class = new ReflectionClass(get_class($object));
+        $method = $class->getMethod($methodName);
+        $method->setAccessible(true);
+
+        return $method->invokeArgs($object, $args);
+    }
 
     public function mockActionThrows(string $class): MockInterface
     {

@@ -1,14 +1,14 @@
 {
     "colors": {
         "accent": {
-            "light": "#FFCA7A",
-            "medium": "#FF9900",
-            "dark": "#B36B00"
+            "light": "#FFFFFF",
+            "medium": "#777777",
+            "dark": "#000000"
         },
         "base": {
-            "light": "#F2F6FA",
-            "medium": "#437BAE",
-            "dark": "#142534"
+            "light": "#FFFFFF",
+            "medium": "#777777",
+            "dark": "#000000"
         }
     }
 }

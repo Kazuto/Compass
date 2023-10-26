@@ -28,6 +28,22 @@ afterEach(function (): void {
     }
 });
 
+it('returns correct theme config file path', function () {
+    // When
+    $response = $this->invokeMethod(app(UpdateThemeConfigAction::class), 'getConfigPath', []);
+
+    // Then
+    assertEquals(app()->basePath('theme.config.json'), $response);
+});
+
+it('returns correct theme config example file path', function () {
+    // When
+    $response = $this->invokeMethod(app(UpdateThemeConfigAction::class), 'getConfigExamplePath', []);
+
+    // Then
+    assertEquals(app()->basePath('theme.config.example.json'), $response);
+});
+
 it('copies example file if theme config file is missing', function () {
     // Given
     fclose($this->tmpfile);
