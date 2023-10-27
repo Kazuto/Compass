@@ -2,39 +2,42 @@
 
 cd ..
 
+function info {
+    printf "\n[INFO] $1 \n"
+}
+
 need_key=false
-need_migration=false
+fresh_install=false
+
 symlinks=(
     $APP_HOME/storage/logs
     $APP_HOME/database/database.sqlite
-    $APP_HOME/theme.config.js
+    $APP_HOME/theme.config.json
     $APP_HOME/.env
 )
 
 if [[ ! -d $CONFIG_HOME/logs ]]; then
-    echo "Creating log directory"
+    info "Creating Log Directory"
     mkdir -p $CONFIG_HOME/logs
 fi
 
 if [[ ! -f $CONFIG_HOME/.env ]]; then
-    echo "Creating .env"
+    info "Creating .env"
     cp $APP_HOME/.env.docker $CONFIG_HOME/.env
 
     need_key=true
 fi
 
 if [[ ! -f $CONFIG_HOME/database.sqlite ]]; then
-    echo "Creating database"
+    info "Creating Database"
     touch $CONFIG_HOME/database.sqlite
 
-    need_migration=true
+    fresh_install=true
 fi
 
-if [[ ! -f $CONFIG_HOME/theme.config.js ]]; then
-    echo "Creating theme file"
-    cp $APP_HOME/theme.config.js.example $CONFIG_HOME/theme.config.js
-
-    need_migration=true
+if [[ ! -f $CONFIG_HOME/theme.config.json ]]; then
+    info "Creating Theme Config"
+    cp $APP_HOME/theme.config.example.json $CONFIG_HOME/theme.config.json
 fi
 
 for i in "${symlinks[@]}"; do
@@ -46,25 +49,33 @@ for i in "${symlinks[@]}"; do
     fi
 done
 
-echo "Setting up permissions"
-chown -R $USERNAME:$USERNAME $CONFIG_HOME
-
 cd $APP_HOME
 
+info "Installing Dependencies - This may take a while"
+composer install --no-interaction --optimize-autoloader --quiet
+
 if [ "$need_key" = true ]; then
-    echo "Creating app key. This may take a while on slower systems"
-    php artisan key:generate
+    info "Generating Encryption Key"
+    php artisan key:generate --quiet
 fi
 
-echo "Optimize Laravel Instance"
-php artisan icon:cache
-php artisan view:cache
-php artisan optimize
+info "Optimizing Application"
+php artisan icon:cache --quiet
+php artisan view:cache --quiet
+php artisan optimize --quiet
 
-if [ "$need_migration" = true ]; then
-    echo "Migrating database"
-    php artisan migrate --force
+info "Migrating Database"
+php artisan migrate --force --quiet
 
-    echo "Creating User"
+if [ "$fresh_install" = true ]; then
+    info "Creating User"
     php artisan compass:setup
 fi
+
+info "Building Assets - This may take a while"
+yarn install --silent && yarn build &>/dev/null
+
+info "Setting Up Permissions"
+chown -R $USERNAME:$USERNAME $APP_HOME
+
+printf "\nAll Done!\n\n"

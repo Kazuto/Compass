@@ -13,7 +13,7 @@ class {{ class }} extends Controller
     {
         return raid(
             '{{ class }}',
-            fn(Raid $raid) => $this->handle($raid)
+            fn (Raid $raid) => $this->handle($raid)
         );
     }
 

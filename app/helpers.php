@@ -16,3 +16,14 @@ if (! function_exists('raid')) {
         return $response;
     }
 }
+
+if (! function_exists('keyFromToggle')) {
+    /** Filters request toggles for true values and returns the keys */
+    function keyFromToggle(array $toggles): array
+    {
+        return collect($toggles)
+            ->filter(fn ($item) => (bool) $item)
+            ->keys()
+            ->toArray();
+    }
+}

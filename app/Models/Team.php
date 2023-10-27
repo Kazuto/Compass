@@ -24,6 +24,8 @@ use Illuminate\Support\Str;
  * @property-read int|null $bookmark_groups_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\User> $users
  * @property-read int|null $users_count
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\WhitelistAccess> $whitelistAccess
+ * @property-read int|null $whitelist_access_count
  *
  * @method static \Database\Factories\TeamFactory factory($count = null, $state = [])
  * @method static Builder|Team isMember(\App\Models\User $user)
@@ -91,6 +93,18 @@ class Team extends Model
             'team_user',
             'team_id',
             'user_id',
+            'id',
+            'id'
+        );
+    }
+
+    public function whitelistAccess(): BelongsToMany
+    {
+        return $this->belongsToMany(
+            WhitelistAccess::class,
+            'team_whitelist_access',
+            'team_id',
+            'whitelist_access_id',
             'id',
             'id'
         );

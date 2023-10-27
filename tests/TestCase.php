@@ -6,28 +6,42 @@ namespace Tests;
 
 use Exception;
 use Illuminate\Foundation\Testing\TestCase as BaseTestCase;
+use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Str;
 use Laravel\Socialite\Facades\Socialite;
 use Mockery;
 use Mockery\MockInterface;
+use ReflectionClass;
 
 abstract class TestCase extends BaseTestCase
 {
     use CreatesApplication;
 
-    public function mockActionThrows(string $class): MockInterface
+    public function invokeMethod($object, string $methodName, array $args = []): mixed
     {
-        return $this->partialMock($class, function (MockInterface $mock) {
-            $mock->shouldReceive('execute')
+        $class = new ReflectionClass(get_class($object));
+        $method = $class->getMethod($methodName);
+        $method->setAccessible(true);
+
+        return $method->invokeArgs($object, $args);
+    }
+
+    public function mockActionThrows(string $class, string $method = 'execute'): MockInterface
+    {
+        return $this->partialMock($class, function (MockInterface $mock) use ($method) {
+            $mock->shouldAllowMockingProtectedMethods()
+                ->shouldReceive($method)
                 ->once()
                 ->andThrows(Exception::class, 'Fun exception');
         });
     }
 
-    public function mockActionReturns(string $class, mixed $return): MockInterface
+    public function mockActionReturns(string $class, mixed $return, string $method = 'execute'): MockInterface
     {
-        return $this->partialMock($class, function (MockInterface $mock) use ($return) {
-            $mock->shouldReceive('execute')
+        return $this->partialMock($class, function (MockInterface $mock) use ($return, $method) {
+            $mock->shouldAllowMockingProtectedMethods()
+                ->shouldReceive($method)
                 ->once()
                 ->andReturns($return);
         });
@@ -50,5 +64,27 @@ abstract class TestCase extends BaseTestCase
             ->andReturn('https://en.gravatar.com/userimage');
 
         Socialite::shouldReceive('driver->user')->andReturn($abstractUser);
+    }
+
+    public function getStylesheetPath(): string
+    {
+        $manifest = json_decode(File::get(public_path('/build/manifest.json')), true);
+        $filePath = Arr::get($manifest, 'resources/css/app.css')['file'];
+
+        return public_path(
+            str('build/')
+                ->append($filePath)
+                ->toString()
+        );
+    }
+
+    public function themeConfig(): array
+    {
+        return [
+            'colors' => [
+                'accent' => ['light' => '#FFFFFF', 'medium' => '#777777', 'dark' => '#000000'],
+                'base' => ['light' => '#FFFFFF', 'medium' => '#777777', 'dark' => '#000000'],
+            ],
+        ];
     }
 }

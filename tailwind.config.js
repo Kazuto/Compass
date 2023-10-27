@@ -1,6 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 import defaultTheme from 'tailwindcss/defaultTheme';
-import colors from './theme.config.js';
+import config from './theme.config.json';
 
 export default {
     darkMode: 'class',
@@ -14,7 +14,7 @@ export default {
             fontFamily: {
                 sans: ['"Quicksand"', ...defaultTheme.fontFamily.sans],
             },
-            colors,
+            colors: config.colors,
         },
     },
     plugins: [],

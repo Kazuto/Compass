@@ -5,7 +5,8 @@ declare(strict_types=1);
 namespace {{ factoryNamespace }};
 
 use Illuminate\Database\Eloquent\Factories\Factory;
-use {{ namespacedModel }}
+use {{ namespacedModel }};
+
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\{{ namespacedModel }}>
  */

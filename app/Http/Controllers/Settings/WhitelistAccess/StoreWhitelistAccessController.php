@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers\Settings\WhitelistAccess;
 
+use App\Actions\WhitelistAccess\AssignTeamsToWhitelistAccessAction;
 use App\Actions\WhitelistAccess\StoreWhitelistAccessAction;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\WhitelistAccess\StoreWhitelistAccessRequest;
@@ -28,10 +29,10 @@ class StoreWhitelistAccessController extends Controller
         $raid->addContext('data', $request->validated());
 
         try {
-            DB::transaction(function () use ($request, $raid) {
-                $raid->debug('Calling Action', ['action' => StoreWhitelistAccessAction::class]);
+            DB::transaction(function () use ($request) {
+                $whitelistAccess = app(StoreWhitelistAccessAction::class)->execute($request->validated());
 
-                app(StoreWhitelistAccessAction::class)->execute($request->validated());
+                app(AssignTeamsToWhitelistAccessAction::class)->execute($whitelistAccess, keyFromToggle($request->get('team_ids', [])));
 
                 Session::flash('success', 'The whitelist entry was added successfully.');
             });

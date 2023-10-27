@@ -28,9 +28,7 @@ class DeleteTeamController extends Controller
         $raid->addContext('teamId', $team->id);
 
         try {
-            DB::transaction(function () use ($team, $raid) {
-                $raid->debug('Calling Action', ['action' => DeleteTeamAction::class]);
-
+            DB::transaction(function () use ($team) {
                 app(DeleteTeamAction::class)->execute($team);
 
                 Session::flash('success', 'The team was deleted successfully.');
