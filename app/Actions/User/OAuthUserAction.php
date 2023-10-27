@@ -4,12 +4,15 @@ declare(strict_types=1);
 
 namespace App\Actions\User;
 
+use App\Actions\Action;
 use App\Models\User;
 use Illuminate\Support\Str;
 use Laravel\Socialite\Two\User as SocialiteUser;
 
-class OAuthUserAction
+class OAuthUserAction extends Action
 {
+    protected static string $description = 'Creating or updating a user from OAuth provider';
+
     private string $provider;
 
     public function execute(SocialiteUser $socialiteUser, string $provider): User

@@ -42,7 +42,6 @@ class CallbackController extends Controller
             return redirect(route('auth.index'));
         }
 
-        $raid->debug('Calling Action', ['action' => OAuthUserAction::class]);
         $user = app(OAuthUserAction::class)->execute($authUser, $request->provider);
 
         $raid->debug('User fetched', ['userId' => $user->id]);
@@ -66,10 +65,8 @@ class CallbackController extends Controller
             return;
         }
 
-        $raid->debug('Calling Action', ['action' => AssociateWhitelistAccessAction::class]);
         app(AssociateWhitelistAccessAction::class)->execute($user);
 
-        $raid->debug('Calling Action', ['action' => SyncWhitelistAccessTeamsToUserAction::class]);
         app(SyncWhitelistAccessTeamsToUserAction::class)->execute($user);
 
         $raid->debug('Whitelist Access updated for User');

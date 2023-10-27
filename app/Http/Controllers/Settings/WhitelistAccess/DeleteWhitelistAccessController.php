@@ -28,9 +28,7 @@ class DeleteWhitelistAccessController extends Controller
         $raid->addContext('whitelistAccessId', $whitelistAccess->id);
 
         try {
-            DB::transaction(function () use ($whitelistAccess, $raid) {
-                $raid->debug('Calling Action', ['action' => DeleteWhitelistAccessAction::class]);
-
+            DB::transaction(function () use ($whitelistAccess) {
                 app(DeleteWhitelistAccessAction::class)->execute($whitelistAccess);
 
                 Session::flash('success', 'The whitelist entry was deleted successfully.');

@@ -4,11 +4,14 @@ declare(strict_types=1);
 
 namespace App\Actions\Theme;
 
+use App\Actions\Action;
 use Illuminate\Contracts\Filesystem\FileNotFoundException;
 use Illuminate\Support\Facades\File;
 
-class LoadThemeConfigAction
+class LoadThemeConfigAction extends Action
 {
+    protected static string $description = 'Loading theme configuration from file';
+
     /**
      * @throws FileNotFoundException
      */

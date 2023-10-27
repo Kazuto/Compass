@@ -30,9 +30,7 @@ class RemoveUserController extends Controller
             ->addContext('userId', $request->get('user_id'));
 
         try {
-            DB::transaction(function () use ($raid, $request, $team) {
-                $raid->debug('Calling Action', ['action' => RemoveUserAction::class]);
-
+            DB::transaction(function () use ($request, $team) {
                 app(RemoveUserAction::class)->execute($team, $request->get('user_id'));
 
                 Session::flash('success', 'The user was removed from the team successfully.');

@@ -29,11 +29,9 @@ class StoreWhitelistAccessController extends Controller
         $raid->addContext('data', $request->validated());
 
         try {
-            DB::transaction(function () use ($request, $raid) {
-                $raid->debug('Calling Action', ['action' => StoreWhitelistAccessAction::class]);
+            DB::transaction(function () use ($request) {
                 $whitelistAccess = app(StoreWhitelistAccessAction::class)->execute($request->validated());
 
-                $raid->debug('Calling Action', ['action' => AssignTeamsToWhitelistAccessAction::class]);
                 app(AssignTeamsToWhitelistAccessAction::class)->execute($whitelistAccess, keyFromToggle($request->get('team_ids', [])));
 
                 Session::flash('success', 'The whitelist entry was added successfully.');

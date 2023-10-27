@@ -30,9 +30,7 @@ class AddUserController extends Controller
             ->addContext('userId', $request->get('user_id'));
 
         try {
-            DB::transaction(function () use ($team, $request, $raid) {
-                $raid->debug('Calling Action', ['action' => AddUserAction::class]);
-
+            DB::transaction(function () use ($team, $request) {
                 app(AddUserAction::class)->execute($team, (int) $request->get('user_id'));
 
                 Session::flash('success', 'The user was added to the team successfully.');
