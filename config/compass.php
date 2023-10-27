@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 return [
-    'version' => '1.6.0',
+    'version' => '0.7.0',
 
     'admin' => [
         'username' => env('ADMIN_USERNAME', 'admin'),
