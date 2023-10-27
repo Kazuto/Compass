@@ -28,9 +28,7 @@ class StoreBookmarkController extends Controller
         $raid->addContext('data', $request->validated());
 
         try {
-            DB::transaction(function () use ($request, $raid) {
-                $raid->debug('Calling Action', ['action' => StoreBookmarkAction::class]);
-
+            DB::transaction(function () use ($request) {
                 app(StoreBookmarkAction::class)->execute($request->validated());
 
                 Session::flash('success', 'The bookmark was added successfully.');

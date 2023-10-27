@@ -7,6 +7,7 @@ namespace Tests\Unit\Models;
 use App\Models\BookmarkGroup;
 use App\Models\Team;
 use App\Models\User;
+use App\Models\WhitelistAccess;
 use Illuminate\Support\Collection;
 
 use function PHPUnit\Framework\assertCount;
@@ -34,6 +35,17 @@ it('has bookmark groups relation and returns collection', function () {
     assertCount(5, $team->bookmarkGroups);
     assertInstanceOf(Collection::class, $team->bookmarkGroups);
     assertInstanceOf(BookmarkGroup::class, $team->bookmarkGroups->first());
+});
+
+it('has whitelist access relation and returns collection', function () {
+    // When
+    $team = Team::factory()->has(WhitelistAccess::factory(5))->create();
+
+    // Then
+    assertTrue($team->isRelation('whitelistAccess'));
+    assertCount(5, $team->whitelistAccess);
+    assertInstanceOf(Collection::class, $team->whitelistAccess);
+    assertInstanceOf(WhitelistAccess::class, $team->whitelistAccess->first());
 });
 
 it('return matching team entries when calling isMember', function () {

@@ -34,9 +34,7 @@ class UpdateBookmarkController extends Controller
         $bookmarkGroup = $bookmark->bookmarkGroup;
 
         try {
-            DB::transaction(function () use ($request, $bookmark, $raid) {
-                $raid->debug('Calling Action', ['action' => UpdateBookmarkAction::class]);
-
+            DB::transaction(function () use ($request, $bookmark) {
                 app(UpdateBookmarkAction::class)->execute($bookmark, $request->validated());
 
                 Session::flash('success', 'The bookmark was updated successfully.');

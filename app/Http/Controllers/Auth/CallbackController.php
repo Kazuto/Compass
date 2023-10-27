@@ -5,7 +5,8 @@ declare(strict_types=1);
 namespace App\Http\Controllers\Auth;
 
 use App\Actions\User\OAuthUserAction;
-use App\Actions\WhitelistAccess\UpdateWhitelistAccessAction;
+use App\Actions\User\SyncWhitelistAccessTeamsToUserAction;
+use App\Actions\WhitelistAccess\AssociateWhitelistAccessAction;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\OAuthRequest;
 use App\Models\User;
@@ -41,8 +42,6 @@ class CallbackController extends Controller
             return redirect(route('auth.index'));
         }
 
-        $raid->debug('Calling Action', ['action' => OAuthUserAction::class]);
-
         $user = app(OAuthUserAction::class)->execute($authUser, $request->provider);
 
         $raid->debug('User fetched', ['userId' => $user->id]);
@@ -60,21 +59,15 @@ class CallbackController extends Controller
     {
         $raid->debug('Updating Whitelist Access for User');
 
-        if (! $user->wasRecentlyCreated) {
-            $raid->debug('User was not created recently. No need for update.');
+        if ($user->whitelistAccess()->active()->exists()) {
+            $raid->debug('User already has whitelist access assigned. No need for update.');
 
             return;
         }
 
-        $raid->debug('Calling Action', ['action' => UpdateWhitelistAccessAction::class]);
+        app(AssociateWhitelistAccessAction::class)->execute($user);
 
-        app(UpdateWhitelistAccessAction::class)->execute(
-            WhitelistAccess::forEmail($user->email)->first(),
-            [
-                'user_id' => $user->id,
-                'is_active' => true,
-            ]
-        );
+        app(SyncWhitelistAccessTeamsToUserAction::class)->execute($user);
 
         $raid->debug('Whitelist Access updated for User');
     }

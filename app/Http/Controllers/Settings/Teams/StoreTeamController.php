@@ -28,9 +28,7 @@ class StoreTeamController extends Controller
         $raid->addContext('data', $request->validated());
 
         try {
-            DB::transaction(function () use ($request, $raid) {
-                $raid->debug('Calling Action', ['action' => StoreTeamAction::class]);
-
+            DB::transaction(function () use ($request) {
                 app(StoreTeamAction::class)->execute($request->validated());
 
                 Session::flash('success', 'The team was added successfully.');

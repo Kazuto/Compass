@@ -31,9 +31,7 @@ class DeleteBookmarkController extends Controller
         $bookmarkGroup = $bookmark->bookmarkGroup;
 
         try {
-            DB::transaction(function () use ($bookmark, $raid) {
-                $raid->debug('Calling Action', ['action' => DeleteBookmarkAction::class]);
-
+            DB::transaction(function () use ($bookmark) {
                 app(DeleteBookmarkAction::class)->execute($bookmark);
 
                 Session::flash('success', 'The bookmark was deleted successfully.');

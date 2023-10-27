@@ -29,9 +29,7 @@ class UpdateUserController extends Controller
         $raid->addContext('userId', $user->id)->addContext('data', $request->validated());
 
         try {
-            DB::transaction(function () use ($request, $user, $raid) {
-                $raid->debug('Calling Action', ['action' => UpdateUserAction::class]);
-
+            DB::transaction(function () use ($request, $user) {
                 app(UpdateUserAction::class)->execute($user, $request->validated());
 
                 Session::flash('success', 'The user was updated successfully.');

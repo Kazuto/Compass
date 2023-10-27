@@ -4,12 +4,15 @@ declare(strict_types=1);
 
 namespace App\Actions\Theme;
 
+use App\Actions\Action;
 use Illuminate\Contracts\Filesystem\FileNotFoundException;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\File;
 
-class UpdateThemeConfigAction
+class UpdateThemeConfigAction extends Action
 {
+    protected static string $description = 'Saving changes to theme configuration file';
+
     /**
      * @throws FileNotFoundException
      */

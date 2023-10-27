@@ -114,8 +114,8 @@ class User extends Authenticatable
         return $this->belongsToMany(
             Team::class,
             'team_user',
-            'team_id',
             'user_id',
+            'team_id',
             'id',
             'id'
         );
