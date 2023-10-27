@@ -36,9 +36,7 @@ class UpdateBookmarkGroupController extends Controller
 
                 app(UpdateBookmarkGroupAction::class)->execute($bookmarkGroup, $request->validated());
 
-                $teamIds = collect($request->get('team_ids'))
-                    ->filter(fn ($item) => (bool) $item)
-                    ->keys();
+                $teamIds = keyFromToggle($request->get('team_ids', []));
 
                 $raid->debug('Syncing Team IDs', ['teamIds' => $teamIds]);
                 $bookmarkGroup->teams()->sync($teamIds);

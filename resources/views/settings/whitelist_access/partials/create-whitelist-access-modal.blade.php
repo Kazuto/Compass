@@ -15,6 +15,25 @@
             type="email"
         />
 
+        <div>
+            <div class="mb-2">
+
+            <h4>Teams</h4>
+            <span class="text-xs text-black/50 dark:text-white/50">Teams will be automatically assigned upon user sign up.</span>
+            </div>
+            @forelse($teams as $id => $name)
+                <x-toggle-switch
+                    id="team_{{ $id }}"
+                    name="team_ids[{{ $id }}]"
+                    label="{{ $name }}"
+                />
+            @empty
+                <p class="text-black/50 dark:text-white/50">
+                    No teams created yet
+                </p>
+            @endforelse
+        </div>
+
         <x-button>Save</x-button>
     </form>
 </x-modal>

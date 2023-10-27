@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Http\Controllers\Settings\WhitelistAccess;
 
 use App\Http\Controllers\Controller;
+use App\Models\Team;
 use App\Models\WhitelistAccess;
 use App\Support\Logging\Raid;
 use Illuminate\Http\Request;
@@ -24,6 +25,7 @@ class ListWhitelistAccessController extends Controller
     {
         return view('settings.whitelist_access.index', [
             'whitelistAccess' => WhitelistAccess::all(),
+            'teams' => Team::all()->pluck('name', 'id'),
         ]);
     }
 }

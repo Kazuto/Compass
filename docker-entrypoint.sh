@@ -7,7 +7,8 @@ function info {
 }
 
 need_key=false
-need_migration=false
+fresh_install=false
+
 symlinks=(
     $APP_HOME/storage/logs
     $APP_HOME/database/database.sqlite
@@ -31,7 +32,7 @@ if [[ ! -f $CONFIG_HOME/database.sqlite ]]; then
     info "Creating Database"
     touch $CONFIG_HOME/database.sqlite
 
-    need_migration=true
+    fresh_install=true
 fi
 
 if [[ ! -f $CONFIG_HOME/theme.config.json ]]; then
@@ -48,7 +49,6 @@ for i in "${symlinks[@]}"; do
     fi
 done
 
-
 cd $APP_HOME
 
 info "Installing Dependencies - This may take a while"
@@ -64,10 +64,10 @@ php artisan icon:cache --quiet
 php artisan view:cache --quiet
 php artisan optimize --quiet
 
-if [ "$need_migration" = true ]; then
-    info "Migrating Database"
-    php artisan migrate --force --quiet
+info "Migrating Database"
+php artisan migrate --force --quiet
 
+if [ "$fresh_install" = true ]; then
     info "Creating User"
     php artisan compass:setup
 fi

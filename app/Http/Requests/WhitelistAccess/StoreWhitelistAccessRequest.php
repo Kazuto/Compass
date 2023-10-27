@@ -17,7 +17,9 @@ class StoreWhitelistAccessRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'email' => 'required|email',
+            'email' => ['required', 'email'],
+            'team_ids' => 'array',
+            'team_ids.*' => ['boolean', 'in:0,1'],
         ];
     }
 }
