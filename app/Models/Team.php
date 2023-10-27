@@ -24,7 +24,7 @@ use Illuminate\Support\Str;
  * @property-read int|null $bookmark_groups_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\User> $users
  * @property-read int|null $users_count
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\User> $whitelistAccess
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\WhitelistAccess> $whitelistAccess
  * @property-read int|null $whitelist_access_count
  *
  * @method static \Database\Factories\TeamFactory factory($count = null, $state = [])
@@ -91,8 +91,8 @@ class Team extends Model
         return $this->belongsToMany(
             User::class,
             'team_user',
-            'user_id',
             'team_id',
+            'user_id',
             'id',
             'id'
         );
@@ -101,7 +101,7 @@ class Team extends Model
     public function whitelistAccess(): BelongsToMany
     {
         return $this->belongsToMany(
-            User::class,
+            WhitelistAccess::class,
             'team_whitelist_access',
             'team_id',
             'whitelist_access_id',
