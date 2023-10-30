@@ -133,15 +133,13 @@ class User extends Authenticatable
     //region Methods
     public function getAuthProviderIcon(): Svg
     {
-        if (blank($this->oauth_provider)) {
-            return svg('phosphor-password', ['class' => 'h-4 w-4', 'title' => 'Basic Auth (Password)']);
-        }
-
-        if ($this->oauth_provider === 'github') {
-            return svg('fab-github', ['class' => 'h-4 w-4', 'title' => 'GitHub OAuth']);
-        }
-
-        return svg('fab-microsoft', ['class' => 'h-4 w-4', 'title' => 'Microsoft OAuth']);
+        return match ($this->oauth_provider) {
+            'github' => svg('fab-github', ['class' => 'h-4 w-4', 'title' => 'GitHub OAuth']),
+            'microsoft' => svg('fab-microsoft', ['class' => 'h-4 w-4', 'title' => 'Microsoft OAuth']),
+            'azure' => svg('devicon-azure', ['class' => 'h-4 w-4', 'title' => 'Azure OAuth']),
+            'google' => svg('fab-google', ['class' => 'h-4 w-4', 'title' => 'Google OAuth']),
+            default => svg('phosphor-password', ['class' => 'h-4 w-4', 'title' => 'Basic Auth (Password)']),
+        };
     }
     //endregion Methods
 }

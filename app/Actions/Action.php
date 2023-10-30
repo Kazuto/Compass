@@ -7,7 +7,7 @@ use DeepCopy\Exception\PropertyException;
 
 class Action
 {
-    private Raid $raid;
+    protected Raid $raid;
 
     /**
      * @throws PropertyException

@@ -36,12 +36,20 @@ return [
     'github' => [
         'client_id' => env('GITHUB_CLIENT_ID'),
         'client_secret' => env('GITHUB_CLIENT_SECRET'),
-        'redirect' => env('GITHUB_REDIRECT_URI', '/auth/callback?provider=github'),
+        'redirect' => '/auth/callback?provider=github',
     ],
 
     'microsoft' => [
         'client_id' => env('MICROSOFT_CLIENT_ID'),
         'client_secret' => env('MICROSOFT_CLIENT_SECRET'),
-        'redirect' => env('MICROSOFT_REDIRECT_URI', '/auth/callback?provider=microsoft'),
+        'redirect' => '/auth/callback?provider=microsoft',
+    ],
+
+    'azure' => [
+        'client_id' => env('AZURE_CLIENT_ID'),
+        'client_secret' => env('AZURE_CLIENT_SECRET'),
+        'redirect' => '/auth/callback?provider=azure',
+        'tenant' => env('AZURE_TENANT_ID'),
+        'proxy' => env('AZURE_PROXY'),  // optionally
     ],
 ];

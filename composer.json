@@ -10,6 +10,7 @@
     "require": {
         "php": "^8.1",
         "blade-ui-kit/blade-icons": "^1.5",
+        "codeat3/blade-devicons": "^1.6",
         "codeat3/blade-phosphor-icons": "^2.0",
         "codeat3/blade-simple-icons": "^1.91",
         "guzzlehttp/guzzle": "^7.2",
@@ -18,7 +19,8 @@
         "laravel/socialite": "^5.9",
         "laravel/tinker": "^2.8",
         "owenvoke/blade-fontawesome": "^2.4",
-        "socialiteproviders/microsoft": "^4.2"
+        "socialiteproviders/microsoft": "^4.2",
+        "socialiteproviders/microsoft-azure": "^5.1"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.9",
@@ -80,6 +82,7 @@
             "composer install",
             "php artisan key:generate",
             "php -r \"file_exists('database/database.sqlite') && unlink('database/database.sqlite');\"",
+            "touch database/database.sqlite",
             "php artisan migrate",
             "php artisan compass:setup",
             "yarn install && yarn build"
