@@ -19,6 +19,7 @@ class Link extends Component
     public function __construct(
         public string $provider,
         public string $icon = '',
+        protected ?string $title = null,
     ) {
         $this->disabled = $this->checkDisabled();
     }
@@ -45,7 +46,7 @@ class Link extends Component
 
     public function title(): string
     {
-        return str($this->provider)
+        return str($this->title ?? $this->provider)
             ->title()
             ->when(
                 $this->disabled,

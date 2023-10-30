@@ -4,21 +4,24 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers\Auth;
 
+use App\Actions\Auth\AzureAuthAction;
+use App\Actions\Auth\WhitelistAuthAction;
 use App\Actions\User\OAuthUserAction;
-use App\Actions\User\SyncWhitelistAccessTeamsToUserAction;
-use App\Actions\WhitelistAccess\AssociateWhitelistAccessAction;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\OAuthRequest;
 use App\Models\User;
-use App\Models\WhitelistAccess;
 use App\Support\Logging\Raid;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use Laravel\Socialite\Facades\Socialite;
+use Laravel\Socialite\Two\User as OAuthUser;
+use Throwable;
 
 class CallbackController extends Controller
 {
+    private OAuthRequest $request;
+
     public function __invoke(OAuthRequest $request): RedirectResponse
     {
         return raid(
@@ -31,44 +34,33 @@ class CallbackController extends Controller
     {
         $raid->addContext('provider', $request->provider);
 
-        /** @var \Laravel\Socialite\Two\User $authUser */
+        /** @var OAuthUser $authUser */
         $authUser = Socialite::driver($request->provider)->user();
 
-        if (WhitelistAccess::isNotWhitelisted($authUser->getEmail())) {
-            $raid->info('User not whitelisted', ['email' => $authUser->getEmail()]);
+        try {
+            $user = match ($request->provider) {
+                'azure' => app(AzureAuthAction::class)->execute($authUser, $request->provider),
+                'github', 'microsoft' => app(WhitelistAuthAction::class)->execute($authUser, $request->provider),
+            };
+        } catch (Throwable $e) {
+            Session::flash('error', $e->getMessage());
 
-            Session::flash('error', "The E-Mail assigned to your account is not whitelisted. \n\n Please talk to an administrator for access.");
-
-            return redirect(route('auth.index'));
+            return to_route('auth.index');
         }
-
-        $user = app(OAuthUserAction::class)->execute($authUser, $request->provider);
-
-        $raid->debug('User fetched', ['userId' => $user->id]);
-
-        $this->updateWhitelistAccess($user, $raid);
 
         Auth::login($user);
 
-        $raid->info('User authenticated.');
+        Session::flash('success', "Welcome back, $user->name!");
 
         return to_route('dashboard');
     }
 
-    private function updateWhitelistAccess(User $user, Raid $raid): void
+    private function handleAzure(OAuthUser $authUser, string $provider, Raid $raid): User
     {
-        $raid->debug('Updating Whitelist Access for User');
+        $user = app(OAuthUserAction::class)->execute($authUser, $provider);
 
-        if ($user->whitelistAccess()->active()->exists()) {
-            $raid->debug('User already has whitelist access assigned. No need for update.');
+        $raid->debug('User fetched', ['userId' => $user->id]);
 
-            return;
-        }
-
-        app(AssociateWhitelistAccessAction::class)->execute($user);
-
-        app(SyncWhitelistAccessTeamsToUserAction::class)->execute($user);
-
-        $raid->debug('Whitelist Access updated for User');
+        return $user;
     }
 }
