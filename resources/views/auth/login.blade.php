@@ -15,7 +15,7 @@
                     <span class="text-center">or</span>
                 </p>
 
-                <div class="flex flex-col gap-4">
+                <div class="flex flex-col gap-2">
                     <x-auth.link
                         provider="github"
                         icon="fab-github"
@@ -24,6 +24,11 @@
                     <x-auth.link
                         provider="microsoft"
                         icon="fab-microsoft"
+                        class="mb-4"
+                    />
+                    <x-auth.link
+                        provider="azure"
+                        icon="devicon-azure"
                         class="mb-4"
                     />
                 </div>

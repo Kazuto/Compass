@@ -25,6 +25,8 @@ class OAuthUserAction extends Action
             $this->updateUser($user, $socialiteUser);
         }
 
+        $this->raid->debug('The user was successfully loaded based on the OAuth provider', ['user' => $user]);
+
         return $user;
     }
 
