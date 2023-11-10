@@ -26,11 +26,6 @@
                         icon="fab-microsoft"
                         class="mb-4"
                     />
-                    <x-auth.link
-                        provider="azure"
-                        icon="devicon-azure"
-                        class="mb-4"
-                    />
                 </div>
             </div>
         </div>

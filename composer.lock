@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "0c6e56268b35b17d444e9e104c894263",
+    "content-hash": "6e20c45c9d9047f59a3991d0c2743752",
     "packages": [
         {
             "name": "blade-ui-kit/blade-icons",
@@ -3728,57 +3728,6 @@
                 "source": "https://github.com/socialiteproviders/providers"
             },
             "time": "2023-03-02T09:58:36+00:00"
-        },
-        {
-            "name": "socialiteproviders/microsoft-azure",
-            "version": "5.1.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/SocialiteProviders/Microsoft-Azure.git",
-                "reference": "7522b27cd8518706b50e03b40a396fb0a6891feb"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/SocialiteProviders/Microsoft-Azure/zipball/7522b27cd8518706b50e03b40a396fb0a6891feb",
-                "reference": "7522b27cd8518706b50e03b40a396fb0a6891feb",
-                "shasum": ""
-            },
-            "require": {
-                "ext-json": "*",
-                "php": "^7.2 || ^8.0",
-                "socialiteproviders/manager": "~4.0"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "SocialiteProviders\\Azure\\": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Chris Hemmings",
-                    "email": "chris@hemmin.gs"
-                }
-            ],
-            "description": "Microsoft Azure OAuth2 Provider for Laravel Socialite",
-            "keywords": [
-                "azure",
-                "laravel",
-                "microsoft",
-                "oauth",
-                "provider",
-                "socialite"
-            ],
-            "support": {
-                "docs": "https://socialiteproviders.com/microsoft-azure",
-                "issues": "https://github.com/socialiteproviders/providers/issues",
-                "source": "https://github.com/socialiteproviders/providers"
-            },
-            "time": "2022-03-15T21:17:43+00:00"
         },
         {
             "name": "symfony/console",

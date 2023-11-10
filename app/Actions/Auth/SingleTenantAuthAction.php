@@ -9,9 +9,9 @@ use App\Actions\User\OAuthUserAction;
 use App\Models\User;
 use Laravel\Socialite\Two\User as OAuthUser;
 
-class AzureAuthAction extends Action
+class SingleTenantAuthAction extends Action
 {
-    protected static string $description = 'Retrieving user by Azure domain';
+    protected static string $description = 'Retrieving user by microsoft single tenant';
 
     public function execute(OAuthUser $authUser, string $provider): User
     {
