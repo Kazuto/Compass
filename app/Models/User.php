@@ -136,8 +136,6 @@ class User extends Authenticatable
         return match ($this->oauth_provider) {
             'github' => svg('fab-github', ['class' => 'h-4 w-4', 'title' => 'GitHub OAuth']),
             'microsoft' => svg('fab-microsoft', ['class' => 'h-4 w-4', 'title' => 'Microsoft OAuth']),
-            'azure' => svg('devicon-azure', ['class' => 'h-4 w-4', 'title' => 'Azure OAuth']),
-            'google' => svg('fab-google', ['class' => 'h-4 w-4', 'title' => 'Google OAuth']),
             default => svg('phosphor-password', ['class' => 'h-4 w-4', 'title' => 'Basic Auth (Password)']),
         };
     }

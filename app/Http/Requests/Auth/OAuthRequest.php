@@ -18,7 +18,7 @@ class OAuthRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'provider' => ['in:github,microsoft,azure'],
+            'provider' => ['in:github,microsoft'],
         ];
     }
 }

@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers\Auth;
 
-use App\Actions\Auth\AzureAuthAction;
+use App\Actions\Auth\SingleTenantAuthAction;
 use App\Actions\Auth\WhitelistAuthAction;
-use App\Actions\User\OAuthUserAction;
+use App\Exceptions\WhitelistException;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\OAuthRequest;
 use App\Models\User;
@@ -39,8 +39,8 @@ class CallbackController extends Controller
 
         try {
             $user = match ($request->provider) {
-                'azure' => app(AzureAuthAction::class)->execute($authUser, $request->provider),
-                'github', 'microsoft' => app(WhitelistAuthAction::class)->execute($authUser, $request->provider),
+                'microsoft' => $this->handleMicrosoft($authUser, $request),
+                default => app(WhitelistAuthAction::class)->execute($authUser, $request->provider),
             };
         } catch (Throwable $e) {
             Session::flash('error', $e->getMessage());
@@ -55,12 +55,14 @@ class CallbackController extends Controller
         return to_route('dashboard');
     }
 
-    private function handleAzure(OAuthUser $authUser, string $provider, Raid $raid): User
+    /**
+     * @throws WhitelistException
+     */
+    private function handleMicrosoft(OAuthUser $authUser, OAuthRequest $request): User
     {
-        $user = app(OAuthUserAction::class)->execute($authUser, $provider);
-
-        $raid->debug('User fetched', ['userId' => $user->id]);
-
-        return $user;
+        return match (config('services.microsoft.tenant')) {
+            'common' => app(WhitelistAuthAction::class)->execute($authUser, $request->provider),
+            default => app(SingleTenantAuthAction::class)->execute($authUser, $request->provider),
+        };
     }
 }

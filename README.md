@@ -38,18 +38,15 @@ In summary, Compass is a bookmark aggregation tool that not only addresses the d
 **Environment variables**
 
 | Name                    | Default        |
-| :---------------------- | :------------- |
+|:------------------------|:---------------|
 | ADMIN_USERNAME          | admin          |
 | ADMIN_PASSWORD          | password       |
 | ADMIN_EMAIL             | admin@app.test |
 | GITHUB_CLIENT_ID        |                |
 | GITHUB_CLIENT_SECRET    |                |
+| MICROSOFT_TENANT_ID     | common         |
 | MICROSOFT_CLIENT_ID     |                |
 | MICROSOFT_CLIENT_SECRET |                |
-| AZURE_CLIENT_ID         |                |
-| AZURE_CLIENT_SECRET     |                |
-| AZURE_TENANT_ID         |                |
-| AZURE_PROXY             |                |
 
 ```
   compass:
@@ -84,13 +81,13 @@ In summary, Compass is a bookmark aggregation tool that not only addresses the d
 3. Run `composer setup`
 
 _Optionally:_
-If you want to enable SSO via GitHub, Microsoft or Azure
+If you want to enable SSO via GitHub or Microsoft 
 
 1. Create a new
     - [GitHub OAuth app](https://github.com/settings/developers)
     - [Microsoft Entra ID](https://entra.microsoft.com/#view/Microsoft_AAD_RegisteredApps/ApplicationsListBlade/quickStartType~/null/sourceType/Microsoft_AAD_IAM)
 2. Configure `.env` with app credentials
-3. Create `whitelist` records in the settings page
+3. Create `whitelist` records in the settings page if not using Microsoft Single-Tenant
 
 ## Contributing
 
