@@ -51,9 +51,6 @@ done
 
 cd $APP_HOME
 
-info "Installing Dependencies - This may take a while"
-composer install --no-interaction --optimize-autoloader --quiet
-
 if [ "$need_key" = true ]; then
     info "Generating Encryption Key"
     php artisan key:generate --quiet
@@ -71,9 +68,6 @@ if [ "$fresh_install" = true ]; then
     info "Creating User"
     php artisan compass:setup
 fi
-
-info "Building Assets - This may take a while"
-yarn install --silent && yarn build &>/dev/null
 
 info "Setting Up Permissions"
 chown -R $USERNAME:$USERNAME $APP_HOME
