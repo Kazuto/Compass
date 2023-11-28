@@ -43,13 +43,7 @@ return [
         'client_id' => env('MICROSOFT_CLIENT_ID'),
         'client_secret' => env('MICROSOFT_CLIENT_SECRET'),
         'redirect' => '/auth/callback?provider=microsoft',
-    ],
-
-    'azure' => [
-        'client_id' => env('AZURE_CLIENT_ID'),
-        'client_secret' => env('AZURE_CLIENT_SECRET'),
-        'redirect' => '/auth/callback?provider=azure',
-        'tenant' => env('AZURE_TENANT_ID'),
-        'proxy' => env('AZURE_PROXY'),  // optionally
+        'tenant' => env('MICROSOFT_TENANT_ID', 'common'),
+        'include_tenant_info' => env('MICROSOFT_TENANT_ID') === 'common',
     ],
 ];
